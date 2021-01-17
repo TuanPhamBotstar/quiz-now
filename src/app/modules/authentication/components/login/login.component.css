@@ -1,0 +1,65 @@
+* {
+    font-family: PoppinsLight;
+}
+input {
+    border: 0
+}
+label {
+    font-style: normal;
+    font-family: PoppinsBlack;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    color: #2d2d2d;
+}
+.label__username {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+}
+.form-control {
+    outline: none;
+}
+.input__username, .input__password {
+    width: 300px;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 54px;
+}
+.input__username:focus, .input__password:focus {
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid blue;
+}
+
+.button-go__finished, .button-go {
+    margin-top: 30px;
+    width: 310px;
+    height: 73px;
+
+    color: white;
+    font-size: PoppinsBlack;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 48px;
+
+    border: 0;
+    outline: none;
+
+    border-radius: 32px;
+}
+.button-go__finished {
+    background: #5F45EA;
+    box-shadow: 0px 27px 100px #5F45EA;
+}
+.button-go {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    background: rgba(0,0,0,0.5);
+    opacity: 0.5;
+}

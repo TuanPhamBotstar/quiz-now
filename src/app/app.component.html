@@ -1,3 +1,6 @@
-<app-login *ngIf="!isLogin"></app-login>
-<h1 *ngIf="isLogin">Hello</h1>
-<app-toast-management></app-toast-management>
+<div class="container">
+    <app-landing-page *ngIf="!isLogin"></app-landing-page>
+    <h1 *ngIf="isLogin">Hello</h1>
+    
+    <app-toast-management></app-toast-management>    
+</div>

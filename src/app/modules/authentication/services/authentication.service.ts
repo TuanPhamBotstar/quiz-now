@@ -50,16 +50,16 @@ export class AuthenticationService {
       .subscribe((res) => {
         this.setSession(res);
         if (res.success === true) {
-          this.toastManagementService.show(res.message, {
-            classname: 'bg-success text-light',
-            delay: 5000,
-          });
+          // this.toastManagementService.show(res.message, {
+          //   classname: 'bg-success text-light',
+          //   delay: 5000,
+          // });
+          window.location.reload();
         } else
           this.toastManagementService.show(res.message, {
             classname: 'bg-danger text-light',
             delay: 5000,
           });
-        window.location.reload();
       });
   }
 
