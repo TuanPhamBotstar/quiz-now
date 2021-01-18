@@ -42,33 +42,44 @@ export class CustomvalidatorService {
   ];
   checkPasswordWhetherStrong() {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
-      let count = 0;
+      if (control.value) {
+        let isUpperCase: boolean = false;
+        let isSpecialCharacter: boolean = false;
+        let isNumber: boolean = false;
+        let isLength: boolean = false;
 
-      for (let c of control.value) {
-        if (c === c.toUpperCase()) count++;
-        else if (~this.specialCharacters.indexOf(c)) count++;
-        else if (!isNaN(parseFloat(c)) && !isNaN(c - 0)) count++;
+        if (control.value.length >= 8) isLength = true;
+
+        for (let c of control.value) {
+          if (c === c.toUpperCase()) isUpperCase = true;
+          if (~this.specialCharacters.indexOf(c)) isSpecialCharacter = true;
+          if (!isNaN(parseFloat(c)) && !isNaN(c - 0)) isNumber = true;
+        }
+
+        if (!isUpperCase || !isSpecialCharacter || !isNumber || !isLength)
+          return { checkPasswordWhetherStrong: true };
+        else return null;
       }
-
-      if (count < 3) return { checkPasswordWhetherStrong: true };
-      else return null;
+      return null;
     };
   }
   validateUsername() {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
-      for (let c of control.value) {
-        if (~this.specialCharacters.indexOf(c)) {
-          return { validateUsername: true };
+      if (control.value)
+        for (let c of control.value) {
+          if (~this.specialCharacters.indexOf(c) || control.value.length < 6) {
+            return { validateUsername: true };
+          }
         }
-      }
       return null;
     };
   }
   validateStudentId() {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
-      if (control.value.indexOf('FU') !== 0) {
-        return { validateStudentId: true };
-      }
+      if (control.value)
+        if (control.value.indexOf('FU') !== 0 || control.value.length != 8) {
+          return { validateStudentId: true };
+        }
       return null;
     };
   }

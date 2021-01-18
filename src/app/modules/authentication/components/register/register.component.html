@@ -1,46 +1,63 @@
 <div class="container">
-    <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label>Your name</label>
-            <input type="text" class="form-control"  formControlName="name" placeholder="Enter your name">
-            <span class="text-danger" *ngIf="(registerFormControl.name.touched || submitted) && registerFormControl.name.errors?.required">
-                Name is required
-            </span>
-        </div>
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" class="form-control" required minlength="6" formControlName="username" placeholder="Enter username">
-            <span class="text-danger" *ngIf="(registerFormControl.username.touched || submitted) && registerFormControl.username.errors?.required">
-                Username is required
-            </span>
-            <span class="text-danger" *ngIf="(registerFormControl.username.touched || submitted) && registerForm.get('username').errors?.validateUsername">
-                Username is invalid
-            </span>
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" required minlength="6" formControlName="password" placeholder="Enter your password">
-            <span class="text-danger" *ngIf="(registerFormControl.password.touched || submitted) && registerFormControl.password.errors?.required">
-                Password is required
-            </span>
-            <span class="text-danger" *ngIf="(registerFormControl.password.touched || submitted) && registerForm.get('password').errors?.checkPasswordWhetherStrong">
-                Password isn't strong. Having at least 1 special, upper case, number character is required. 
-            </span>
-        </div>
-        <div class="form-group">
-            <label>Student ID</label>
-            <input type="text" class="form-control" formControlName="msv" placeholder="Enter your student ID">
-            <span class="text-danger" *ngIf="registerForm.get('msv').errors?.validateStudentId && (registerFormControl.msv.touched || submitted)">Your Student ID is not belong to FPT Edu</span>
-        </div>
-        <div class="form-group">
-            <label>Mail</label>
-            <input type="text" class="form-control" formControlName="mail" placeholder="Enter your email">
-            <span class="text-danger" *ngIf="(registerFormControl.mail.touched || submitted) && registerFormControl.mail.errors?.email">
-                Mail is not valid
-            </span>
-        </div>
-        <div *ngIf="registerForm.valid" class="form-group">
-            <button type="submit" class="btn btn-success">Register</button>
-        </div>
-    </form>
+  <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Your name</label>
+      <br>
+      <input type="text" class="input__name" required minlength="1" formControlName="name" placeholder="Enter your name">
+      <br>
+      <span class="text-danger"
+        *ngIf="(registerFormControl.name.touched || submitted) && registerFormControl.name.errors?.minlength">
+        Name is required
+      </span>
+    </div>
+    <div class="form-group">
+      <label>Username</label>
+      <br>
+      <input type="text" class="input__username" required minlength="6" formControlName="username"
+        placeholder="Enter username">
+      <br>
+      <span class="text-danger"
+        *ngIf="(registerFormControl.username.touched || submitted) && registerForm.get('username').errors?.validateUsername">
+        Username is invalid
+      </span>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <br>
+      <input type="password" class="input__password" required minlength="6" formControlName="password"
+        placeholder="Enter your password">
+      <br>
+      <span class="text-danger"
+        *ngIf="(registerFormControl.password.touched || submitted) && registerForm.get('password').errors?.checkPasswordWhetherStrong">
+        Password isn't strong. Having at least 1 special, upper case, number character, and min length is 8 is required.
+      </span>
+    </div>
+    <div class="form-group">
+      <label>Student ID</label>
+      <br>
+      <input type="text" class="input__msv" formControlName="msv" placeholder="Enter your student ID">
+      <br>
+      <span class="text-danger"
+        *ngIf="registerForm.get('msv').errors?.validateStudentId && (registerFormControl.msv.touched || submitted)">Your
+        Student ID is not belong to FPT Edu</span>
+    </div>
+    <div class="form-group">
+      <label>Mail</label>
+      <br>
+      <input type="text" class="input__mail" required formControlName="mail" placeholder="Enter your email">
+      <br>
+      <span class="text-danger"
+        *ngIf="(registerFormControl.mail.touched || submitted) && registerFormControl.mail.errors?.email">
+        Mail is not valid
+      </span>
+    </div>
+    <div *ngIf="registerForm.valid" class="form-group">
+      <button type="submit" class="button-register__finished">Register</button>
+    </div>
+    <div *ngIf="!registerForm.valid" class="form-group">
+      <div class="button-register">
+        Register
+      </div>
+    </div>
+  </form>
 </div>

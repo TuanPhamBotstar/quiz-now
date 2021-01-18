@@ -11,32 +11,23 @@ import { ToastManagementService } from 'src/app/shared/components/toast-manageme
 export class AuthenticationService {
   constructor(
     private http: HttpClient,
-    private toastManagementService: ToastManagementService,
+    private toastManagementService: ToastManagementService
   ) {}
 
   checkAuthentication(): Observable<any> {
     return this.http.get('http://localhost:3000');
   }
   register(user: any) {
-    this.http
-      .post<any>('http://localhost:3000/api/user/register', user, {
+    return this.http.post<any>(
+      'http://localhost:3000/api/user/register',
+      user,
+      {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           'X-Requested-With': 'XMLHttpRequest',
         }),
-      })
-      .subscribe((res) => {
-        if (res.success) {
-          this.toastManagementService.show(res.message, {
-            classname: 'bg-success text-light',
-            delay: 5000,
-          });
-        } else
-          this.toastManagementService.show(res.message, {
-            classname: 'bg-danger text-light',
-            delay: 5000,
-          });
-      });
+      }
+    );
   }
 
   login(user: any) {
@@ -66,9 +57,11 @@ export class AuthenticationService {
   private setSession(authResult: any) {
     const expiresAt = moment().add(authResult.expiresIn, 'second');
 
-    localStorage.setItem('token', authResult.token);
-    localStorage.setItem('expiresAt', JSON.stringify(expiresAt.valueOf()));
-    localStorage.setItem('username', authResult.username);
+    if (authResult.token) {
+      localStorage.setItem('token', authResult.token);
+      localStorage.setItem('expiresAt', JSON.stringify(expiresAt.valueOf()));
+      localStorage.setItem('username', authResult.username);
+    }
   }
 
   logout() {

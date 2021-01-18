@@ -1,34 +1,39 @@
-<div class="container">
-    
-        <div class="bar">
-            <div>
-                <img src="../../../../../assets/imgs/logo.svg" class="bar__logo">
-                <span>Quiznow</span>
-            </div>
-            <div>
-                <button class = "bar__button-login">Sign up</button>
-            </div>
+<div>
+  <div class="container">
+
+    <div class="bar">
+      <div>
+        <img src="../../../../../assets/imgs/logo.svg" class="bar__logo">
+        <span>Quiznow</span>
+      </div>
+      <div>
+        <button class="bar__button" (click)="changeForm()">{{!showRegisterForm ? "Sign up" : "Login"}}</button>
+      </div>
+    </div>
+
+    <div *ngIf="!showRegisterForm" class="main-div-login animate__animated animate__fadeInLeft">
+      <div>
+        <div class="slogan">
+          Get started!
         </div>
-        
-        <div class="main-div">
-            <div>
-                <div class="slogan">
-                    Get started!
-                </div>
-                
-                <app-login></app-login>
-            </div>
-            <div class="image">
-                <img class="image__dot-1" src="../../../../../assets/imgs/dot-1.svg">
-                <img class="image__dot-2" src="../../../../../assets/imgs/dot-2.svg">
-                <img class="image__elipse-1" src="../../../../../assets/imgs/elipse-1.svg">
-                <img class="image__vector-1" src="../../../../../assets/imgs/vector-1.svg">
-                
-                <img class="image__landing-page" src="../../../../../assets/imgs/img-landing-page.png">
-            </div>
-        </div>
-        
-    
-    
-    
+
+        <app-login></app-login>
+      </div>
+      <div class="image">
+
+        <img class="image__landing-page" src="../../../../../assets/imgs/img-landing-page.png">
+      </div>
+    </div>
+
+    <div *ngIf="showRegisterForm" class="main-div-register animate__animated animate__fadeInRight">
+      <div class="image">
+
+        <img class="image__landing-page" src="../../../../../assets/imgs/img-landing-page.png">
+      </div>
+      <app-register></app-register>
+    </div>
+
+
+
+  </div>
 </div>

@@ -23,9 +23,21 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
-      username: ['', [Validators.required, this.customvalidator.validateUsername()]],
-      password: ['', [Validators.required, this.customvalidator.checkPasswordWhetherStrong()]],
-      msv: ['', [Validators.required, this.customvalidator.validateStudentId()]],
+      username: [
+        '',
+        [Validators.required, this.customvalidator.validateUsername()],
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          this.customvalidator.checkPasswordWhetherStrong(),
+        ],
+      ],
+      msv: [
+        '',
+        [Validators.required, this.customvalidator.validateStudentId()],
+      ],
       mail: ['', Validators.email],
     });
   }
@@ -36,9 +48,28 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    const newUser = Object.assign({'avatarUrl': ""}, this.registerForm.value);
+    const newUser = Object.assign({ avatarUrl: '' }, this.registerForm.value);
     if (this.registerForm.valid) {
-      this.authenticationService.register(newUser);
+      this.authenticationService.register(newUser).subscribe((res) => {
+        if (res.success) {
+          this.toastManagementService.show(res.message, {
+            classname: 'bg-success text-light',
+            delay: 5000,
+          });
+          for (let control in this.registerFormControl) {
+            this.registerFormControl[control].pristine = true;
+          }
+          this.registerForm.reset();
+
+          console.log(this.registerFormControl)
+
+        } else {
+          this.toastManagementService.show(res.message, {
+            classname: 'bg-danger text-light',
+            delay: 5000,
+          });
+        }
+      });
     }
   }
 }

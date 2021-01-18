@@ -24,10 +24,11 @@
     width: 64px;
     height: 64px;
 }
-.bar__button-login {
+.bar__button {
     background: #5F45EA;
     border-radius: 32px;
     border: 0;
+    outline: none;
 
     color: #f8f8f8;
     font-family: PoppinsLight;
@@ -45,10 +46,13 @@
     font-size: 68px;
     line-height: 102px;
 }
-.main-div {
+.main-div-login, .main-div-register {
     margin-top: 80px;
     display: flex;
     justify-content: space-between;
+}
+.main-div-register {
+    margin-top: 60px;
 }
 .image__dot-1 {
     position: absolute;
@@ -83,4 +87,7 @@
     height: 405px;
     left: 1004px;
     top: 423px;
+
+    z-index: -1;
+    border-radius: 50%;
 }
