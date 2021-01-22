@@ -1,0 +1,39 @@
+<div class="create-bank-container">
+  <app-nav-bar></app-nav-bar>
+
+  <div class="create-bank-form">
+    <form [formGroup]="bankForm">
+      <div class="bankForm__title">
+        <input type="text" formControlName="title" placeholder="Enter bank's name">
+      </div>
+      <div formArrayName="questions">
+        <button (click)="addQuestion()" class="button__add-question">Add question</button>
+        <br>
+        <span>This bank has {{bankLength}} questions</span>
+        <div *ngFor="let question of questionsFormGroup; let i=index" class="question-form">
+          <div [formGroup]="question">
+            <label>
+              <b>Question:</b> &nbsp;
+              <input type="text" formControlName="title" class="input__question">
+              <div class="level">
+                <label for="level">Level: &nbsp;</label>
+                <select id="level" formControlName="level">
+                  <option value="easy">Easy</option>
+                  <option value="normal">Normal</option>
+                  <option value="hard">Hard</option>
+                </select>
+              </div>
+
+              <app-create-question (newAnswersEvent)="addAnswers($event)"></app-create-question>
+            </label>
+
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" (click)="onSubmit()" class="button__submit">Submit</button>
+    </form>
+  </div>
+
+
+</div>

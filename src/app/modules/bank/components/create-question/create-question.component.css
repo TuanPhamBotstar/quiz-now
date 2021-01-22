@@ -1,0 +1,30 @@
+button, input {
+  border: 0;
+  outline: none;
+  padding: 4px 16px;
+  font-size: 16px;
+}
+
+.button__add-answer {
+  color: #759AF1;
+  background-color: transparent;
+}
+
+.tab {
+  margin-left: 2.5rem;
+}
+
+input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+}
+input[formControlName="title"] {
+    width: 300px;
+}
+.button__done {
+  background-color: #0F993E;
+  color: white;
+  border-radius: 24px;
+  font-size: 20px;
+  padding: 4px 16px
+}

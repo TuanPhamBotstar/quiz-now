@@ -1,0 +1,22 @@
+<div class="view-bank-container">
+  <app-nav-bar></app-nav-bar>
+  <div class="view-bank">
+    <div class="path">
+      <h2>Yours</h2>
+    </div>
+    <div class="list-banks">
+      <div *ngFor="let bank of banks" class="bank">
+        <div class="bank-title" (click)="goToBankDetail(bank._id)">
+          <p>{{bank.title}}</p> 
+        </div>
+        <div class="test-number">
+            <p>{{bank.test.length| count:"test"}}</p>
+        </div>
+        <div class="question-number">
+            <p>{{bank.questions.length| count:"question"}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

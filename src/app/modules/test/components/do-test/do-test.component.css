@@ -1,0 +1,37 @@
+.do-test__title {
+
+  font-family: PoppinsBlack;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 60px;
+  color: #2D2D2D;
+}
+
+.do-test__title__number {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.do-test__header {
+
+  position: relative;
+  margin-top: 50px;
+  /* margin-left: 120px; */
+  display: flex;
+}
+
+.do-test__creator {
+  position: absolute;
+  right: 150px;
+  top: 20px;
+  display: flex;
+  align-items: center;
+
+  font-family: PoppinsLight;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 36px;
+  color: #929292;
+}

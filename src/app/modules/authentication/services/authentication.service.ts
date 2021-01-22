@@ -61,6 +61,8 @@ export class AuthenticationService {
       localStorage.setItem('token', authResult.token);
       localStorage.setItem('expiresAt', JSON.stringify(expiresAt.valueOf()));
       localStorage.setItem('username', authResult.username);
+      localStorage.setItem('name', authResult.name);
+
     }
   }
 

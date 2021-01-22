@@ -1,0 +1,133 @@
+.create-test-container {
+  display: flex;
+}
+
+input {
+  border: 0;
+  outline: none
+}
+
+.path {
+  font-family: PoppinsBlack !important;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 42px;
+
+  margin-top: 30px;
+  margin-left: 60px;
+  margin-bottom: 30px;
+}
+
+.create-test-form {
+  width: 823px;
+  margin-left: 120px;
+  padding-bottom: 32px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 70px -30px #C4C4C4;
+  border-radius: 32px;
+}
+
+.create-test-form-title {
+
+  padding: 30px 50px;
+  font-family: PoppinsBlack;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 48px;
+  /* identical to box height */
+
+  color: #5F45EA;
+}
+
+.input-question {
+  font-family: PoppinsBlack;
+  font-weight: 600;
+  margin: 0 auto;
+  font-size: 24px;
+  width: 728px;
+  height: 71px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  padding: 4px 16px;
+
+  background: #FFFFFF;
+  box-shadow: 0px 10px 70px -30px #B4B4B4;
+  border-radius: 32px;
+}
+
+.input-question-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-question-number,
+.input-setting-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-question-number input {
+  width: 48px;
+  height: 48px;
+  background-color: #fff;
+  font-weight: bold;
+}
+
+.create-test-form-setting {
+  margin: 0 auto;
+
+  width: 728px;
+
+  background: #FFFFFF;
+  box-shadow: 0px 0px 70px -30px #C4C4C4;
+  border-radius: 32px;
+}
+
+.create-test-form-setting__title {
+  color: #FE8B8F;
+  padding: 20px 30px;
+  font-family: PoppinsBlack;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  /* identical to box height */
+}
+
+.input-setting {
+  justify-content: flex-start;
+  margin: 0 auto;
+  width: 600px;
+  box-shadow: 0px;
+}
+
+.input-setting-text input {
+  background-color: white;
+}
+
+.input-checkbox {
+  width: 28px;
+  height: 28px;
+}
+
+.button__create {
+  outline: none;
+  border: 0;
+  position: absolute;
+  top: 80px;
+  right: 30px;
+  background-color: #759AF1;
+  width: 152px;
+  height: 54px;
+
+  font-size: 20px;
+  border-radius: 32px;
+  color: white;
+}

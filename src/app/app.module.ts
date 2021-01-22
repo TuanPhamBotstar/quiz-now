@@ -10,12 +10,15 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
 
 import { ToastManagementComponent } from './shared/components/toast-management/toast-management.component';
 
+
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor';
+import { BankModule } from './modules/bank/bank.module';
+import { TestModule } from './modules/test/test.module';
 
 @NgModule({
   declarations: [AppComponent, ToastManagementComponent],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, AuthenticationModule],
+  imports: [BrowserModule, AppRoutingModule, NgbModule, AuthenticationModule, BankModule, TestModule],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,

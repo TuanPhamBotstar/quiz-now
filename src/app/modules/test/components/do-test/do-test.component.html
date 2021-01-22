@@ -1,0 +1,60 @@
+<div class="container">
+  <div *ngIf="test" class="do-test-container">
+    <div class="do-test__header">
+      <div class="do-test__title">
+        <span>{{test.title}}</span>
+        &nbsp;
+        <span class="do-test__title__number">{{test.questions.length | count:"question"}}</span>
+      </div>
+      <div class="do-test__creator">
+        <span>Create by Nguyen Ngoc Man</span>
+      </div>
+    </div>
+    <form [formGroup]="userForm" (ngSubmit)=onSubmit()>
+      <div class="do-test__questions">
+        <div formArrayName="answers">
+          <div class="do-test__question__answers">
+            <div *ngFor="let answerGroup of answersFormGroup; let i = index">
+              <div class="do-test__question__title">
+                {{test.questions[i].title}}
+              </div>
+              <div class="do-test__answers">
+                <div *ngFor="let answer of test.questions[i].answers">
+                  <div [formGroup]="answerGroup">
+                    <div *ngIf="!test.questions[i].isManyAnswers">
+                      <input type="radio" name="{{test.questions[i].title}}"
+                        (click)="onChoseAnswer(answer.title, i, 'radio')">{{answer.title}}
+                    </div>
+                    <div *ngIf="test.questions[i].isManyAnswers">
+                      <input type="checkbox" name="{{test.questions[i].title}}" (click)="onChoseAnswer(answer.title, i, 'checkbox')">{{answer.title}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div *ngFor="let question of test.questions">
+          <div class="do-test__question">
+            <div class="do-test__question__title">
+              {{question.title}}
+            </div>
+            <div formArrayName="answers">
+              <div class="do-test__question__answers">
+                <div *ngFor="let answerGroup of answersFormGroup; let i = index">
+                  <div [formGroup]="answerGroup">
+                    {{i}}
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <button type="submit">Done</button>
+    </form>
+
+  </div>
+
+</div>

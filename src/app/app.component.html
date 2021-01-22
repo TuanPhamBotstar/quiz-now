@@ -3,4 +3,7 @@
 <app-landing-page *ngIf="!isLogin">
 </app-landing-page>
 
-<h1 *ngIf="isLogin">Hello</h1>
+<router-outlet *ngIf="isLogin"></router-outlet>
+<!-- <div *ngIf="isLogin">
+  <app-nav-bar></app-nav-bar>
+</div> -->

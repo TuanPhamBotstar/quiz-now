@@ -1,0 +1,89 @@
+.create-bank-container {
+  display: flex;
+}
+
+* {
+  font-family: PoppinsLight;
+}
+
+button {
+  border: 0;
+  outline: none;
+  color: white;
+}
+
+input {
+  outline: none;
+  border: 0
+}
+
+.create-bank-form {
+  margin-left: 50px;
+  margin-top: 80px;
+}
+
+.bankForm__title {
+  font-size: 36px;
+}
+
+.bankForm__title input {}
+
+.button__add-question {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  width: 137px;
+  height: 54px;
+  background: #5F45EA;
+  border-radius: 32px;
+}
+
+.question-form {
+  width: 827px;
+  padding: 16px;
+  margin-bottom: 20px;
+  
+  background: #FFFFFF;
+  box-shadow: 0px 0px 70px -30px #C4C4C4;
+  border-radius: 32px;
+}
+
+.input__question {
+  width: 800px;
+  padding: 16px;
+}
+
+.button__submit {
+  position: absolute;
+  right: 10px;
+  top: 80px;
+
+  background: #0F993E;
+  border-radius: 32px;
+  width: 137px;
+  height: 54px;
+}
+
+label {
+  font-size: 20px;
+}
+
+select {
+  outline: none;
+}
+
+option[value="easy"] {
+  color: #0f993e
+}
+
+option[value="normal"] {
+  color: #E89528;
+}
+
+option[value="hard"] {
+  color: #F22D2D
+}
+
+.level {
+  margin-top: 20px;
+}

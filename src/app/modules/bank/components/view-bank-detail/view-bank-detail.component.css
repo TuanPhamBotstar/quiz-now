@@ -1,0 +1,127 @@
+.view-bank-detail-container {
+  display: flex;
+}
+
+button {
+  outline: none;
+  border: 0;
+  color: white;
+}
+
+.path {
+  font-family: PoppinsBlack !important;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 42px;
+
+  margin-top: 120px;
+  margin-left: 60px;
+  margin-bottom: 30px;
+}
+
+.list-test {
+  width: 823px;
+
+  padding: 30px 50px;
+
+  margin-left: 120px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 70px -30px #C4C4C4;
+  border-radius: 32px;
+}
+
+.list-test-title {
+  font-family: PoppinsLight;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 48px;
+}
+
+.button__generate-test {
+  position: absolute;
+  right: 30px;
+  top: 160px;
+  width: 152px;
+  height: 54px;
+
+  background: #5F45EA;
+  border-radius: 32px;
+}
+
+.test-card {
+  position: relative;
+
+  margin-bottom: 10px;
+  display: flex;
+  width: 728px;
+  height: 71px;
+
+  background: #FFFFFF;
+  box-shadow: 0px 10px 70px -30px #C4C4C4;
+  border-radius: 32px;
+}
+
+.test-card-title {
+  margin-left: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: PoppinsBlack;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  /* identical to box height */
+
+
+  color: #000000;
+}
+
+.list-test-title {
+  margin-bottom: 20px;
+}
+
+.test-card-detail {
+  margin-left: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: PoppinsBlack;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+}
+
+.test-card-detail p {
+  color: #759AF1;
+}
+
+.test-card-detail p span {
+  color: #2D2D2D;
+  font-weight: 400;
+}
+
+.test-card-copy button {
+
+  position: absolute;
+  right: 40px;
+  top: 10px;
+  font-family: PoppinsBlack;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 36px;
+  background-color: #fff;
+
+  color: rgba(0, 0, 0, .3)
+}
+
+.test-card-copy button:hover {
+  color: #0F993E;
+}

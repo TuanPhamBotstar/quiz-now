@@ -1,0 +1,89 @@
+<div class="create-test-container">
+  <app-nav-bar></app-nav-bar>
+  <div class="create-test">
+    <div class="path">
+      Yours > {{bank.title}} > New Test
+    </div>
+    <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+      <div class="create-test-form">
+        <div class="create-test-form-title">
+          Create new test
+        </div>
+        <div class="input-question">
+          <div class="input-question-title">
+            Number of&nbsp;<span style="color: #195F01">easy</span>&nbsp;questions
+          </div>
+          <div class="input-question-number">
+            <input type="number" min="0" formControlName="numberOfEasyQuestions" placeholder="0">
+          </div>
+        </div>
+        <div class="input-question">
+          <div class="input-question-title">
+            Number of&nbsp;<span style="color: #E89528">normal</span>&nbsp;questions
+          </div>
+          <div class="input-question-number">
+            <input type="number" min="0" formControlName="numberOfNormalQuestions" placeholder="0">
+          </div>
+        </div>
+        <div class="input-question">
+          <div class="input-question-title">
+            Number of&nbsp;<span style="color: #F22D2D">hard</span>&nbsp;questions
+          </div>
+          <div class="input-question-number">
+            <input type="number" min="0" formControlName="numberOfHardQuestions"  placeholder="0">
+          </div>
+        </div>
+        <div class="input-question">
+          <div class="input-question-title">
+            Time:
+          </div>
+          <div class="input-question-number">
+            <input type="number" min="1" formControlName="time" placeholder="1">
+            minutes
+          </div>
+        </div>
+        <div class="create-test-form-setting">
+          <div class="create-test-form-setting__title">
+            SETTING
+          </div>
+          <div class="input-question input-setting">
+            <div class="input-question-title">Code:&nbsp;</div>
+            <div class="input-setting-text">
+              <input type="text" placeholder="Enter test's code" formControlName="code">
+            </div>
+          </div>
+          <div class="input-question input-setting">
+            <div class="input-question-title">Name:&nbsp;</div>
+            <div class="input-setting-text">
+              <input type="text" placeholder="Enter test's name" formControlName="title">
+            </div>
+          </div>
+          <div class="input-question input-setting">
+            <div class="input-question-title">Require student name:&nbsp;&nbsp;</div>
+            <div class="input-setting-text">
+              <input type="checkbox" class="input-checkbox" formControlName="requiredName">
+            </div>
+          </div>
+          <div class="input-question input-setting">
+            <div class="input-question-title">Require student ID:&nbsp;&nbsp;</div>
+            <div class="input-setting-text">
+              <input type="checkbox" class="input-checkbox" formControlName="requiredMsv"> 
+            </div>
+          </div>
+          <div class="input-question input-setting">
+            <div class="input-question-title">Candidate can see the result after submit:&nbsp;&nbsp;</div>
+            <div class="input-setting-text">
+              <input type="checkbox" class="input-checkbox" formControlName="knowTheResult">
+            </div>
+          </div>
+        </div>
+      </div>
+    <button type="submit" class="button__create">Create</button>
+
+    </form>
+
+
+
+
+  </div>
+</div>

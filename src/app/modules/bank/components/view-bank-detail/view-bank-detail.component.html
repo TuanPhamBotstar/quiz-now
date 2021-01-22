@@ -1,0 +1,31 @@
+<div class="view-bank-detail-container">
+  <app-nav-bar></app-nav-bar>
+  <div *ngIf="bank" class="view-bank-detail">
+    <div class="path">
+      <h2>Yours > {{bank ? bank.title : ""}}</h2>
+    </div>
+    <button class="button__generate-test" (click)="goToCreateTest()">
+      New test
+    </button>
+    <div class="list-test">
+      <div class="list-test-title">
+        <p>{{bank.test.length | count: "test"}} created</p>
+      </div>
+      <div *ngFor="let test of listTest">
+        <div class="test-card">
+          <div class="test-card-title">
+            <p>{{test.title}}</p>
+          </div>
+          <div class="test-card-detail">
+            <p>{{test.questions.length | count:"question"}}  - <span>{{test.time | count:"min"}}</span></p>
+          </div>
+          <div class="test-card-copy">
+            <button ngxClipboard [cbContent]="test.link">Copy link</button>
+            <!-- <p ngxClipboard [cbContent]="{{test.link}}">Copy link</p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
