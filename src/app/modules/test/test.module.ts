@@ -9,9 +9,11 @@ import { ViewTestComponent } from './components/view-test/view-test.component';
 import { DoTestComponent } from './components/do-test/do-test.component';
 
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TimerComponent } from './components/timer/timer.component';
+import { FinishTestComponent } from './components/finish-test/finish-test.component';
 
 @NgModule({
-  declarations: [CreateTestComponent, ViewTestComponent, DoTestComponent],
+  declarations: [CreateTestComponent, ViewTestComponent, DoTestComponent, TimerComponent, FinishTestComponent],
   imports: [
     CommonModule,
     CoreModule,

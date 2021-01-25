@@ -3,10 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { CreateBankComponent } from './modules/bank/components/create-bank/create-bank.component';
 import { ViewBankDetailComponent } from './modules/bank/components/view-bank-detail/view-bank-detail.component';
 import { ViewBankComponent } from './modules/bank/components/view-bank/view-bank.component';
+import { HomeComponent } from './modules/home/components/home/home.component';
 import { CreateTestComponent } from './modules/test/components/create-test/create-test.component';
 import { DoTestComponent } from './modules/test/components/do-test/do-test.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent},
   {path: 'bank/create', component: CreateBankComponent},
   {path: 'bank/view', component: ViewBankComponent},
   {path: 'bank/view/:id', component: ViewBankDetailComponent},

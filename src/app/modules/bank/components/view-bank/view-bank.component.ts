@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BankService, Bank } from '../../services/bank.service';
 
 import {Router} from '@angular/router';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-view-bank',
@@ -16,7 +17,9 @@ export class ViewBankComponent implements OnInit {
   ngOnInit(): void {
     this.getBanks();
   }
-
+  goToCreate() {
+    this.router.navigate(['/bank/create'])
+  }
   getBanks() {
     this.bankService.getBanks().subscribe((res) => {
       this.banks = res.data;

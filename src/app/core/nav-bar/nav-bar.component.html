@@ -6,10 +6,10 @@
   <div class="name-container">
     <div class="name">{{name}}</div>
   </div>
-  <div class="route-container">
+  <div class="route-container" [class.selected]="currentLink == 'home'" (click)="goHome()">
     Home
   </div>
-  <div class="route-container">
+  <div class="route-container" [class.selected]="currentLink.indexOf('bank') != -1"(click)="goYour()">
     Yours
   </div>
   <div class="route-container">

@@ -37,7 +37,7 @@ export class ViewBankDetailComponent implements OnInit {
     });
   }
   getAllTest() {
-    this.testService.getAllTest().subscribe((res) => {
+    this.testService.getAllTest(this.bankId).subscribe((res) => {
       this.listTest = res.data;
       console.log(res);
     })

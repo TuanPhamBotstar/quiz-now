@@ -1,0 +1,18 @@
+.home-container {
+  display: flex;
+}
+
+.home__title {
+  margin-top: 150px;
+  margin-left: 70px;
+
+  font-family: PoppinsBlack;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 42px;
+  /* identical to box height */
+
+
+  color: #2D2D2D;
+}

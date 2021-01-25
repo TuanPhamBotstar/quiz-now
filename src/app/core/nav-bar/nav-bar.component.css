@@ -32,10 +32,14 @@
 }
 .route-container {
   margin-bottom: 30px;
-
+  padding: 20px;
   text-align: center;
   font-style: normal;
   font-weight: 600;
   font-size: 28px;
   line-height: 42px;
+}
+.selected {
+  background-color: #5F45EA;
+  color: white;
 }
