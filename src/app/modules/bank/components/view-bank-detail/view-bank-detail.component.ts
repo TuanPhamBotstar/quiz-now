@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BankService, Bank } from '../../services/bank.service';
-import {TestService, Test} from '../../../test/services/test.service';
+import { TestService, Test } from '../../../test/services/test.service';
 
 import { Router } from '@angular/router';
 
@@ -30,19 +30,34 @@ export class ViewBankDetailComponent implements OnInit {
   }
 
   getBank() {
-    this.bankService.getBankInfo(this.bankId).subscribe((res) => {
-      this.bank = res.data;
-
-      console.log(this.bank);
+    // this.bankService.getBanksDataStore().subscribe((res) => {
+    //   console.log(res);
+    //   if (res.length > 0) {
+    //     for (let bank of res) {
+    //       if (bank._id === this.bankId) this.bank = bank;
+    //       break;
+    //     }
+    //   } else {
+    //     this.bankService.getBankInfoStore(this.bankId).subscribe((res) => {
+    //       this.bank = res;
+    //     });
+    //   }
+    // });
+    this.bankService.getBankInfoStore(this.bankId).subscribe((res) => {
+      this.bank = res;
     });
   }
+
   getAllTest() {
     this.testService.getAllTest(this.bankId).subscribe((res) => {
       this.listTest = res.data;
       console.log(res);
-    })
+    });
   }
   goToCreateTest() {
     this.router.navigate([`/bank/view/${this.bankId}/create/test`]);
+  }
+  goToViewQuestions() {
+    this.router.navigate([`/bank/view/${this.bankId}/questions`]);
   }
 }

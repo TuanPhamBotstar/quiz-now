@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateBankComponent } from './modules/bank/components/create-bank/create-bank.component';
 import { ViewBankDetailComponent } from './modules/bank/components/view-bank-detail/view-bank-detail.component';
+import { ViewBankQuestionsComponent } from './modules/bank/components/view-bank-questions/view-bank-questions.component';
 import { ViewBankComponent } from './modules/bank/components/view-bank/view-bank.component';
 import { HomeComponent } from './modules/home/components/home/home.component';
 import { CreateTestComponent } from './modules/test/components/create-test/create-test.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'bank/view', component: ViewBankComponent},
   {path: 'bank/view/:id', component: ViewBankDetailComponent},
   {path: 'bank/view/:id/create/test', component: CreateTestComponent},
+  {path: 'bank/view/:id/questions', component: ViewBankQuestionsComponent},
   {path: 'test/access/:id', component: DoTestComponent}
 ];
 

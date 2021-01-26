@@ -10,9 +10,10 @@ import { ViewBankComponent } from './components/view-bank/view-bank.component';
 import {SharedModule} from '../../shared/shared.module';
 import { ViewBankDetailComponent } from './components/view-bank-detail/view-bank-detail.component';
 import { ClipboardModule } from 'ngx-clipboard';
+import { ViewBankQuestionsComponent } from './components/view-bank-questions/view-bank-questions.component';
 
 @NgModule({
-  declarations: [CreateBankComponent, CreateQuestionComponent, ViewBankComponent, ViewBankDetailComponent],
+  declarations: [CreateBankComponent, CreateQuestionComponent, ViewBankComponent, ViewBankDetailComponent, ViewBankQuestionsComponent],
   imports: [
     CommonModule,
     CoreModule, 

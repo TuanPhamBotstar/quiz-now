@@ -20,7 +20,12 @@ button {
   margin-left: 60px;
   margin-bottom: 30px;
 }
-
+.path div {
+  font-family: PoppinsLight;
+  font-size: 16px;
+  color: blue;
+  cursor: pointer;
+}
 .list-test {
   width: 823px;
 

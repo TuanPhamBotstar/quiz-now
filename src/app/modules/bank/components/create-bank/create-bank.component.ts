@@ -12,6 +12,9 @@ export class CreateBankComponent implements OnInit {
   constructor(private fb: FormBuilder, private bankService: BankService) {}
 
   bankLength: number = 0;
+  finishAddQuestion: boolean = false;
+
+  // titleForm = this.fb.control('');
 
   bankForm: FormGroup = this.fb.group({
     title: [''],
@@ -30,11 +33,16 @@ export class CreateBankComponent implements OnInit {
     return this.questions.controls as FormGroup[];
   }
 
-  addAnswers(event: any) {
-    this.bankForm.value.questions[
-      this.bankForm.value.questions.length - 1
-    ].answers = event;
+  addAnswers(event: any, i: any) {
+    console.log(i)
+    console.log(event);
+
+    // this.bankForm.value.questions[
+    //   this.bankForm.value.questions.length - 1
+    // ].answers = event;
+    this.bankForm.value.questions[i].answers = event;
   }
+
   addQuestion() {
     this.bankLength++;
     this.questions.push(
@@ -46,7 +54,7 @@ export class CreateBankComponent implements OnInit {
     );
   }
   onSubmit() {
-    this.bankService.createBank(this.bankForm.value);
+    // this.bankService.createBank(this.bankForm.value);
 
     console.log(this.bankForm.value);
   }

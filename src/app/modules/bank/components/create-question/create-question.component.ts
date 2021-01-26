@@ -14,6 +14,8 @@ export class CreateQuestionComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  finishAddQuestion: boolean = false;
+
   questionForm: FormGroup = this.fb.group({
     answers: new FormArray([]),
   });
@@ -31,6 +33,7 @@ export class CreateQuestionComponent implements OnInit {
   }
 
   addAnswer() {
+    this.finishAddQuestion = false;
     this.answers.push(
       this.fb.group({
         title: [''],
@@ -39,6 +42,14 @@ export class CreateQuestionComponent implements OnInit {
     );
   }
   onSubmit() {
-    this.newAnswersEvent.emit(this.questionForm.value);
+    for (let answer of this.answers.value) {
+      if (answer.isTrue) {
+        this.finishAddQuestion = true;
+        break;
+      }
+    }
+    if (this.finishAddQuestion)
+      this.newAnswersEvent.emit(this.questionForm.value);
+    else alert('Please choose correct answer')
   }
 }

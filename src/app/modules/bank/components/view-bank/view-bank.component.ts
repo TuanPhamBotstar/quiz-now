@@ -20,11 +20,16 @@ export class ViewBankComponent implements OnInit {
   goToCreate() {
     this.router.navigate(['/bank/create'])
   }
+  // getBanks() {
+  //   this.bankService.getBanks().subscribe((res) => {
+  //     this.banks = res.data;
+  //     console.log(this.banks)
+  //   });
+  // }
   getBanks() {
-    this.bankService.getBanks().subscribe((res) => {
-      this.banks = res.data;
-      console.log(this.banks)
-    });
+    this.bankService.getBanksStore().subscribe((res) => {
+      this.banks = res;
+    })
   }
   goToBankDetail(id: any) {
     console.log(id)

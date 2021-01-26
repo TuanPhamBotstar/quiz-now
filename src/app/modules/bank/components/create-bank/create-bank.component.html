@@ -7,7 +7,6 @@
         <input type="text" formControlName="title" placeholder="Enter bank's name">
       </div>
       <div formArrayName="questions">
-        <button (click)="addQuestion()" class="button__add-question">Add question</button>
         <br>
         <span>This bank has {{bankLength}} questions</span>
         <div *ngFor="let question of questionsFormGroup; let i=index" class="question-form">
@@ -23,13 +22,20 @@
                   <option value="hard">Hard</option>
                 </select>
               </div>
-
-              <app-create-question (newAnswersEvent)="addAnswers($event)"></app-create-question>
+              <!-- <div formArrayName="answers">
+                <button>Add answer</button>
+                <br>
+                <div *ngFor="let answer of answers.controls; let i=index">
+                  <div [formGroup]="answer"></div>
+                </div>
+              </div> -->
+              <app-create-question (newAnswersEvent)="addAnswers($event, i)"></app-create-question>
             </label>
 
           </div>
         </div>
       </div>
+      <button (click)="addQuestion()" class="button__add-question">Add question</button>
 
       <button type="submit" (click)="onSubmit()" class="button__submit">Submit</button>
     </form>
