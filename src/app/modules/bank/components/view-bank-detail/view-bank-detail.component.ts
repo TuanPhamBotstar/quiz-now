@@ -24,32 +24,33 @@ export class ViewBankDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.bankId);
     this.getBank();
     this.getAllTest();
   }
 
   getBank() {
-    // this.bankService.getBanksDataStore().subscribe((res) => {
-    //   console.log(res);
-    //   if (res.length > 0) {
-    //     for (let bank of res) {
-    //       if (bank._id === this.bankId) this.bank = bank;
-    //       break;
-    //     }
-    //   } else {
-    //     this.bankService.getBankInfoStore(this.bankId).subscribe((res) => {
-    //       this.bank = res;
-    //     });
-    //   }
-    // });
-    this.bankService.getBankInfoStore(this.bankId).subscribe((res) => {
-      this.bank = res;
+    this.bankService.getBanksDataStore().subscribe((res) => {
+      console.log('res', res);
+      if (res) {
+        console.log(res.length);
+        for (let bank of res) {
+          if (bank._id === this.bankId) {
+            this.bank = bank;
+            break;
+          }
+        }
+      } else {
+        console.log('haha');
+        this.bankService.getBankInfoStore(this.bankId).subscribe((res) => {
+          this.bank = res;
+        });
+      }
     });
   }
 
   getAllTest() {
     this.testService.getAllTest(this.bankId).subscribe((res) => {
+      console.log(this.bank);
       this.listTest = res.data;
       console.log(res);
     });

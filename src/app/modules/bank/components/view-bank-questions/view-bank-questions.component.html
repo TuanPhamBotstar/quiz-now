@@ -1,1 +1,18 @@
-<p>view-bank-questions works!</p>
+<div class="view-bank-questions-container">
+    <app-nav-bar></app-nav-bar>
+    <div class="view-bank-questions">
+        <div *ngIf="bankName" class="path">
+            Yours > {{bankName}} > Questions
+        </div>
+        <div *ngFor="let question of questions">
+            <div class="view-bank-question" (click)="goToQuestion(question._id)">
+                <div class="question__title">
+                    {{question.title}}
+                </div>
+                <div class="question__level">
+                    {{question.level}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

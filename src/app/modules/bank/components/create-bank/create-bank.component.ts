@@ -54,7 +54,7 @@ export class CreateBankComponent implements OnInit {
     );
   }
   onSubmit() {
-    // this.bankService.createBank(this.bankForm.value);
+    this.bankService.createBank(this.bankForm.value);
 
     console.log(this.bankForm.value);
   }

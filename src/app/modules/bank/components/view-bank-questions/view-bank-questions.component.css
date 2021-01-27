@@ -1,0 +1,32 @@
+.view-bank-questions-container {
+  display: flex;
+}
+
+.path {
+  margin-top: 80px;
+  margin-left: 50px;
+  font-family: PoppinsBlack;
+  font-size: 28px;
+}
+
+.view-bank-question {
+  width: 827px;
+  display: flex;
+
+  margin-left: 30px;
+  margin-top: 20px;
+  
+  padding: 20px 30px;
+  justify-content: space-between;
+
+  background: #FFFFFF;
+  box-shadow: 0px 0px 70px -30px #C4C4C4;
+  border-radius: 32px;
+}
+.question__title {
+  font-size: 20px;
+  font-family: PoppinsBlack;
+}
+.question__level {
+  font-family: PoppinsLight;
+}

@@ -1,0 +1,82 @@
+.view-question-detail-container {
+  display: flex;
+}
+
+form {
+  font-family: PoppinsLight;
+}
+
+input {
+  border: 0;
+  outline: none;
+  background: #fff;
+}
+
+button {
+  border: 0;
+  outline: none;
+}
+
+.deleted input {
+  text-decoration: line-through
+}
+
+.deleted {
+  text-decoration: line-through
+}
+
+.form-question {
+  margin-top: 60px;
+  margin-left: 60px;
+  height: 100%;
+
+  padding: 40px 40px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 70px -30px #C4C4C4;
+  border-radius: 32px;
+  position: relative;
+}
+
+.form-answers {
+  margin-top: 10px;
+  margin-left: 30px;
+  font-size: 24px;
+}
+
+input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+}
+
+.question__title input {
+  font-family: PoppinsBlack;
+  width: 817px;
+  font-size: 24px;
+  background: #fff;
+  padding: 10px 20px;
+}
+
+label[for="level"] {
+  font-size: 24px;
+}
+
+button[type="submit"] {
+  position: absolute;
+  right: 50px;
+  bottom: 20px;
+
+  padding: 10px 20px;
+  border-radius: 32px;
+
+  background-color: #0F993E;
+  color: #fff;
+}
+
+.button__delete {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: red;
+  background-color: #fff;
+  cursor: pointer;
+}

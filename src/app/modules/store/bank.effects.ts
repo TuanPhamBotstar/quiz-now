@@ -12,25 +12,59 @@ export class BankEffects {
   getAllBanks$ = this.actions$.pipe(
     ofType(bankActions.GET_BANKS),
     switchMap(() => {
-      console.log('hello');
       return this.bankService.getBanks();
     }),
     map((res) => {
-      console.log('effect', res.data);
+      console.log(res.data);
       return new bankActions.GetAllBanksSuccess(res.data);
     }),
     catchError((err) => [new bankActions.GetAllBanksError(err)])
   );
   @Effect()
   getBank$ = this.actions$.pipe(
-      ofType(bankActions.GET_BANK_BY_ID),
-      map((action: bankActions.GetBankById) => {
-          return action.payload;
-      }),
-      switchMap((id) => this.bankService.getBankInfo(id)),
-      map((bank) => {
-          return new bankActions.GetBankByIdSuccess(bank.data);
-      }),
-      catchError(err => [new bankActions.GetBankByIdError(err)])
+    ofType(bankActions.GET_BANK_BY_ID),
+    map((action: bankActions.GetBankById) => {
+      return action.payload;
+    }),
+    switchMap((id) => this.bankService.getBankInfo(id)),
+    map((bank) => {
+      return new bankActions.GetBankByIdSuccess(bank.data);
+    }),
+    catchError((err) => [new bankActions.GetBankByIdError(err)])
+  );
+  @Effect()
+  getBankQuestions$ = this.actions$.pipe(
+    ofType(bankActions.GET_BANK_QUESTIONS),
+    map((action: bankActions.GetBankQuestions) => action.payload),
+    switchMap((id) => this.bankService.getBankQuestions(id)),
+    map((questions) => {
+      console.log(questions);
+      return new bankActions.GetBankQuestionsSuccess(questions.data);
+    }),
+    catchError((err) => [new bankActions.GetBankQuestionsError(err)])
+  );
+  @Effect()
+  getQuestion$ = this.actions$.pipe(
+    ofType(bankActions.GET_QUESTION_BY_ID),
+    map((action: bankActions.GetQuestionById) => action.payload),
+    switchMap((id) => this.bankService.getQuestion(id)),
+    map((question) => {
+      console.log(question);
+
+      return new bankActions.GetQuestionByIdSuccess(question.data);
+    }),
+    catchError((error) => [new bankActions.GetQuestionByIdError(error)])
+  );
+  @Effect()
+  updateQuestion$ = this.actions$.pipe(
+    ofType(bankActions.UPDATE_QUESTION),
+    map((action: bankActions.UpdateQuestion) => action.payload),
+    switchMap((question) => this.bankService.updateQuestion(question)),
+    map((question) => {
+      console.log(question);
+
+      return new bankActions.UpdateQuestionSuccess(question.data);
+    }),
+    catchError((err) => [new bankActions.UpdateQuestionError(err)])
   )
 }
