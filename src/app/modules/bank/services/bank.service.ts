@@ -29,8 +29,8 @@ export class BankService {
   getBankInfo(bankId: any): Observable<any> {
     return this.http.get<any>('http://localhost:3000/bank/get/' + bankId);
   }
-  getBanks(): Observable<any> {
-    return this.http.get<any>('http://localhost:3000/bank/get');
+  getBanks(page: string): Observable<any> {
+    return this.http.get<any>('http://localhost:3000/bank/get/page/' + page);
   }
   getBankQuestions(id: any): Observable<any> {
     return this.http.get<any>('http://localhost:3000/bank/get/questions/' + id);
@@ -63,8 +63,8 @@ export class BankService {
   getOneBankDataStore() {
     return this.store.select(getOneBank);
   }
-  getBanksStore() {
-    this.store.dispatch(new GetAllBanks());
+  getBanksStore(page: string) {
+    this.store.dispatch(new GetAllBanks(page));
     
     // this.store.select(getAllBanks);
   }
@@ -93,7 +93,7 @@ export class BankService {
 export interface Bank {
   _id: string;
   idQuestions: string[];
-  test: string[];
+  idTests: string[];
   title: string;
   owner: string;
 }

@@ -13,8 +13,11 @@ export class BankEffects {
   @Effect()
   getAllBanks$ = this.actions$.pipe(
     ofType(bankActions.GET_BANKS),
-    switchMap(() => {
-      return this.bankService.getBanks();
+    map((action: bankActions.GetAllBanks) => {
+      return action.payload
+    }),
+    switchMap((page) => {
+      return this.bankService.getBanks(page);
     }),
     map((res) => {
       return new bankActions.GetAllBanksSuccess(res.data);

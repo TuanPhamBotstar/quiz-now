@@ -50,6 +50,7 @@ export const CREATE_TEST_ERROR = '[TEST] Create test error';
 
 export class GetAllBanks implements Action {
   readonly type = GET_BANKS;
+  constructor(public payload: string){}
 }
 export class GetAllBanksSuccess implements Action {
   readonly type = GET_BANKS_SUCCESS;

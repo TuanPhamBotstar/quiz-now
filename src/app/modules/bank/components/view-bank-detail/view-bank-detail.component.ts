@@ -30,25 +30,20 @@ export class ViewBankDetailComponent implements OnInit {
   }
 
   getBank() {
-    this.bankService.getBankInfoStore(this.bankId).subscribe((res) => {
-      this.bank = res;
+    this.bankService.getBanksDataStore().subscribe((res) => {
+      console.log(res);
+      for (let bank of res) {
+        if (bank._id === this.bankId) {
+          this.bank = bank;
+          break;
+        }
+      }
+      if (!this.bank)
+        this.bankService.getBankInfoStore(this.bankId).subscribe((res) => {
+          this.bank = res;
+        });
     });
-    // this.bankService.getBanksDataStore().subscribe((res) => {
-    // console.log(res);
-    // if (!res || res.length === 0) {
-    //   this.bankService.getBankInfoStore(this.bankId).subscribe((res) => {
-    //     this.bank = res;
-    //     console.log(res);
-    //   });
-    // } else {
-    //   for (let bank of res) {
-    //     if (bank._id === this.bankId) {
-    //       this.bank = bank;
-    //       break;
-    //     }
-    //   }
-    // }
-    // });
+
   }
   getAllTest() {
     this.testService.getAllTestStore(this.bankId);

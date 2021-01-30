@@ -39,21 +39,10 @@ export class ViewBankQuestionsComponent implements OnInit {
   }
   getBankQuestions() {
     this.bankService.getBankQuestionsStore(this.bankId);
+
     this.bankService.getQuestionsDataStore().subscribe(res => {
       this.questions = res;
     })
-    // this.bankService.getQuestionsDataStore().subscribe((res) => {
-    //   if (!res || res.length === 0) {
-    //     this.bankService.getBankQuestionsStore(this.bankId)
-    //   } else this.questions = res;
-    // });
-    // this.bankService.getQuestionStore(this.bankId);
-    // console.log(this.bankId);
-
-    // this.bankService.getQuestionsDataStore().subscribe((res) => {
-    //   console.log(res);
-    //   this.questions = res;
-    // });
   }
   goToQuestion(id: any) {
     this.router.navigate([`/bank/question/${id}`]);

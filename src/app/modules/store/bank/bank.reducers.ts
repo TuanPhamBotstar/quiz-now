@@ -279,13 +279,29 @@ export function reducer(state = initialArrayState, action: AppAction) {
       }
     }
     case bankActions.CREATE_TEST_SUCCESS: {
+      console.log(action.payload);
       let newTests = [...state.tests, action.payload]
+      let newBanks = [...state.banks];
 
+      for (let bank of newBanks) {
+        if (bank._id === action.payload.source) {
+          // console.log(bank)
+          let newBank = {
+            ...bank,
+            idTests: newTests
+          }
+          const index = newBanks.indexOf(bank);
+          console.log(index);
+          newBanks = [...newBanks.slice(0, index), newBank,...newBanks.slice(index+1)]
+        }
+      } 
+      console.log(newBanks);
       return {
         ...state,
         action: bankActions.CREATE_TEST_SUCCESS,
         done: true,
-        tests: newTests
+        tests: newTests,
+        banks: newBanks 
       }
     }
     case bankActions.CREATE_TEST_ERROR: 
@@ -304,9 +320,10 @@ export const getBankState = createFeatureSelector<BankArrayState>('banks');
 export const getAllBanks = createSelector(
   getBankState,
   (state: BankArrayState) => {
+    console.log(state);
     if (state) return state.banks;
 
-    return null;
+    return [];
   }
 );
 export const getOneBank = createSelector(
