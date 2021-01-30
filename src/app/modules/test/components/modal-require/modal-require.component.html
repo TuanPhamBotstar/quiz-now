@@ -1,0 +1,45 @@
+<div class="modal-container">
+  <div class="modal-require-info">
+    <div class="modal__title">
+      {{test.title}}
+    </div>
+    <div class="test__info">
+      <span class="number-question">{{test.questions.length | count: "question"}}</span>
+      <span> - {{test.time | count: "minute"}}</span>
+    </div>
+    <form [formGroup]="infoRequireForm" (ngSubmit)="onSubmit()">
+      <div class="require-field">
+        <div class="code-require">
+          <label>
+            Code:
+          </label>
+          &nbsp;
+          <input type="text" placeholder="Input exam's code" formControlName="code">
+        </div>
+        <div formArrayName="infos">
+          <div *ngIf="test.requireInfo.length > 0">
+            <div *ngFor="let info of infosFormGroup; let i = index" class="info-require">
+              <div [formGroup]="info">
+                <label>
+                  {{test.requireInfo[i].info}}:
+                </label>
+                &nbsp;
+                <input *ngIf="test.requireInfo[i].type != 'option'" formControlName="value"
+                  type="{{test.requireInfo[i].type}}" placeholder="Input your {{test.requireInfo[i].info}}">
+                <div *ngIf="test.requireInfo[i].type === 'option' ">
+                  <div *ngFor="let option of test.requireInfo[i].option">
+                    <input type="radio" name="option" formControlName="value">{{option}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+
+
+  </div>
+</div>

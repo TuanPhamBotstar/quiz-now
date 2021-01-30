@@ -1,0 +1,53 @@
+input {
+  border: 0;
+  background-color: white;
+  outline: none
+}
+.modal-container {
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  position: fixed;
+  background-color: #C4C4C4;
+  opacity: .8;
+  z-index: 1;
+}
+
+.modal-require-info {
+  margin: 10% auto;
+  background: #FFFFFF;
+  border-radius: 32px;
+  padding: 15px;
+  width: 672px;
+  height: 537px;
+}
+
+.test__info {
+  font-size: 20px;
+}
+
+.modal__title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 60px;
+}
+
+.number-question {
+  color: #759AF1;
+}
+
+.require-field {
+  padding: 20px;
+  font-size: 24px;
+  margin: 0 auto;
+}
+
+.code-require {
+  width: 583px;
+  height: 69px;
+
+  background: #FFFFFF;
+  box-shadow: 0px 10px 70px -30px #C4C4C4;
+  border-radius: 32px;
+}

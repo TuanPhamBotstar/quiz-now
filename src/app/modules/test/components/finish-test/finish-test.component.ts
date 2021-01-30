@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-finish-test',
@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./finish-test.component.css']
 })
 export class FinishTestComponent implements OnInit {
+  @Input() test: any;
+  @Input() score: any;
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.test, this.score)
   }
 
 }

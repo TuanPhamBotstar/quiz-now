@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BankService, Bank } from '../../services/bank.service';
 
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { ThisReceiver } from '@angular/compiler';
 
 @Component({
@@ -18,21 +18,16 @@ export class ViewBankComponent implements OnInit {
     this.getBanks();
   }
   goToCreate() {
-    this.router.navigate(['/bank/create'])
+    this.router.navigate(['/bank/create']);
   }
-  // getBanks() {
-  //   this.bankService.getBanks().subscribe((res) => {
-  //     this.banks = res.data;
-  //     console.log(this.banks)
-  //   });
-  // }
   getBanks() {
-    this.bankService.getBanksStore().subscribe((res) => {
-      this.banks = res;
-    })
+      this.bankService.getBanksStore();
+      this.bankService.getBanksDataStore().subscribe(res => {
+        this.banks = res;
+      })
   }
   goToBankDetail(id: any) {
-    console.log(id)
-    this.router.navigate([`/bank/view/${id}`])
+    console.log(id);
+    this.router.navigate([`/bank/view/${id}`]);
   }
 }

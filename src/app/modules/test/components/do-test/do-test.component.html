@@ -1,4 +1,6 @@
-<div *ngIf="!isFinished">
+<app-modal-require *ngIf="test && !showModal" [test]="test" (infoEmitEvent)="receiveInfo($event)"></app-modal-require>
+
+<div *ngIf="!isFinished && test">
   <div class="questions-container">
     <div class="container">
       <div class="row">
@@ -10,7 +12,7 @@
     </div>
   </div>
 
-  <app-timer [time]="test.time*60" (finishedEvent)="submitAnswers()"></app-timer>
+  <app-timer *ngIf="showModal" [time]="test.time*60" (finishedEvent)="submitAnswers()"></app-timer>
 
   <div class="container">
     <div *ngIf="test" class="do-test-container">
@@ -59,5 +61,5 @@
 
 </div>
 <div *ngIf="isFinished">
-  <app-finish-test></app-finish-test>
+  <app-finish-test [test]="test" [score]="score"></app-finish-test>
 </div>

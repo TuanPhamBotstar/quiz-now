@@ -12,7 +12,7 @@
   <div class="route-container" [class.selected]="currentLink.indexOf('bank') != -1"(click)="goYour()">
     Yours
   </div>
-  <div class="route-container">
-    Notifications
+  <div class="route-container" [class.selected]="currentLink.indexOf('result') != -1" (click)="goResult()">
+    Results
   </div>
 </div>

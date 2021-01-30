@@ -41,18 +41,18 @@ export class ViewQuestionDetailComponent implements OnInit {
       });
   }
   deleteQuestion() {
-    console.log('go');
     this.isDeleted = !this.isDeleted;
   }
   getQuestion() {
     this.questionId = window.location.href.slice(36, 36 + 24);
+
     this.bankService
-      .getQuestionStore(this.questionId)
-      .pipe(filter((question) => question))
-      .pipe(take(1))
+      .getQuestion(this.questionId)
+      // .pipe(filter((question) => question))
+      // .pipe(take(1))
       .subscribe((res) => {
-        console.log(res);
         if (res) {
+          res = res.data;
           this.questionForm.controls.title.setValue(res.title);
           this.questionForm.controls.level.setValue(res.level);
 

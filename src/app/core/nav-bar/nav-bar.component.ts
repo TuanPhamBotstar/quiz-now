@@ -4,24 +4,24 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+  styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent implements OnInit {
-
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
   name: string | null = localStorage.getItem('name');
 
+  currentLink: string | any;
+
   goHome() {
-    this.router.navigate(['/home'])
+    this.router.navigate(['/home']);
   }
   goYour() {
-    this.router.navigate(['/bank/view'])
+    this.router.navigate(['/bank/view']);
   }
-   currentLink: string | any;
-
+  goResult() {
+    this.router.navigate(['/result']);
+  }
   ngOnInit(): void {
-    this.currentLink = (window.location.href.slice(22))
-
+    this.currentLink = window.location.href.slice(22);
   }
-
 }

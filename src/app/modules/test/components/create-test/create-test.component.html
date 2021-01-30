@@ -1,4 +1,4 @@
-<div class="create-test-container">
+<div *ngIf="bank" class="create-test-container">
   <app-nav-bar></app-nav-bar>
   <div class="create-test">
     <div class="path">
@@ -30,7 +30,7 @@
             Number of&nbsp;<span style="color: #F22D2D">hard</span>&nbsp;questions
           </div>
           <div class="input-question-number">
-            <input type="number" min="0" formControlName="numberOfHardQuestions"  placeholder="0">
+            <input type="number" min="0" formControlName="numberOfHardQuestions" placeholder="0">
           </div>
         </div>
         <div class="input-question">
@@ -58,7 +58,7 @@
               <input type="text" placeholder="Enter test's name" formControlName="title">
             </div>
           </div>
-          <div class="input-question input-setting">
+          <!-- <div class="input-question input-setting">
             <div class="input-question-title">Require student name:&nbsp;&nbsp;</div>
             <div class="input-setting-text">
               <input type="checkbox" class="input-checkbox" formControlName="requiredName">
@@ -69,6 +69,24 @@
             <div class="input-setting-text">
               <input type="checkbox" class="input-checkbox" formControlName="requiredMsv"> 
             </div>
+          </div> -->
+          <div formArrayName="requireInfo" class="require-info">
+            <div class="button-add-info" (click)="addInfo()">+ Add info</div>
+            <div *ngFor="let infoFormGroup of infosFormGroup">
+              <div [formGroup]="infoFormGroup" class="info-form">
+                <input type="text" formControlName="info" class="info-field">
+                &nbsp;
+                <label for="type">Type: &nbsp;</label>
+                <select id="level" formControlName="type">
+                  <option value="text">Text</option>
+                  <option value="number">Number</option>
+                  <option value="option">Option</option>
+                </select>
+                <div *ngIf="infoFormGroup.controls.type.value === 'option'">
+                  <input type="text" formControlName="option" class="option-field" placeholder="Dividing options into comma ',' ">
+                </div>
+              </div>
+            </div>
           </div>
           <div class="input-question input-setting">
             <div class="input-question-title">Candidate can see the result after submit:&nbsp;&nbsp;</div>
@@ -78,7 +96,7 @@
           </div>
         </div>
       </div>
-    <button type="submit" class="button__create">Create</button>
+      <button type="submit" class="button__create">Create</button>
 
     </form>
 

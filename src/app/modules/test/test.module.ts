@@ -11,9 +11,10 @@ import { DoTestComponent } from './components/do-test/do-test.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TimerComponent } from './components/timer/timer.component';
 import { FinishTestComponent } from './components/finish-test/finish-test.component';
+import { ModalRequireComponent } from './components/modal-require/modal-require.component';
 
 @NgModule({
-  declarations: [CreateTestComponent, ViewTestComponent, DoTestComponent, TimerComponent, FinishTestComponent],
+  declarations: [CreateTestComponent, ViewTestComponent, DoTestComponent, TimerComponent, FinishTestComponent, ModalRequireComponent],
   imports: [
     CommonModule,
     CoreModule,

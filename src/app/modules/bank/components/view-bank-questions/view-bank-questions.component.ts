@@ -23,25 +23,37 @@ export class ViewBankQuestionsComponent implements OnInit {
   }
 
   getBankInfo() {
-    this.bankService.getOneBankDataStore().subscribe(res => {
+    this.bankService.getOneBankDataStore().subscribe((res) => {
       if (res) {
         this.bankName = res.title;
       } else {
-        this.bankService.getBankInfoStore(this.bankId).subscribe(res => {
+        this.bankService.getBankInfoStore(this.bankId).subscribe((res) => {
           this.bankName = res.title;
-        })
+        });
       }
-    })
+    });
   }
   getBankId() {
-    const id = window.location.href.slice(32, 32+24);
+    const id = window.location.href.slice(32, 32 + 24);
     this.bankId = id;
   }
   getBankQuestions() {
-    this.bankService.getBankQuestionsStore(this.bankId).subscribe((res) => {
-      console.log(res);
+    this.bankService.getBankQuestionsStore(this.bankId);
+    this.bankService.getQuestionsDataStore().subscribe(res => {
       this.questions = res;
-    });
+    })
+    // this.bankService.getQuestionsDataStore().subscribe((res) => {
+    //   if (!res || res.length === 0) {
+    //     this.bankService.getBankQuestionsStore(this.bankId)
+    //   } else this.questions = res;
+    // });
+    // this.bankService.getQuestionStore(this.bankId);
+    // console.log(this.bankId);
+
+    // this.bankService.getQuestionsDataStore().subscribe((res) => {
+    //   console.log(res);
+    //   this.questions = res;
+    // });
   }
   goToQuestion(id: any) {
     this.router.navigate([`/bank/question/${id}`]);

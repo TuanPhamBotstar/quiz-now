@@ -3,19 +3,25 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { TestService, Test } from '../../services/test.service';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-do-test',
   templateUrl: './do-test.component.html',
   styleUrls: ['./do-test.component.css'],
 })
 export class DoTestComponent implements OnInit {
-  constructor(private testService: TestService, public fb: FormBuilder, private router: Router) {}
+  constructor(
+    private testService: TestService,
+    public fb: FormBuilder,
+    private router: Router
+  ) {}
 
   test: Test | any;
   isFinished: boolean = false;
+  showModal: boolean = false;
+  score: number = 0;
 
   userForm: FormGroup = this.fb.group({
+    info: [''],
     answers: this.fb.array([]),
   });
   scroll(id: any) {
@@ -41,12 +47,16 @@ export class DoTestComponent implements OnInit {
   ngOnInit(): void {
     this.getTestInfo();
   }
+  receiveInfo(value: any) {
+    this.userForm.controls.info.setValue(value.infos);
+    this.showModal = true;
+  }
   submitAnswers() {
-    console.log(this.userForm.value)
+    console.log(this.userForm.value);
     this.testService
       .submitTest(Object.assign({ testId: this.test._id }, this.userForm.value))
       .subscribe((res) => {
-        console.log(res);
+        if (res.data) this.score = res.data;
         this.isFinished = true;
       });
   }
@@ -77,7 +87,14 @@ export class DoTestComponent implements OnInit {
           this.saveStateAnswer.push(false);
         }
 
-        console.log(this.test)
+        for (let i = 0; i < this.test.requireInfo.length; i++) {
+          let require = this.test.requireInfo[i];
+          if (require.option) {
+            require.option = require.option.split(',').map((o: any) => o.trim());
+          }
+          
+        }
+        console.log(this.test);
       });
   }
 }

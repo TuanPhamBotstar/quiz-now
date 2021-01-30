@@ -25,34 +25,37 @@ export class ViewBankDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBank();
+    console.log('haix');
     this.getAllTest();
   }
 
   getBank() {
-    this.bankService.getBanksDataStore().subscribe((res) => {
-      console.log('res', res);
-      if (res) {
-        console.log(res.length);
-        for (let bank of res) {
-          if (bank._id === this.bankId) {
-            this.bank = bank;
-            break;
-          }
-        }
-      } else {
-        console.log('haha');
-        this.bankService.getBankInfoStore(this.bankId).subscribe((res) => {
-          this.bank = res;
-        });
-      }
+    this.bankService.getBankInfoStore(this.bankId).subscribe((res) => {
+      this.bank = res;
     });
+    // this.bankService.getBanksDataStore().subscribe((res) => {
+    // console.log(res);
+    // if (!res || res.length === 0) {
+    //   this.bankService.getBankInfoStore(this.bankId).subscribe((res) => {
+    //     this.bank = res;
+    //     console.log(res);
+    //   });
+    // } else {
+    //   for (let bank of res) {
+    //     if (bank._id === this.bankId) {
+    //       this.bank = bank;
+    //       break;
+    //     }
+    //   }
+    // }
+    // });
   }
-
   getAllTest() {
-    this.testService.getAllTest(this.bankId).subscribe((res) => {
-      console.log(this.bank);
-      this.listTest = res.data;
+    this.testService.getAllTestStore(this.bankId);
+
+    this.testService.getAllTestDataStore().subscribe((res) => {
       console.log(res);
+      this.listTest = res;
     });
   }
   goToCreateTest() {

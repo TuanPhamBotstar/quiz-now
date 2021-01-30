@@ -9,14 +9,15 @@ import {
   getOneBank,
   getBankQuestions,
   getOneQuestion,
-} from '../../store/bank.reducers';
+} from '../../store/bank/bank.reducers';
 import {
+  CreateBank,
   GetAllBanks,
   GetBankById,
   GetBankQuestions,
   GetQuestionById,
   UpdateQuestion,
-} from '../../store/bank.actions';
+} from '../../store/bank/bank.actions';
 import { Question } from '../models/question';
 
 @Injectable({
@@ -34,17 +35,14 @@ export class BankService {
   getBankQuestions(id: any): Observable<any> {
     return this.http.get<any>('http://localhost:3000/bank/get/questions/' + id);
   }
-  createBank(bank: any) {
-    this.http
+  createBank(bank: any): Observable<any> {
+    return this.http
       .post<any>('http://localhost:3000/bank/create', bank, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           'X-Requested-With': 'XMLHttpRequest',
         }),
       })
-      .subscribe((res) => {
-        console.log(res);
-      });
   }
   getQuestion(id: any): Observable<any> {
     return this.http.get<any>('http://localhost:3000/bank/question/' + id);
@@ -55,6 +53,10 @@ export class BankService {
       newQuestion
     );
   }
+  
+  getQuestionsDataStore() {
+    return this.store.select(getBankQuestions)
+  }
   getBanksDataStore() {
     return this.store.select(getAllBanks);
   }
@@ -63,7 +65,11 @@ export class BankService {
   }
   getBanksStore() {
     this.store.dispatch(new GetAllBanks());
-    return this.store.select(getAllBanks);
+    
+    // this.store.select(getAllBanks);
+  }
+  createBankStore(id: any) {
+    this.store.dispatch(new CreateBank(id));
   }
   getBankInfoStore(id: any) {
     this.store.dispatch(new GetBankById(id));
@@ -71,7 +77,6 @@ export class BankService {
   }
   getBankQuestionsStore(id: any) {
     this.store.dispatch(new GetBankQuestions(id));
-    return this.store.select(getBankQuestions);
   }
   getQuestionStore(id: any) {
     this.store.dispatch(new GetQuestionById(id));
@@ -87,7 +92,7 @@ export class BankService {
 
 export interface Bank {
   _id: string;
-  questions: string[];
+  idQuestions: string[];
   test: string[];
   title: string;
   owner: string;

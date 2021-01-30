@@ -1,0 +1,11 @@
+<div class="view-result-container">
+    <app-nav-bar></app-nav-bar>
+    <div class="view-result">
+        <div class="path">Results</div>
+        <div class="list-result">
+            <div *ngFor="let result of listResults">
+                <app-result [result]="result"></app-result>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { BankService, Bank } from 'src/app/modules/bank/services/bank.service';
 import { TestService } from '../../services/test.service';
 
@@ -24,8 +24,7 @@ export class CreateTestComponent implements OnInit {
     title: [''],
     code: [''],
     time: [''],
-    requiredName: false,
-    requiredMsv: false,
+    requireInfo: this.fb.array([]),
     knowTheResult: false,
     numberOfEasyQuestions: 0,
     numberOfNormalQuestions: 0,
@@ -35,6 +34,20 @@ export class CreateTestComponent implements OnInit {
     this.getBank();
   }
 
+  get infos() {
+    return this.testForm.controls.requireInfo as FormArray;
+  }
+  get infosFormGroup() {
+    return this.infos.controls as FormGroup[];
+  }
+
+  addInfo() {
+    this.infos.push(this.fb.group({
+      info: [''],
+      type: [''],
+      option: ['']
+    }))
+  }
   getBank() {
     this.bankService.getBankInfo(this.bankId).subscribe((res) => {
       this.bank = res.data;
@@ -42,13 +55,10 @@ export class CreateTestComponent implements OnInit {
       console.log(this.bank);
     });
   }
-  onSubmit() {
-    console.log('hello');
+  onSubmit() {  
+    console.log(this.testForm.value);
+
     this.testService
-      .createTest(Object.assign({ source: this.bankId }, this.testForm.value))
-      .subscribe((res) => {
-        console.log(res);
-      });
-    // console.log(this.testForm.value);
+      .createTestStore(Object.assign({ source: this.bankId }, this.testForm.value))
   }
 }

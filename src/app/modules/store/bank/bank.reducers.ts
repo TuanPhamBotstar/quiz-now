@@ -1,24 +1,32 @@
-import { Bank } from '../bank/services/bank.service';
-import { AppAction } from './app.action';
+import { Bank } from '../../bank/services/bank.service';
+import { AppAction } from '../app.action';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as bankActions from './bank.actions';
-import { Question } from '../bank/models/question';
+import { Question } from '../../bank/models/question';
+import { Result } from '../../bank/models/result';
+import { Test } from '../../bank/models/test';
 
 export interface BankArrayState {
   banks: Bank[];
-  questions: Question[];
   selected: Bank | any;
+  questions: Question[];
   question: Question | any;
+  results: Result | any;
+  tests: Test[];
+  test: Test | any;
   action: string | any;
   done: boolean;
   error?: Error | any;
 }
 const initialArrayState: BankArrayState = {
   banks: [],
-  questions: [],
   selected: null,
+  questions: [],
   question: null,
+  results: [],
+  tests: [],
+  test: null,
   action: null,
   done: false,
   error: null,
@@ -65,6 +73,26 @@ export function reducer(state = initialArrayState, action: AppAction) {
         done: true,
         error: action.payload,
       };
+    case bankActions.GET_ALL_TEST:
+      return {
+        ...state,
+        action: bankActions.GET_ALL_TEST,
+        done: false
+      }
+    case bankActions.GET_ALL_TEST_SUCCESS:
+      return {
+        ...state,
+        action: bankActions.GET_ALL_TEST_SUCCESS,
+        done: true,
+        tests: action.payload
+      }
+    case bankActions.GET_ALL_TEST_ERROR:
+      return {
+        ...state,
+        action: bankActions.GET_ALL_TEST_ERROR,
+        done: true,
+        error: action.payload,
+      }
     case bankActions.GET_BANK_QUESTIONS:
       return {
         ...state,
@@ -117,9 +145,10 @@ export function reducer(state = initialArrayState, action: AppAction) {
       let newQuestions;
 
       if (state.questions) {
-        
         if (!action.payload.title) {
-          newQuestions = state.questions.filter(question => question._id != action.payload._id);
+          newQuestions = state.questions.filter(
+            (question) => question._id != action.payload._id
+          );
         } else {
           const index = state.questions.findIndex(
             (h) => h._id === action.payload._id
@@ -128,7 +157,6 @@ export function reducer(state = initialArrayState, action: AppAction) {
           newQuestions = [...state.questions];
           newQuestions[index] = action.payload;
         }
-        
       } else newQuestions = state.questions;
 
       return {
@@ -172,7 +200,101 @@ export function reducer(state = initialArrayState, action: AppAction) {
         error: action.payload,
       };
     }
+    case bankActions.GET_RESULTS_BY_USER: {
+      return {
+        ...state,
+        action: bankActions.GET_RESULTS_BY_USER,
+        done: false,
+      };
+    }
+    case bankActions.GET_RESULTS_BY_USER_SUCCESS: {
+      return {
+        ...state,
+        action: bankActions.GET_RESULTS_BY_USER_SUCCESS,
+        done: true,
+        results: action.payload,
+      };
+    }
+    case bankActions.GET_RESULTS_BY_USER_ERROR: {
+      return {
+        ...state,
+        action: bankActions.GET_RESULTS_BY_USER_ERROR,
+        done: true,
+        error: action.payload,
+      };
+    }
+    case bankActions.GET_TEST_BY_ID: {
+      return {
+        ...state,
+        action: bankActions.GET_TEST_BY_ID,
+        done: false,
+      };
+    }
+    case bankActions.GET_TEST_BY_ID_SUCCESS: {
+      return {
+        ...state,
+        action: bankActions.GET_TEST_BY_ID_SUCCESS,
+        done: true,
+        test: action.payload,
+      };
+    }
+    case bankActions.GET_TEST_BY_ID_ERROR: {
+      return {
+        ...state,
+        action: bankActions.GET_TEST_BY_ID_ERROR,
+        done: true,
+        error: action.payload,
+      };
+    }
+    case bankActions.CREATE_BANK: {
+      return {
+        ...state,
+        action: bankActions.CREATE_BANK,
+        done: false,  
+      } 
+    }
+    case bankActions.CREATE_BANK_SUCCESS: {
+      console.log(action);
+      let newBanks = [...state.banks, action.payload];
+      return {
+        ...state,
+        action: bankActions.CREATE_BANK_SUCCESS,
+        done: true,
+        banks: newBanks
+      }
+    }
+    case bankActions.CREATE_BANK_ERROR: {
+      return {
+        ...state,
+        action: bankActions.CREATE_BANK_ERROR,
+        done: true,
+        error: action.payload
+      }
+    }
+    case bankActions.CREATE_TEST: {
+      return {
+        ...state,
+        action: bankActions.CREATE_TEST,
+        done: false,
+      }
+    }
+    case bankActions.CREATE_TEST_SUCCESS: {
+      let newTests = [...state.tests, action.payload]
 
+      return {
+        ...state,
+        action: bankActions.CREATE_TEST_SUCCESS,
+        done: true,
+        tests: newTests
+      }
+    }
+    case bankActions.CREATE_TEST_ERROR: 
+      return {
+        ...state,
+        action: bankActions.CREATE_TEST_ERROR,
+        done: true,
+        error: action.payload,
+      }
     default:
       return;
   }
@@ -195,18 +317,33 @@ export const getOneBank = createSelector(
     return null;
   }
 );
+export const getAllTest = createSelector(
+  getBankState,
+  (state: BankArrayState) => {
+    return state.tests;
+  }
+)
 export const getBankQuestions = createSelector(
   getBankState,
   (state: BankArrayState) => {
-    console.log(state);
-
     return state.questions;
   }
 );
 export const getOneQuestion = createSelector(
   getBankState,
   (state: BankArrayState) => {
-    console.log(state);
     return state.question;
   }
 );
+export const getResultsUser = createSelector(
+  getBankState,
+  (state: BankArrayState) => {
+    return state.results;
+  }
+);
+export const getTest = createSelector(
+  getBankState,
+  (state: BankArrayState) => {
+    return state.test;
+  }
+)

@@ -1,3 +1,4 @@
+
 .do-test__title {
 
   font-family: PoppinsBlack;
@@ -13,10 +14,13 @@
   font-weight: 400;
 }
 
+.container {
+  padding-top: 50px;
+}
+
 .do-test__header {
 
   position: relative;
-  margin-top: 50px;
   /* margin-left: 120px; */
   display: flex;
 }
@@ -54,10 +58,12 @@
 
   color: #2D2D2D;
 }
+
 .do-test__question__title span {
   font-weight: 600;
   text-decoration: underline;
 }
+
 .do-test__answer__title {
   font-family: PoppinsLight;
   font-style: normal;
@@ -100,6 +106,8 @@ input[type=radio] {
 
   color: #000
 }
+
 .selected {
   background-color: blue;
 }
+
