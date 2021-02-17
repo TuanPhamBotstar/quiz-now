@@ -77,22 +77,22 @@ export function reducer(state = initialArrayState, action: AppAction) {
       return {
         ...state,
         action: bankActions.GET_ALL_TEST,
-        done: false
-      }
+        done: false,
+      };
     case bankActions.GET_ALL_TEST_SUCCESS:
       return {
         ...state,
         action: bankActions.GET_ALL_TEST_SUCCESS,
         done: true,
-        tests: action.payload
-      }
+        tests: action.payload,
+      };
     case bankActions.GET_ALL_TEST_ERROR:
       return {
         ...state,
         action: bankActions.GET_ALL_TEST_ERROR,
         done: true,
         error: action.payload,
-      }
+      };
     case bankActions.GET_BANK_QUESTIONS:
       return {
         ...state,
@@ -133,6 +133,44 @@ export function reducer(state = initialArrayState, action: AppAction) {
         done: true,
         error: action.payload,
       };
+    case bankActions.ADD_QUESTION:
+      return {
+        ...state,
+        action: bankActions.ADD_QUESTION,
+        done: false,
+      };
+    case bankActions.ADD_QUESTION_SUCCESS: {
+      let newQuestions = [...state.questions];
+      if (newQuestions.length < 5) {
+        newQuestions = [...state.questions, action.payload];
+      } else newQuestions = [...state.questions];
+      let newSelected = {
+        ...state.selected,
+        idQuestions: [...state.selected.idQuestions, action.payload._id]
+      }
+      let newBanks = [...state.banks];
+      for (let i = 0; i < state.banks.length; i++) {
+        if (state.banks[i]._id === state.selected._id) {
+          newBanks = [...newBanks.slice(0, i), newSelected, ...newBanks.slice(i+1)]
+        }
+      }
+      return {
+        ...state,
+        action: bankActions.ADD_QUESTION_SUCCESS,
+        done: true,
+        questions: newQuestions,
+        selected: newSelected,
+        banks: newBanks
+      };
+    }
+    case bankActions.ADD_QUESTION_ERROR:
+      return {
+        ...state,
+        action: bankActions.ADD_QUESTION_ERROR,
+        done: true,
+        error: action.payload,
+      };
+
     case bankActions.UPDATE_QUESTION:
       return {
         ...state,
@@ -250,67 +288,104 @@ export function reducer(state = initialArrayState, action: AppAction) {
       return {
         ...state,
         action: bankActions.CREATE_BANK,
-        done: false,  
-      } 
+        done: false,
+      };
     }
     case bankActions.CREATE_BANK_SUCCESS: {
       console.log(action);
-      let newBanks = [...state.banks, action.payload];
+      let newBanks: any = [];
+      if (state.banks.length < 5) {
+        newBanks = [...state.banks, action.payload];
+      } else newBanks = [...state.banks];
       return {
         ...state,
         action: bankActions.CREATE_BANK_SUCCESS,
         done: true,
-        banks: newBanks
-      }
+        banks: newBanks,
+      };
     }
     case bankActions.CREATE_BANK_ERROR: {
       return {
         ...state,
         action: bankActions.CREATE_BANK_ERROR,
         done: true,
-        error: action.payload
-      }
+        error: action.payload,
+      };
+    }
+    case bankActions.DELETE_BANK_BY_ID: {
+      return {
+        ...state,
+        action: bankActions.DELETE_BANK_BY_ID,
+        done: false,
+      };
+    }
+    case bankActions.DELETE_BANK_BY_ID_SUCCESS: {
+      let newBanks = [...state.banks];
+      newBanks = newBanks.filter((bank) => bank._id != action.payload);
+
+      return {
+        ...state,
+        action: bankActions.DELETE_BANK_BY_ID_SUCCESS,
+        done: true,
+        banks: newBanks,
+      };
+    }
+    case bankActions.DELETE_BANK_BY_ID_ERROR: {
+      return {
+        ...state,
+        action: bankActions.DELETE_BANK_BY_ID_ERROR,
+        done: true,
+      };
     }
     case bankActions.CREATE_TEST: {
       return {
         ...state,
         action: bankActions.CREATE_TEST,
         done: false,
-      }
+      };
     }
     case bankActions.CREATE_TEST_SUCCESS: {
-      console.log(action.payload);
-      let newTests = [...state.tests, action.payload]
+      console.log(state);
+      // console.log(action.payload);
+      // let newTests = [...state.tests, action.payload];
+      let newTests = [...state.selected.idTests, action.payload];
       let newBanks = [...state.banks];
+      
+      let newSelected = { ...state.selected, idTests: newTests };
 
       for (let bank of newBanks) {
         if (bank._id === action.payload.source) {
           // console.log(bank)
           let newBank = {
             ...bank,
-            idTests: newTests
-          }
+            idTests: newTests,
+          };
           const index = newBanks.indexOf(bank);
           console.log(index);
-          newBanks = [...newBanks.slice(0, index), newBank,...newBanks.slice(index+1)]
+          newBanks = [
+            ...newBanks.slice(0, index),
+            newBank,
+            ...newBanks.slice(index + 1),
+          ];
         }
-      } 
+      }
       console.log(newBanks);
       return {
         ...state,
         action: bankActions.CREATE_TEST_SUCCESS,
         done: true,
         tests: newTests,
-        banks: newBanks 
-      }
+        banks: newBanks,
+        selected: newSelected
+      };
     }
-    case bankActions.CREATE_TEST_ERROR: 
+    case bankActions.CREATE_TEST_ERROR:
       return {
         ...state,
         action: bankActions.CREATE_TEST_ERROR,
         done: true,
         error: action.payload,
-      }
+      };
     default:
       return;
   }
@@ -321,7 +396,9 @@ export const getAllBanks = createSelector(
   getBankState,
   (state: BankArrayState) => {
     console.log(state);
-    if (state) return state.banks;
+    if (state) {
+      if (state.banks) return state.banks;
+    }
 
     return [];
   }
@@ -337,9 +414,11 @@ export const getOneBank = createSelector(
 export const getAllTest = createSelector(
   getBankState,
   (state: BankArrayState) => {
-    return state.tests;
+    if (state) return state.tests;
+
+    return [];
   }
-)
+);
 export const getBankQuestions = createSelector(
   getBankState,
   (state: BankArrayState) => {
@@ -355,12 +434,10 @@ export const getOneQuestion = createSelector(
 export const getResultsUser = createSelector(
   getBankState,
   (state: BankArrayState) => {
-    return state.results;
+    if (state) return state.results;
+    return [];
   }
 );
-export const getTest = createSelector(
-  getBankState,
-  (state: BankArrayState) => {
-    return state.test;
-  }
-)
+export const getTest = createSelector(getBankState, (state: BankArrayState) => {
+  return state.test;
+});

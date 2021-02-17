@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CountPipe implements PipeTransform{
     transform(n: any, s: any):string {
-        if (n.toString() === "0" || n.toString() === "1") return n + " " + s;
+        if (n.toString() === "1") return n + " " + s;
 
         return n + " " + s + "s";
     }

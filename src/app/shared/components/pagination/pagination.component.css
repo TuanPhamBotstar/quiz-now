@@ -1,0 +1,18 @@
+.pagination-container {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.pagination-item {
+    font-size : 24px!important;
+}
+.selected {
+    background-color: #5F45EA;
+}
+.pagination .page-item .page-link {
+    font-size: 16px;
+    margin: 0 10px;
+}
+.pagination .page-item .page-link:hover {
+    background-color: #5F45ea;
+    margin: 0 10px;
+}

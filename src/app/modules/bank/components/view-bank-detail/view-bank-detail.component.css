@@ -8,49 +8,37 @@ button {
   color: white;
 }
 
-.path {
-  font-family: PoppinsBlack !important;
-
-  font-style: normal;
-  font-weight: 600;
-  font-size: 28px;
-  line-height: 42px;
-
-  margin-top: 120px;
-  margin-left: 60px;
-  margin-bottom: 30px;
-}
 .path div {
   font-family: PoppinsLight;
   font-size: 16px;
   color: blue;
   cursor: pointer;
 }
+
 .list-test {
-  width: 823px;
+  width: 526px;
 
-  padding: 30px 50px;
-
-  margin-left: 120px;
-  background: #FFFFFF;
-  box-shadow: 0px 0px 70px -30px #C4C4C4;
-  border-radius: 32px;
+  padding: 15px 30px;
+  margin-left: 240px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .list-test-title {
   font-family: PoppinsLight;
   font-style: normal;
   font-weight: 600;
-  font-size: 32px;
+  font-size: 24px;
   line-height: 48px;
 }
 
 .button__generate-test {
-  position: absolute;
-  right: 30px;
-  top: 160px;
-  width: 152px;
-  height: 54px;
+  width: 100px;
+  height: 36px;
 
   background: #5F45EA;
   border-radius: 32px;
@@ -61,7 +49,7 @@ button {
 
   margin-bottom: 10px;
   display: flex;
-  width: 728px;
+  width: 480px;
   height: 71px;
 
   background: #FFFFFF;
@@ -71,15 +59,17 @@ button {
 
 .test-card-title {
   margin-left: 20px;
+  cursor: pointer;
+
+  flex-basis: 150px;
 
   display: flex;
-  justify-content: center;
   align-items: center;
   font-family: PoppinsBlack;
   font-style: normal;
   font-weight: 600;
-  font-size: 24px;
-  line-height: 36px;
+  font-size: 16px;
+  line-height: 24px;
   /* identical to box height */
 
 
@@ -91,16 +81,16 @@ button {
 }
 
 .test-card-detail {
-  margin-left: 40px;
+
+  flex-basis: 180px;
 
   display: flex;
-  justify-content: center;
   align-items: center;
   font-family: PoppinsBlack;
   font-style: normal;
   font-weight: 600;
-  font-size: 24px;
-  line-height: 36px;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .test-card-detail p {
@@ -114,14 +104,16 @@ button {
 
 .test-card-copy button {
 
+  flex-basis: 100px;
+
   position: absolute;
   right: 40px;
-  top: 10px;
+  top: 15px;
   font-family: PoppinsBlack;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
-  line-height: 36px;
+  line-height: 24px;
   background-color: #fff;
 
   color: rgba(0, 0, 0, .3)
@@ -129,4 +121,72 @@ button {
 
 .test-card-copy button:hover {
   color: #0F993E;
+}
+
+.button-delete {
+  position: absolute;
+  width: 132px;
+  height: 34px;
+  right: 30px;
+  bottom: 34px;
+
+  padding: 0;
+  background: #FE8B8F;
+  border-radius: 16px;
+}
+
+.modal-confirm {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .3)
+}
+
+.modal-content {
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: 35%;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 400px;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-family: PoppinsBlack;
+}
+
+.modal-detail {
+  font-size: 14px;
+  color: rgba(0, 0, 0, .6)
+}
+
+.button-choice {
+  display: flex;
+  justify-content: space-around
+}
+
+.button-yes {
+  opacity: .6;
+  width: 68px;
+  color: black;
+  background: #fff;
+  border: 3px solid red;
+  border-radius: 14px;
+}
+
+.button-no {
+  width: 68px;
+  color: black;
+  background: #fff;
+  border: 3px solid green;
+  border-radius: 14px;
 }

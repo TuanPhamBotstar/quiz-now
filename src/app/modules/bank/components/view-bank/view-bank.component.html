@@ -1,23 +1,41 @@
 <div class="view-bank-container">
   <app-nav-bar></app-nav-bar>
-  <div class="view-bank">
+  <div class="view-bank component-container">
     <div class="path">
-      <h2>Yours</h2>
+      Yours
     </div>
-    <div class="list-banks">
+    <div style="display: flex">
+      <app-search-bank (eventSearchResults)="receiveSearchBanks($event)"></app-search-bank>
+
       <button class="button__create-bank" (click)="goToCreate()">New bank</button>
+    </div>
+
+
+    <div class="list-banks data-board">
+      <div *ngIf="banks.length === 0 && !isFetched">
+        <app-loader></app-loader>
+      </div>
+      <div *ngIf="banks.length === 0 && isFetched">
+        Empty
+      </div>
       <div *ngFor="let bank of banks" class="bank">
         <div class="bank-title" (click)="goToBankDetail(bank._id)">
-          <p>{{bank.title}}</p> 
+          {{bank.title}}
         </div>
-        <div class="test-number">
-            <p>{{bank.idTests.length| count:"test"}}</p>
+        <div class="bank-static">
+          <div class="test-number">
+            {{bank.idTests.length| count:"test"}}
+          </div>
+          &nbsp;
+          <div class="question-number">
+            - {{bank.idQuestions.length| count:"question"}}
+          </div>
         </div>
-        <div class="question-number">
-            <p>{{bank.idQuestions.length| count:"question"}}</p>
-        </div>
-      </div>
-    </div>
-  </div>
 
+      </div>
+      <app-pagination *ngIf="pages != 0" [goRoute]="'/bank/view'" [pageNumber]="pages"
+        (changePageEvent)="getBanks($event)" class="pagination" [currentPage]="currentPage.toString()"></app-pagination>
+    </div>
+
+  </div>
 </div>

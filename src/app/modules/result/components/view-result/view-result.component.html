@@ -1,11 +1,41 @@
 <div class="view-result-container">
-    <app-nav-bar></app-nav-bar>
-    <div class="view-result">
-        <div class="path">Results</div>
-        <div class="list-result">
-            <div *ngFor="let result of listResults">
-                <app-result [result]="result"></app-result>
-            </div>
-        </div>
+  <app-nav-bar></app-nav-bar>
+  <div class="view-result component-container">
+    <div class="path">Results</div>
+    <div *ngIf="listResults.length === 0 && !isFetched" class="loading">
+      <app-loader></app-loader>
     </div>
+
+    <div class="list-result" *ngIf="listResults.length > 0">
+      
+      <table class="table">
+        <!-- <div *ngIf="!fetchedTest">
+          <div *ngFor="let result of listResults; let i = index">
+            <app-result [result]="result" [i]="i+1 + (currentPage*1 - 1)*5" (fetched)="changeStateFetchedTest($event)">
+            </app-result>
+          </div>
+        </div>
+        <div *ngIf="fetchedTest">
+          <div *ngFor="let test of listTests; let i = index">
+            <tr>
+              <th scope="row">{{i}}</th>
+              <td class="title-col">{{test.title}}</td>
+              <td class="time-col">{{test.time | count: "min"}}</td>
+              <td class="question-col">{{test.questions.length | count: "que"}}</td>
+              <td class="score-col">{{(listResults[i].score * 10).toFixed(2)}}</td>
+            </tr>
+          </div>
+        </div> -->
+        <div *ngFor="let result of listResults; let i = index">
+          <app-result [result]="result" [i]="i+1 + (currentPage*1 - 1)*5" (fetched)="changeStateFetchedTest($event)"></app-result>
+        </div>
+
+      </table>
+      <app-pagination *ngIf="pages > 0 && fetchedTest " [pageNumber]="pages" [currentPage]="currentPage.toString()"
+        [goRoute]="'/result'" (changePageEvent)="getResultsByIdUser($event)"></app-pagination>
+    </div>
+
+
+  </div>
+
 </div>

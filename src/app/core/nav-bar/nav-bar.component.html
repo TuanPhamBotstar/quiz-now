@@ -1,15 +1,29 @@
 <div class="nav-bar">
+  <div class="setting-icon">
+    <div style="width: 2em" (click)="changeStateShowLogOut()">
+      <i style="font-size: 2em" class="fas fa-cog "></i>
+    </div>
+    <!-- <span (click)="changeStateShowLogOut()">Click here</span> -->
+    <div *ngIf="showLogOutDropdown" class="dropdown-logout">
+      <div class="option" (click)="logOut()">
+        Log out
+      </div>
+    </div>
+
+  </div>
   <div class="avatar-container">
     <!-- <img class="avatar" src="../../../../../assets/imgs/user.svg"> -->
-    <img class="avatar" src="https://scontent.fdad2-1.fna.fbcdn.net/v/t1.0-9/139278675_1723657964463071_4754263555392824954_o.jpg?_nc_cat=109&ccb=2&_nc_sid=09cbfe&_nc_ohc=926NDxG-2S0AX9EyOFf&_nc_oc=AQnRStv8cxAR-jP4ZhSSo8WbvwuVHB-nE5Hw36vhC-sNe8yBCqWkjqHM_Tr2TW2ky38&_nc_ht=scontent.fdad2-1.fna&oh=a73f4d4713a44439bf37bab4a345562e&oe=602C5BE2">
+    <img class="avatar"
+      src="https://lh3.googleusercontent.com/proxy/kJSp2lMqhS1KugncXoJjKthRCfx2PgkBknH2Xu4CLq_vuc4aLfepKWeMbd5-SywygH5nrJgj0REM_zbStyEuZDVNZkULyvdQoKh1bs1l2UqOKfBfG9YS_tZJFre3giLe4IgldVzL1HW_P6X6">
   </div>
+
   <div class="name-container">
     <div class="name">{{name}}</div>
   </div>
-  <div class="route-container" [class.selected]="currentLink == 'home'" (click)="goHome()">
+  <!-- <div class="route-container" [class.selected]="currentLink == 'home'" (click)="goHome()">
     Home
-  </div>
-  <div class="route-container" [class.selected]="currentLink.indexOf('bank') != -1"(click)="goYour()">
+  </div> -->
+  <div class="route-container" [class.selected]="currentLink.indexOf('bank') != -1" (click)="goYour()">
     Yours
   </div>
   <div class="route-container" [class.selected]="currentLink.indexOf('result') != -1" (click)="goResult()">

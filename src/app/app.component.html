@@ -1,7 +1,9 @@
 <app-toast-management></app-toast-management>
 
-<app-landing-page *ngIf="!isLogin">
-</app-landing-page>
+<div class="over-bg">
+  <app-landing-page *ngIf="!isLogin && !isSend">
+  </app-landing-page>
 
-<router-outlet *ngIf="isLogin"></router-outlet>
+  <router-outlet *ngIf="isLogin"></router-outlet>
 
+</div>

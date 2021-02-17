@@ -13,30 +13,74 @@ export class ViewBankComponent implements OnInit {
     private bankService: BankService,
     private router: Router,
     private route: ActivatedRoute
-  ) {
-    console.log(this.route.snapshot.queryParamMap.get('page')); 
-  }
+  ) {}
 
   banks: Bank[] | any = [];
-  currentPage: string = '1';
+  currentPage: string = '';
+  pages: number = 0;
+  searchBanks: Bank[] | any = [];
+  contentSearch: string = '';
 
+  isFetched: boolean = false;
+  flag: boolean = false;
+  isSearched: boolean = false;
+
+  getPage() {
+    this.bankService.getPage().subscribe((res) => {
+      this.pages = res.data;
+      console.log(res);
+    });
+  }
+  receiveSearchBanks(event: any): void {
+    if (event) {
+      this.isSearched = event.isSearched;
+      this.contentSearch = event.content;
+
+      console.log(event);
+      this.searchBanks = event.results;
+      if (this.searchBanks.length > 0) {
+        this.banks = this.searchBanks;
+      } else
+        this.bankService.getBanksDataStore().subscribe((res) => {
+          console.log(res);
+          this.banks = res;
+        });
+    }
+  }
   ngOnInit(): void {
+    this.getPage();
+
+    this.currentPage = this.route.snapshot.queryParamMap.get('page') || '1';
+
+    if (this.currentPage === '1') {
+      this.router.navigate(['/bank/view'], { queryParams: { page: '1' } });
+    }
     this.bankService.getBanksDataStore().subscribe((res) => {
-      if (res.length == 0) {
+      this.currentPage = this.route.snapshot.queryParamMap.get('page') || '1';
+
+      if (res.length < 5 && this.flag == false) {
         console.log('hello');
         this.getBanks(this.currentPage);
-      }
-      this.banks = res;
+        this.flag = true;
+      } else this.banks = res;
+      if (this.flag == true) this.isFetched = true;
     });
   }
   goToCreate() {
     this.router.navigate(['/bank/create']);
   }
   getBanks(page: string) {
-    this.bankService.getBanksStore(page);
+    this.currentPage = page;
+    if (!this.isSearched) this.bankService.getBanksStore(page);
+    else
+      this.bankService
+        .searchBankByName(this.contentSearch, page)
+        .subscribe((res) => {
+          this.banks = res.data;
+        });
   }
   goToBankDetail(id: any) {
-    console.log(id);
+    this.bankService.getBankInfoStore(id);
     this.router.navigate([`/bank/view/${id}`]);
   }
 }

@@ -1,0 +1,51 @@
+.detail-result-container {
+  display: flex;
+}
+input[type="radio"] {
+  width: 24px;
+  height: 24px;
+}
+.question-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.question-order {
+  font-weight: 600;
+  font-style: underline;
+}
+.question {
+  width: 641px;
+  padding: 10px;
+  margin-left: 240px;
+  font-size: 24px;
+  background: #FFFFFF;
+  box-shadow: 0px 10px 70px -30px #C4C4C4;
+  margin-top: 20px;
+}
+
+.choices {
+  padding: 10px;
+  background: #f6d9d8;
+  color: white;
+
+}
+
+.trueAnswer {
+  color: green;
+  font-family: PoppinsBlack;
+}
+
+.trueBox {
+  background: #0F993E;
+}
+button {
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: rgba(0,0,0,.6);
+}
+button:hover {
+  color: green;
+  font-weight: 600;
+}

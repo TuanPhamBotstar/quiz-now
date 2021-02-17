@@ -1,0 +1,40 @@
+<div class="detail-result-container">
+  <app-nav-bar></app-nav-bar>
+  <div *ngIf="test" class="questions component-container">
+    <div class="path">Results > {{test.title}}</div>
+    <button ngxClipboard [cbContent]="test.link">Copy link</button>
+    <div *ngFor="let question of test.questions; let i = index" class="question">
+      <div class="question-bar">
+        <div class="question-title"><span class="question-order">Question {{i+1}}</span>: {{question.title}}</div>
+        <div class="question-state">
+          <span style="color: #28a745; font-weight: 600" *ngIf="result.userAnswers[i].isTrue">1/1</span>
+          <span style="color: #dc3545; font-weight: 600" *ngIf="!result.userAnswers[i].isTrue">0/1</span>
+        </div>
+      </div>
+
+      <ul class="answers">
+        <div *ngFor="let answer of question.answers; let j = index">
+          <div>
+            <span *ngIf="answer.isTrue">
+              <img src="../../../../../assets/imgs/checkmark.png">
+              &nbsp;
+              <label>{{answer.title}}</label>
+            </span>
+            <span *ngIf="!answer.isTrue && result.userAnswers[i].answers.indexOf(answer.title) != -1">
+              <img src="../../../../../assets/imgs/wrong.png">
+              &nbsp;
+              <label>{{answer.title}}</label>
+            </span>
+            <span *ngIf="!answer.isTrue && result.userAnswers[i].answers.indexOf(answer.title) == -1">
+              <input type="radio">
+              &nbsp;
+              <label>{{answer.title}}</label>
+            </span>
+          </div>
+
+          <!-- <div [class.trueAnswer]="answer.isTrue">{{answer.title}}</div> -->
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>

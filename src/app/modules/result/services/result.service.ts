@@ -12,16 +12,32 @@ import { GetAllResults } from '../../store/bank/bank.actions';
 export class ResultService {
   constructor(private http: HttpClient, private store: Store<AppState>) {}
 
-  getResultsByIdUser(): Observable<any> {
-    console.log('hello')
-    return this.http.get<any>('http://localhost:3000/result/user');
+  getPage(): Observable<any> {
+    return this.http.get<any>('http://localhost:3000/result/page')
   }
-  getResultsByIdResult(id: any) {}
-  getResultsByIdTest(id: any) {}
-
-  getResultsByIdUserStore(): Observable<any> {
-    this.store.dispatch(new GetAllResults());
-
+  getResultsDataStore(): Observable<any> {
+    return this.store.select(getResultsUser)
+  }
+  getResultsByIdUser(page: any): Observable<any> {
+    console.log('hello')
+    return this.http.get<any>('http://localhost:3000/result/user/' + page);
+  }
+  getResults(): Observable<any> {
     return this.store.select(getResultsUser);
+  }
+  getResultsByIdResult(id: any): Observable<any> {
+    return this.http.get<any>('http://localhost:3000/result/id/' + id);
+  }
+
+  getResultsByIdTest(id: any):Observable<any> {
+    return this.http.get<any>('http://localhost:3000/result/test/' + id);
+  }
+
+
+  getResultsByIdUserStore(page: any) {
+    this.store.dispatch(new GetAllResults(page));
+  }
+  getUserNameByIdUser(id: any) : Observable<any> {
+    return this.http.get<any>('http://localhost:3000/result/user/name/' + id);
   }
 }

@@ -13,14 +13,17 @@ import { GetTestById, GetAllTest, CreateTest } from '../../store/bank/bank.actio
 export class TestService {
   constructor(private http: HttpClient, private store: Store<AppState>) {}
 
+  getPage(id: any) {
+    return this.http.get<any>('http://localhost:3000/test/page/' + id);
+  }
   getOwnerTest(): Observable<any> {
     return this.http.get<any>('http://localhost:3000/test/owner');
   }
   createTest(test: any): Observable<any> {
     return this.http.post<any>('http://localhost:3000/test/create', test);
   }
-  getAllTest(bankId: any): Observable<any> {
-    return this.http.get<any>('http://localhost:3000/test/' + bankId);
+  getAllTest(info: any): Observable<any> {
+    return this.http.post<any>('http://localhost:3000/test', info);
   }
   getTestById(id: any): Observable<any> {
     return this.http.get<any>('http://localhost:3000/test/detail/' + id);
@@ -42,8 +45,8 @@ export class TestService {
   getAllTestDataStore() {
     return this.store.select(getAllTest);
   }
-  getAllTestStore(id: any) {
-    this.store.dispatch(new GetAllTest(id));
+  getAllTestStore(id: any, page: any = '1') {
+    this.store.dispatch(new GetAllTest({id: id, page: page}));
   }
   getDetailTestStore(id: any): Observable<any> {
     this.store.dispatch(new GetTestById(id));

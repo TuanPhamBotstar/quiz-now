@@ -66,7 +66,12 @@ export class DoTestComponent implements OnInit {
 
   onChoseAnswer(answer: any, i: any, type: any): void {
     if (type === 'checkbox' || this.answers.at(i).value.length === 0) {
-      this.answers.at(i).value.push(answer);
+      if (this.answers.at(i).value.indexOf(answer) === -1)
+        this.answers.at(i).value.push(answer);
+      else {
+        const index = this.answers.at(i).value.indexOf(answer);
+        this.answers.at(i).setValue([...this.answers.at(i).value.slice(0, index), ...this.answers.at(i).value.slice(index+1)]) 
+      } 
       this.saveStateAnswer[i] = true;
     } else {
       this.saveStateAnswer[i] = true;
@@ -90,9 +95,10 @@ export class DoTestComponent implements OnInit {
         for (let i = 0; i < this.test.requireInfo.length; i++) {
           let require = this.test.requireInfo[i];
           if (require.option) {
-            require.option = require.option.split(',').map((o: any) => o.trim());
+            require.option = require.option
+              .split(',')
+              .map((o: any) => o.trim());
           }
-          
         }
         console.log(this.test);
       });

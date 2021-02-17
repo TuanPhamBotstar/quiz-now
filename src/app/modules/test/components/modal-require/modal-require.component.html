@@ -23,12 +23,12 @@
                 <label>
                   {{test.requireInfo[i].info}}:
                 </label>
-                &nbsp;
                 <input *ngIf="test.requireInfo[i].type != 'option'" formControlName="value"
                   type="{{test.requireInfo[i].type}}" placeholder="Input your {{test.requireInfo[i].info}}">
                 <div *ngIf="test.requireInfo[i].type === 'option' ">
-                  <div *ngFor="let option of test.requireInfo[i].option">
-                    <input type="radio" name="option" formControlName="value">{{option}}
+                  <div *ngFor="let option of test.requireInfo[i].option; let j = index">
+                    <input style="width: 16px;height: 16px" type="radio" id="option-{{j}}" name="option" value={{option}} formControlName="value">&nbsp;
+                    <label for="option-{{j}}">{{option}}</label>
                   </div>
                 </div>
               </div>

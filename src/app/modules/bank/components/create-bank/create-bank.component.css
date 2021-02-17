@@ -19,11 +19,11 @@ input {
 
 .create-bank-form {
   margin-left: 50px;
-  margin-top: 80px;
+  margin-top: 50px;
 }
 
 .bankForm__title {
-  font-size: 36px;
+  font-size: 24px;
 }
 
 .bankForm__title input {}
@@ -60,12 +60,12 @@ input {
 
   background: #0F993E;
   border-radius: 32px;
-  width: 137px;
-  height: 54px;
+  width: 107px;
+  height: 34px;
 }
 
 label {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 select {

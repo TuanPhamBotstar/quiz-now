@@ -8,8 +8,8 @@ input {
   height: 100vh;
   padding: 0;
   position: fixed;
-  background-color: #C4C4C4;
-  opacity: .8;
+  background-color: rgba(0,0,0,.6);
+  /* opacity: .8; */
   z-index: 1;
 }
 
@@ -20,6 +20,7 @@ input {
   padding: 15px;
   width: 672px;
   height: 537px;
+  opacity: 1;
 }
 
 .test__info {

@@ -1,5 +1,24 @@
-<div class="result-container">
+<div *ngIf="test" (click)=goToResult(result._id)>
+  <!-- <div>
     <div class="title">
-        
+      {{test.title}}
     </div>
+
+    <div class="info">
+      <span class="quesNumber">{{test.questions.length | count: "que"}} - </span>
+      <span class="minNumber">{{test.time | count: "minute"}}</span>
+    </div>
+  </div>
+  <div class="result">
+    <div *ngIf="test.knowTheResult"><b>Score: </b>{{(result.score*10).toFixed(2)}}</div>
+  </div> -->
+  <tr *ngIf="isFetched">
+    <th scope="row">{{i}}</th>
+    <td class="title-col">{{test.title}}</td>
+    <td class="time-col">{{test.time | count: "min"}}</td>
+    <td class="question-col">{{test.questions.length | count: "que"}}</td>
+    <td class="score-col">{{(result.score * 10).toFixed(2)}}</td>
+  </tr>
+
+
 </div>

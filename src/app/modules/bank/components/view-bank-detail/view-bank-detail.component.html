@@ -1,8 +1,8 @@
 <div class="view-bank-detail-container">
   <app-nav-bar></app-nav-bar>
-  <div *ngIf="bank" class="view-bank-detail">
+  <div *ngIf="bank" class="view-bank-detail component-container">
     <div class="path">
-      <h2>Yours > {{bank ? bank.title : ""}}</h2>
+      <a routerLink="/bank/view">Yours</a> > {{bank ? bank.title : ""}}
       <div (click)="goToViewQuestions()">Questions</div>
     </div>
     <button class="button__generate-test" (click)="goToCreateTest()">
@@ -14,16 +14,30 @@
       </div>
       <div *ngFor="let test of listTest">
         <div class="test-card">
-          <div class="test-card-title">
+          <div class="test-card-title " (click)="goToTestDetail(test._id)">
             <p>{{test.title}}</p>
           </div>
           <div class="test-card-detail">
-            <p>{{test.questions.length | count:"question"}} - <span>{{test.time | count:"min"}}</span></p>
+            <p>{{test.questions.length | count:"que"}} - <span>{{test.time | count:"min"}}</span></p>
           </div>
           <div class="test-card-copy">
             <button ngxClipboard [cbContent]="test.link">Copy link</button>
             <!-- <p ngxClipboard [cbContent]="{{test.link}}">Copy link</p> -->
           </div>
+        </div>
+      </div>
+      <app-pagination *ngIf="pages > 0" [goRoute]="'/bank/view/'+bankId" [pageNumber]="pages"
+        (changePageEvent)="getTestByBank($event)" [currentPage]="currentPage.toString()"></app-pagination>
+    </div>
+
+    <button class="button-delete" (click)="openModal()">Delete bank</button>
+    <div *ngIf="showModalDelete" class="modal-confirm">
+      <div class="modal-content">
+        <div class="modal-title">Delete this bank ?</div>
+        <div class="modal-detail">Delete this bank will delete all tests which generated from this bank</div>
+        <div class="button-choice">
+          <button class="button-yes" (click)="deleteBank(bank._id)">Yes</button>
+          <button class="button-no" (click)="deleteBank(null)">No</button>
         </div>
       </div>
     </div>

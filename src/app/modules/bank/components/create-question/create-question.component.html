@@ -6,7 +6,6 @@
       <div *ngFor="let answer of answersFormGroup; let i = index">
         <div [formGroup]="answer">
           <label class="tab">
-            Answer:
             <input type="text" formControlName="title">
             &nbsp;
             <input type="checkbox" formControlName="isTrue">
@@ -15,6 +14,7 @@
       </div>
     </div>
 
-    <button type="submit" (click)="onSubmit()" class="button__done">Done</button>
+    <button *ngIf="!finishAddQuestion" class="button__not-done">Done</button>
+    <button type="submit" *ngIf="finishAddQuestion" (click)="onSubmit()" class="button__done">Done</button>
   </form>
 </div>

@@ -13,6 +13,8 @@ export class ViewQuestionDetailComponent implements OnInit {
 
   questionId: string = '';
 
+  reFetch: boolean = false;
+
   questionForm = this.fb.group({
     title: [''],
     level: [''],

@@ -9,18 +9,26 @@ import { ViewTestComponent } from './components/view-test/view-test.component';
 import { DoTestComponent } from './components/do-test/do-test.component';
 
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ChartsModule } from 'ng2-charts';
+import { NpnSliderModule } from "npn-slider";
+import {RouterModule} from '@angular/router';
+
 import { TimerComponent } from './components/timer/timer.component';
 import { FinishTestComponent } from './components/finish-test/finish-test.component';
 import { ModalRequireComponent } from './components/modal-require/modal-require.component';
+import { TestResultBarChartComponent } from './components/test-result-bar-chart/test-result-bar-chart.component';
 
 @NgModule({
-  declarations: [CreateTestComponent, ViewTestComponent, DoTestComponent, TimerComponent, FinishTestComponent, ModalRequireComponent],
+  declarations: [CreateTestComponent, ViewTestComponent, DoTestComponent, TimerComponent, FinishTestComponent, ModalRequireComponent, TestResultBarChartComponent],
   imports: [
     CommonModule,
     CoreModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    ChartsModule,
+    NpnSliderModule,
+    RouterModule
   ],
-  exports: [CreateTestComponent]
+  exports: [CreateTestComponent, TestResultBarChartComponent]
 })
 export class TestModule { }

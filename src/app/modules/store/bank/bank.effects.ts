@@ -9,12 +9,17 @@ import { TestService } from '../../test/services/test.service';
 
 @Injectable()
 export class BankEffects {
-  constructor(private actions$: Actions, private bankService: BankService, private resultService: ResultService, private testService: TestService) {}
+  constructor(
+    private actions$: Actions,
+    private bankService: BankService,
+    private resultService: ResultService,
+    private testService: TestService
+  ) {}
   @Effect()
   getAllBanks$ = this.actions$.pipe(
     ofType(bankActions.GET_BANKS),
     map((action: bankActions.GetAllBanks) => {
-      return action.payload
+      return action.payload;
     }),
     switchMap((page) => {
       return this.bankService.getBanks(page);
@@ -28,14 +33,26 @@ export class BankEffects {
   createBank$ = this.actions$.pipe(
     ofType(bankActions.CREATE_BANK),
     map((action: bankActions.CreateBank) => {
-      return action.payload
+      return action.payload;
     }),
     switchMap((newBank) => this.bankService.createBank(newBank)),
-    map(newBank => {
-      return new bankActions.CreateBankSuccess(newBank.data)
+    map((newBank) => {
+      return new bankActions.CreateBankSuccess(newBank.data);
     }),
     catchError((err) => [new bankActions.CreateBankError(err)])
-  )
+  );
+  @Effect()
+  deleteBank$ = this.actions$.pipe(
+    ofType(bankActions.DELETE_BANK_BY_ID),
+    map((action: bankActions.DeleteBank) => {
+      return action.payload;
+    }),
+    switchMap((id) => this.bankService.deleteBank(id)),
+    map((res) => {
+      return new bankActions.DeleteBankSuccess(res.data);
+    }),
+    catchError((err) => [new bankActions.DeleteBankError(err)])
+  );
   @Effect()
   getBank$ = this.actions$.pipe(
     ofType(bankActions.GET_BANK_BY_ID),
@@ -53,7 +70,11 @@ export class BankEffects {
   getBankQuestions$ = this.actions$.pipe(
     ofType(bankActions.GET_BANK_QUESTIONS),
     map((action: bankActions.GetBankQuestions) => action.payload),
-    switchMap((id) => this.bankService.getBankQuestions(id)),
+    switchMap((info) => {
+      console.log(info);
+
+      return this.bankService.getBankQuestions(info);
+    }),
     map((questions) => {
       return new bankActions.GetBankQuestionsSuccess(questions.data);
     }),
@@ -72,6 +93,14 @@ export class BankEffects {
     catchError((error) => [new bankActions.GetQuestionByIdError(error)])
   );
   @Effect()
+  addQuestion$ = this.actions$.pipe(
+    ofType(bankActions.ADD_QUESTION),
+    map((action: bankActions.AddQuestion) => action.payload),
+    switchMap((question) => this.bankService.addQuestion(question)),
+    map((question) => new bankActions.AddQuestionSuccess(question.data)),
+    catchError((err) => [new bankActions.AddQuestionError(err)])
+  );
+  @Effect()
   updateQuestion$ = this.actions$.pipe(
     ofType(bankActions.UPDATE_QUESTION),
     map((action: bankActions.UpdateQuestion) => action.payload),
@@ -82,12 +111,13 @@ export class BankEffects {
       return new bankActions.UpdateQuestionSuccess(question.data);
     }),
     catchError((err) => [new bankActions.UpdateQuestionError(err)])
-  )
+  );
   @Effect()
   getResultsByUser$ = this.actions$.pipe(
     ofType(bankActions.GET_RESULTS_BY_USER),
-    switchMap(() => {
-      return this.resultService.getResultsByIdUser()
+    map((action: bankActions.GetAllResults) => action.payload),
+    switchMap((page) => {
+      return this.resultService.getResultsByIdUser(page);
     }),
     map((results) => {
       console.log(results);
@@ -95,12 +125,12 @@ export class BankEffects {
       return new bankActions.GetAllResultsSuccess(results.data);
     }),
     catchError((err) => [new bankActions.GetAllResultsError(err)])
-  )
+  );
   @Effect()
   getTestById$ = this.actions$.pipe(
     ofType(bankActions.GET_TEST_BY_ID),
-    map((action : bankActions.GetTestById) => {
-      return action.payload
+    map((action: bankActions.GetTestById) => {
+      return action.payload;
     }),
     switchMap((id) => {
       return this.testService.getTestById(id);
@@ -109,33 +139,35 @@ export class BankEffects {
       return new bankActions.GetTestByIdSuccess(res.data);
     }),
     catchError((err) => [new bankActions.GetTestByIdError(err)])
-  )
+  );
   @Effect()
   getAllTest$ = this.actions$.pipe(
     ofType(bankActions.GET_ALL_TEST),
     map((action: bankActions.GetAllTest) => {
-      return action.payload
+      return action.payload;
     }),
-    switchMap((id) => {
-      return this.testService.getAllTest(id);
+    switchMap((res) => {
+      console.log(res);
+      return this.testService.getAllTest(res);
     }),
     map((res) => {
+      console.log(res);
       return new bankActions.GetAllTestSuccess(res.data);
     }),
     catchError((err) => [new bankActions.GetAllTestError(err)])
-  )
+  );
   @Effect()
   createTest$ = this.actions$.pipe(
     ofType(bankActions.CREATE_TEST),
     map((action: bankActions.CreateTest) => {
-      return action.payload
+      return action.payload;
     }),
     switchMap((test) => {
       return this.testService.createTest(test);
     }),
     map((res) => {
-      return new bankActions.CreateTestSuccess(res.data)
+      return new bankActions.CreateTestSuccess(res.data);
     }),
     catchError((err) => [new bankActions.CreateTestError(err)])
-  )
+  );
 }

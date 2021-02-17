@@ -1,0 +1,46 @@
+<div class="result-with-test-container">
+  <app-nav-bar></app-nav-bar>
+  <div *ngIf="bank && test" class="component-container">
+    <div class="path">
+      <a routerLink="/bank/view">Yours</a> > <a routerLink="/bank/view/{{bank._id}}">{{bank.title}}</a> >
+      {{test.title}}
+    </div>
+
+    <div *ngIf="listResults.length > 0 && test" style="display: flex">
+      <div class="result-with-test ">
+        <div class="info">
+          There is/are {{listResults.length | count:"user"}} access this test.
+        </div>
+        <div class="score-chart">
+          <label>Score's statistics.</label>
+          <app-bar-chart [results]="listResults"></app-bar-chart>
+        </div>
+        <div class="right-answer-chart">
+          <label>Right answers statistics.</label>
+          <app-test-result-bar-chart [results]="listResults" [test]="test"></app-test-result-bar-chart>
+        </div>
+      </div>
+      <div class="rank">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" class="rank-col">Rank</th>
+              <th scope="col" class="name-col">Name</th>
+              <th scope="col" class="score-col">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let result of listResults.slice(0, 5); let i = index">
+              <th scope="row">{{i + 1}}</th>
+              <th scope="row">{{userNames[i]}}</th>
+              <th scope="row">{{(result.score*10).toFixed(2)}}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

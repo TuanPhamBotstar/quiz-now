@@ -33,7 +33,8 @@ export class CreateQuestionComponent implements OnInit {
   }
 
   addAnswer() {
-    this.finishAddQuestion = false;
+    if (this.answers.length >= 1) this.finishAddQuestion = true;
+    else this.finishAddQuestion = false;
     this.answers.push(
       this.fb.group({
         title: [''],
@@ -42,14 +43,16 @@ export class CreateQuestionComponent implements OnInit {
     );
   }
   onSubmit() {
+    let flag = false;
+
     for (let answer of this.answers.value) {
       if (answer.isTrue) {
-        this.finishAddQuestion = true;
+        flag = true;
         break;
       }
     }
-    if (this.finishAddQuestion)
+    if (flag)
       this.newAnswersEvent.emit(this.questionForm.value);
-    else alert('Please choose correct answer')
+    else alert('Please choose correct answer');
   }
 }

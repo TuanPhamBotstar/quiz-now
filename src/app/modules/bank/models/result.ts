@@ -7,5 +7,6 @@ export interface Result {
     numberOfHardQuestions: number;
     userAnswers: [];
     count: number;
+    score: number;
     infos: [];
   }

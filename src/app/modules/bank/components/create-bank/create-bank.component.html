@@ -22,13 +22,7 @@
                   <option value="hard">Hard</option>
                 </select>
               </div>
-              <!-- <div formArrayName="answers">
-                <button>Add answer</button>
-                <br>
-                <div *ngFor="let answer of answers.controls; let i=index">
-                  <div [formGroup]="answer"></div>
-                </div>
-              </div> -->
+              
               <app-create-question (newAnswersEvent)="addAnswers($event, i)"></app-create-question>
             </label>
 

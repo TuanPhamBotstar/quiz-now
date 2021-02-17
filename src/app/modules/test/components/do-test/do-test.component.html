@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div *ngFor="let question of test.questions; let i = index" class="col-3">
-          <div class="question__number" (click)="scroll('question' + i)" [class.selected]="saveStateAnswer[i]">{{i+1}}
+          <div style="cursor: pointer" class="question__number" (click)="scroll('question' + i)" [class.selected]="saveStateAnswer[i]">{{i+1}}
           </div>
         </div>
       </div>
@@ -38,12 +38,19 @@
                   <div *ngFor="let answer of test.questions[i].answers">
                     <div [formGroup]="answerGroup">
                       <div *ngIf="!test.questions[i].isManyAnswers" class="do-test__answer__title">
-                        <input type="radio" name="{{test.questions[i].title}}"
-                          (click)="onChoseAnswer(answer.title, i, 'radio')"> &nbsp;{{answer.title}}
+                        <span>
+                          <input type="radio" name="{{test.questions[i].title}}" id="{{answer.title}}-{{i}}"
+                            (click)="onChoseAnswer(answer.title, i, 'radio')">
+                        </span> &nbsp;
+                        <label for="{{answer.title}}-{{i}}">{{answer.title}}</label>
                       </div>
                       <div *ngIf="test.questions[i].isManyAnswers" class="do-test__answer__title">
-                        <input type="checkbox" name="{{test.questions[i].title}}"
-                          (click)="onChoseAnswer(answer.title, i, 'checkbox')">{{answer.title}}
+                        <span>
+                          <input type="checkbox" name="{{test.questions[i].title}} " id="{{answer.title}}-{{i}}"
+                            (click)="onChoseAnswer(answer.title, i, 'checkbox')">
+                        </span>
+                        &nbsp;
+                        <label for="{{answer.title}}-{{i}}">{{answer.title}}</label>
                       </div>
                     </div>
                   </div>
@@ -52,7 +59,7 @@
             </div>
           </div>
         </div>
-        <button id="target" type="submit">Done</button>
+        <button class="button-submit-test" id="target" type="submit">Done</button>
       </form>
 
     </div>

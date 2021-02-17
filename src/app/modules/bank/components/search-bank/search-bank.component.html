@@ -1,0 +1,9 @@
+<div class="container" tabindex="-1" ng-blur="changeStateInput(false)">
+  <input type="text" placeholder="Search bank" (keyup)="search($event)" (focus)="focus($event)">
+  <!-- <ul *ngIf="results.length > 0 && expanded" class="dropdown-search">
+    <li *ngFor="let result of results">
+      <div routerLink="/bank/view/{{result._id}}">{{result.title}}</div>
+    </li>
+  </ul> -->
+  <!-- (focusout)="changeStateInput(false)" (focus)="changeStateInput(true)" -->
+</div>

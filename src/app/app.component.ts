@@ -10,10 +10,14 @@ import { AuthenticationService } from './modules/authentication/services/authent
 export class AppComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService) {}
   isLogin: boolean = false;
+  isSend: boolean = false;
 
   ngOnInit() {
-    this.authenticationService.checkAuthentication().subscribe(res => {
-      this.isLogin = res.isLogin;
-    })
+    this.authenticationService.checkAuthentication().subscribe((res) => {
+      if (res) {
+        this.isLogin = res.isLogin;
+        this.isSend = true;
+      }
+    });
   }
 }

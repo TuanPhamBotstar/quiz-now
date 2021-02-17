@@ -1,4 +1,5 @@
-button, input {
+button,
+input {
   border: 0;
   outline: none;
   padding: 4px 16px;
@@ -18,11 +19,21 @@ input[type="checkbox"] {
   width: 24px;
   height: 24px;
 }
+
 input[formControlName="title"] {
-    width: 300px;
+  width: 300px;
 }
+
 .button__done {
   background-color: #0F993E;
+  color: white;
+  border-radius: 24px;
+  font-size: 20px;
+  padding: 4px 16px
+}
+
+.button__not-done {
+  background-color: #c3c3c3;
   color: white;
   border-radius: 24px;
   font-size: 20px;

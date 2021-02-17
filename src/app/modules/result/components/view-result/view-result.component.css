@@ -4,12 +4,32 @@
 * {
     font-family: PoppinsLight;
 }
-.path {
-  margin: 80px;
-  font-style: normal;
+.table {
+  /* border: 1px solid red; */
+  background-color: #fff;
+}
+.loading {
+  margin-left: 240px;
+}
+.list-result {
+  font-size: 24px;
+  margin-left: 120px;
+}
+thead {
+  background-color: white;
+}
+.question-col {
+  width: 300px;
+}
+.score-col {
+}
+.time-col {
+  width: 200px;
+}
+.table th {
+  font-size: 16px;
   font-weight: 600;
-  font-size: 28px;
-  line-height: 42px;
-
-  color: #2D2D2D;
+}
+.table td {
+  font-size: 16px;
 }
