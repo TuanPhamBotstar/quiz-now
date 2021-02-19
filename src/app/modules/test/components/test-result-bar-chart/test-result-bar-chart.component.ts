@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { Label, Color } from 'ng2-charts';
 
 @Component({
   selector: 'app-test-result-bar-chart',
@@ -20,7 +20,11 @@ export class TestResultBarChartComponent implements OnInit {
   public barChartOptions: ChartOptions | any;
   public barChartLabels: Label[] = [];
   public barChartData: ChartDataSets[] = [{ data: [], label: 'Users' }];
-
+  public barChartColor: Color[] = [
+    {
+      backgroundColor: '#5cc2a4',
+    },
+  ];
   ngOnInit(): void {
     console.log(this.results);
     console.log(this.test);
@@ -34,6 +38,7 @@ export class TestResultBarChartComponent implements OnInit {
     this.countRightAnswers();
 
     this.barChartOptions = {
+      bezierCurve: false,
       responsive: true,
       scales: {
         yAxes: [

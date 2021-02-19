@@ -96,7 +96,7 @@ export class ViewBankDetailComponent implements OnInit {
       .getAllTestDataStore()
       .pipe(
         filter((result) => {
-          console.log(result)
+          // console.log(result)
           // if (result.length > 0) return result[0].source == id;
           return result != null;
         })

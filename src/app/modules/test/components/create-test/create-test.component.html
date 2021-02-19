@@ -4,14 +4,14 @@
     <div class="path">
       <a routerLink="/bank/view">Yours</a> > <a routerLink="/bank/view/{{bankId}}">{{bank.title}}</a> > New Test
     </div>
-    <div class="bank-info">
+    <!-- <div class="bank-info">
       <div>This bank has: </div>
       <ul>
         <li>{{bank.numberOfEasyQuestions}} easy questions.</li>
         <li>{{bank.numberOfNormalQuestions}} normal questions.</li>
         <li>{{bank.numberOfHardQuestions}} hard questions.</li>
       </ul>
-    </div>
+    </div> -->
     <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
       <div class="create-test-form">
         <div class="create-test-form-title">
@@ -31,9 +31,12 @@
         <div class="test-info">
           <div>There are: {{totalQuestions}} questions</div>
           <ul>
-            <li [class.over]="easyQuestions > bank.numberOfEasyQuestions">{{easyQuestions}} easy questions.</li>
-            <li [class.over]="normalQuestions > bank.numberOfNormalQuestions">{{normalQuestions}} normal questions.</li>
-            <li [class.over]="hardQuestions > bank.numberOfHardQuestions">{{hardQuestions}} hard questions.</li>
+            <li [class.over]="easyQuestions > bank.numberOfEasyQuestions">{{easyQuestions}} easy questions. (Max is
+              {{bank.numberOfEasyQuestions}} questions)</li>
+            <li [class.over]="normalQuestions > bank.numberOfNormalQuestions">{{normalQuestions}} normal questions. (Max
+              is {{bank.numberOfNormalQuestions}} questions)</li>
+            <li [class.over]="hardQuestions > bank.numberOfHardQuestions">{{hardQuestions}} hard questions. (Max is
+              {{bank.numberOfHardQuestions}} questions)</li>
           </ul>
           <npn-slider *ngIf="totalQuestions > 0 " [min]="0" [max]="totalQuestions" (onChange)="onSliderChange($event)"
             [step]="1" [showStepIndicator]="true">
@@ -89,12 +92,13 @@
             </div>
           </div>
           <div class="input-question input-setting">
-            <div class="input-setting-text">
               <input type="checkbox" id="inputKnowTheResult" class="input-checkbox" formControlName="knowTheResult">
-            </div>
             &nbsp;
-            <label for="inputKnowTheResult" class="input-question-title">Candidate can see the result after
-              submit</label>
+            <span>
+              <label for="inputKnowTheResult" class="input-question-title">Candidate can see the result after
+                submit</label>
+            </span>
+
           </div>
         </div>
       </div>

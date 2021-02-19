@@ -21,19 +21,16 @@ input {
   margin-left: 50px;
   margin-top: 50px;
 }
-
 .bankForm__title {
   font-size: 24px;
 }
-
-.bankForm__title input {}
-
 .button__add-question {
   margin-top: 20px;
   margin-bottom: 20px;
 
-  width: 137px;
-  height: 54px;
+  width: 127px;
+  height: 44px;
+  font-size: 16px;
   background: #5F45EA;
   border-radius: 32px;
 }
@@ -75,11 +72,9 @@ select {
 option[value="easy"] {
   color: #0f993e
 }
-
 option[value="normal"] {
   color: #E89528;
 }
-
 option[value="hard"] {
   color: #F22D2D
 }

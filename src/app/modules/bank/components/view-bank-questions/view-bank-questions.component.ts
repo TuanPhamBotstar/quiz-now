@@ -90,6 +90,9 @@ export class ViewBankQuestionsComponent implements OnInit {
       this.questions = res;
     });
   }
+  closeModal(): void {
+    this.showModalAdd = false;
+  }
   goToQuestion(id: any) {
     this.router.navigate([`/bank/question/${id}`]);
   }

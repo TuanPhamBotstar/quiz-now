@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { TestService, Test } from '../../services/test.service';
 import { Router } from '@angular/router';
@@ -14,6 +14,21 @@ export class DoTestComponent implements OnInit {
     public fb: FormBuilder,
     private router: Router
   ) {}
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    // console.log(window.scrollY);
+    // if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    //   console.log('inner: ', window.innerHeight);
+    //   console.log('y: ', window.scrollY);
+    //   console.log('offsetHeight: ', document.body.offsetHeight);
+    // }
+    const number = Math.ceil(window.scrollY/240);
+    console.log(number);
+    this.testService.getOneQuestionInTest({shortId: window.location.href.slice(34), number: number}).subscribe(res => {
+      console.log(res);
+    })
+  }
 
   test: Test | any;
   isFinished: boolean = false;
@@ -70,8 +85,13 @@ export class DoTestComponent implements OnInit {
         this.answers.at(i).value.push(answer);
       else {
         const index = this.answers.at(i).value.indexOf(answer);
-        this.answers.at(i).setValue([...this.answers.at(i).value.slice(0, index), ...this.answers.at(i).value.slice(index+1)]) 
-      } 
+        this.answers
+          .at(i)
+          .setValue([
+            ...this.answers.at(i).value.slice(0, index),
+            ...this.answers.at(i).value.slice(index + 1),
+          ]);
+      }
       this.saveStateAnswer[i] = true;
     } else {
       this.saveStateAnswer[i] = true;

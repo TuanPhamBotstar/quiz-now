@@ -7,10 +7,16 @@ button {
   border: 0;
 }
 .list-banks {
+  height: 600px;
   margin-top: 10px;
   margin-left: 200px;
+  border-radius: 24px;
+  position: relative;
 }
-
+.pagination {
+  position: absolute;
+  bottom: 2%;
+}
 .bank {
   width: 527px;
   margin-bottom: 10px;

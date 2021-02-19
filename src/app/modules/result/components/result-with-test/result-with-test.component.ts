@@ -21,7 +21,14 @@ export class ResultWithTestComponent implements OnInit {
     private bankService: BankService
   ) {}
 
+  randomNumber1 : any = (Math.random()* 10).toFixed(2);
+  randomNumber2 : any = (Math.random()* 10).toFixed(2);
+  averageScore: any;
+
   userNames: string[] = [];
+  scores: any[] = [];
+
+  shouldShow: boolean = false;
 
   idBank: string = '';
   bank: any;
@@ -29,7 +36,7 @@ export class ResultWithTestComponent implements OnInit {
   idTest: string = '';
   test: any;
 
-  listResults : any = [];
+  listResults: any = [];
 
   ngOnInit(): void {
     this.idBank = location.pathname.slice(11, 35);
@@ -42,14 +49,22 @@ export class ResultWithTestComponent implements OnInit {
   }
   getAllResultsByIdTest() {
     this.resultService.getResultsByIdTest(this.idTest).subscribe((res) => {
+      console.log(res);
       this.listResults = res.data.sort((a: any, b: any) => b.score - a.score);
-      
+
+      console.log(this.listResults);
+
       for (let result of this.listResults) {
-        this.resultService.getUserNameByIdUser(result.idUser).subscribe(res => {
-          console.log(res);
-          this.userNames.push(res.name);
-        })
+        // console.log(result.score);
+        this.scores.push(result.score);
+        this.resultService
+          .getUserNameByIdUser(result.idUser)
+          .subscribe((res) => {
+            this.userNames.push(res.name);
+          });
       }
+
+      this.averageScore = +(this.scores.reduce((a, b) => a + b, 0) / this.scores.length).toFixed(3) * 10;
     });
   }
 
@@ -81,5 +96,4 @@ export class ResultWithTestComponent implements OnInit {
         });
     });
   }
-  
 }

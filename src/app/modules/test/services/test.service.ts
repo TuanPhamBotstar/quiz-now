@@ -22,6 +22,9 @@ export class TestService {
   createTest(test: any): Observable<any> {
     return this.http.post<any>('http://localhost:3000/test/create', test);
   }
+  getOneQuestionInTest(info: any): Observable<any> {
+    return this.http.post<any>('http://localhost:3000/test/question', info)
+  }
   getAllTest(info: any): Observable<any> {
     return this.http.post<any>('http://localhost:3000/test', info);
   }

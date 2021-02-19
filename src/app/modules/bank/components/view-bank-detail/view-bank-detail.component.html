@@ -27,7 +27,7 @@
         </div>
       </div>
       <app-pagination *ngIf="pages > 0" [goRoute]="'/bank/view/'+bankId" [pageNumber]="pages"
-        (changePageEvent)="getTestByBank($event)" [currentPage]="currentPage.toString()"></app-pagination>
+        (changePageEvent)="getTestByBank($event)" [currentPage]="currentPage.toString()" class="pagination"></app-pagination>
     </div>
 
     <button class="button-delete" (click)="openModal()">Delete bank</button>

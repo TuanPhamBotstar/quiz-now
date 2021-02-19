@@ -18,17 +18,23 @@
             <span *ngIf="answer.isTrue">
               <img src="../../../../../assets/imgs/checkmark.png">
               &nbsp;
-              <label>{{answer.title}}</label>
+              <span>
+                <label>{{answer.title}}</label>
+              </span>
             </span>
             <span *ngIf="!answer.isTrue && result.userAnswers[i].answers.indexOf(answer.title) != -1">
               <img src="../../../../../assets/imgs/wrong.png">
               &nbsp;
-              <label>{{answer.title}}</label>
+              <span>
+                <label>{{answer.title}}</label>
+              </span>
             </span>
             <span *ngIf="!answer.isTrue && result.userAnswers[i].answers.indexOf(answer.title) == -1">
               <input type="radio">
               &nbsp;
-              <label>{{answer.title}}</label>
+              <span>
+                <label>{{answer.title}}</label>
+              </span>
             </span>
           </div>
 

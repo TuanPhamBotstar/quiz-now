@@ -11,7 +11,7 @@ input {
   outline: none;
 }
 .view-bank-question {
-  width: 827px;
+  width: 627px;
   display: flex;
 
   margin-left: 30px;
@@ -26,7 +26,7 @@ input {
 }
 
 .question__title {
-  font-size: 20px;
+  font-size: 16px;
   font-family: PoppinsBlack;
 }
 
@@ -35,11 +35,11 @@ input {
 }
 
 .button-add-question {
-  position: absolute;
-  width: 152px;
-  height: 54px;
-  right: 30px;
-  top: 154px;
+  /* position: absolute; */
+  width: 142px;
+  height: 44px;
+  /* right: 30px; */
+  /* top: 154px; */
 
   background: #5F45EA;
   ;

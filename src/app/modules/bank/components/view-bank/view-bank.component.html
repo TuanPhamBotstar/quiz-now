@@ -11,13 +11,14 @@
     </div>
 
 
-    <div class="list-banks data-board">
-      <div *ngIf="banks.length === 0 && !isFetched">
-        <app-loader></app-loader>
-      </div>
-      <div *ngIf="banks.length === 0 && isFetched">
-        Empty
-      </div>
+    <div *ngIf="banks.length === 0 && !isFetched" class="data-board" style="margin-top: 20px">
+      <app-loader></app-loader>
+    </div>
+    <div *ngIf="banks.length === 0 && isFetched" class="data-board" style="margin-top: 20px">
+      Empty
+    </div>
+
+    <div class="list-banks data-board" *ngIf="banks.length > 0">
       <div *ngFor="let bank of banks" class="bank">
         <div class="bank-title" (click)="goToBankDetail(bank._id)">
           {{bank.title}}

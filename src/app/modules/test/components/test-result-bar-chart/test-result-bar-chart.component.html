@@ -1,11 +1,6 @@
-<div style="display: block;">
-    <canvas baseChart 
-      [datasets]="barChartData"
-      [labels]="barChartLabels"
-      [options]="barChartOptions"
-      [plugins]="barChartPlugins"
-      [legend]="barChartLegend"
-      [chartType]="barChartType">
-    </canvas>
-  </div>
-  
+<div class="chart" style="display: block;">
+  <div style="font-weight: 800; font-size: 24px;">Right answers statistics</div>
+  <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+    [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColor">
+  </canvas>
+</div>

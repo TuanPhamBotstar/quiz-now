@@ -28,16 +28,19 @@
 
   color: #2D2D2D;
 }
-
+tr {
+  display: flex;
+}
 th {
   font-size: 16px;
-
+  flex-basis: 50px;
   font-weight: 600;
 }
 
 .result {
   font-size: 16px;
   line-height: 54px;
+  flex-basis: 400px;
 }
 
 .quesNumber {
@@ -46,22 +49,23 @@ th {
 
 .title-col {
   font-size: 16px;
-  width: 300px;
+  flex-basis: 300px;
   cursor: pointer;
 }
 
 .question-col {
   font-size: 16px;
-  width: 300px;
+  flex-basis: 300px;
 }
 
 .score-col {
   font-size: 16px;
-  font-weight: 600
+  font-weight: 600;
+  flex-basis: 200px;
 }
 
 .time-col {
   font-size: 16px;
 
-  width: 200px;
+  flex-basis: 400px;
 }

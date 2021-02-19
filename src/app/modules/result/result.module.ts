@@ -13,11 +13,13 @@ import { ResultComponent } from './components/result/result.component';
 import { DetailResultComponent } from './components/detail-result/detail-result.component';
 import { ResultWithTestComponent } from './components/result-with-test/result-with-test.component';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
+import { LineChartComponent } from './components/line-chart/line-chart.component';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 
 
 
 @NgModule({
-  declarations: [ViewResultComponent, ResultComponent, DetailResultComponent, ResultWithTestComponent, BarChartComponent],
+  declarations: [ViewResultComponent, ResultComponent, DetailResultComponent, ResultWithTestComponent, BarChartComponent, LineChartComponent, PieChartComponent],
   imports: [
     CommonModule,
     CoreModule,

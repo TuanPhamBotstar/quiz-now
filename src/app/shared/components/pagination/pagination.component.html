@@ -12,8 +12,8 @@
           <span class="sr-only">Previous</span>
         </a>
       </li>
-      <li *ngFor="let page of pages; let i = index" class="page-item" [class.selected]="page.toString() === currentPage"><a class="page-link"
-          (click)="goToPage(i+1)">{{page}}</a></li>
+      <li *ngFor="let page of pageItems; let i = index" class="page-item" [class.selected]="page.toString() === currentPage"><a class="page-link"
+          (click)="goToPage(page)">{{page}}</a></li>
       <li class="page-item">
         <a class="page-link" (click)="goToPage('Next')" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>

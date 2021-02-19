@@ -5,9 +5,7 @@
     <div *ngIf="bankName" class="path">
       <a routerLink="/bank/view">Yours</a> > <a routerLink="/bank/view/{{bankId}}">{{bankName}}</a> > Questions
     </div>
-    <app-pagination *ngIf="pages != 0" [goRoute]="link" (changePageEvent)="getBankQuestions($event)"
-      [pageNumber]="pages" [currentPage]="currentPage.toString()"></app-pagination>
-
+  <button class="button-add-question" (click)="openModal()">Add question</button>
     <div *ngFor="let question of questions">
       <div class="view-bank-question" (click)="goToQuestion(question._id)">
         <div class="question__title">
@@ -18,10 +16,16 @@
         </div>
       </div>
     </div>
+    <app-pagination *ngIf="pages != 0" [goRoute]="link" (changePageEvent)="getBankQuestions($event)"
+      [pageNumber]="pages" [currentPage]="currentPage.toString()"></app-pagination>
+
   </div>
   <div *ngIf="showModalAdd" class="modal-confirm">
     <div class="modal-content">
-      <div class="modal-title">Add question</div>
+      <div style="display: flex; justify-content: space-between">
+        <div class="modal-title">Add question</div>
+        <span style="cursor: pointer" (click)="closeModal()">X</span>
+      </div>
       <form [formGroup]="questionForm" class="form">
         <input class="input-title" formControlName="title" placeholder="Input question content">
         <div class="level">
@@ -40,6 +44,4 @@
       </div>
     </div>
   </div>
-
-  <button class="button-add-question" (click)="openModal()">Add question</button>
 </div>

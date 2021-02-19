@@ -7,12 +7,15 @@
 }
 .selected {
     background-color: #5F45EA;
+    color: white!important;
 }
+.page-link
 .pagination .page-item .page-link {
     font-size: 16px;
-    margin: 0 10px;
+    margin: 0px;
 }
 .pagination .page-item .page-link:hover {
     background-color: #5F45ea;
-    margin: 0 10px;
+    color: white;
+    margin: 0px;
 }

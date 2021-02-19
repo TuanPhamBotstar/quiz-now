@@ -1,32 +1,36 @@
-<div class="nav-bar">
-  <div class="setting-icon">
-    <div style="width: 2em" (click)="changeStateShowLogOut()">
-      <i style="font-size: 2em" class="fas fa-cog "></i>
-    </div>
-    <!-- <span (click)="changeStateShowLogOut()">Click here</span> -->
-    <div *ngIf="showLogOutDropdown" class="dropdown-logout">
-      <div class="option" (click)="logOut()">
-        Log out
+<div style="width: 251px; height: 100%">
+  <div class="nav-bar">
+    <div class="setting-icon">
+      <div style="width: 2em" (click)="changeStateShowLogOut()">
+        <i style="font-size: 2em" class="fas fa-cog "></i>
       </div>
+      <!-- <span (click)="changeStateShowLogOut()">Click here</span> -->
+      <div *ngIf="showLogOutDropdown" class="dropdown-logout">
+        <div class="option" (click)="logOut()">
+          Log out
+        </div>
+      </div>
+
+    </div>
+    <div class="avatar-container">
+      <img class="avatar" src="../../../../../assets/imgs/user.jpg">
+      <!-- <img class="avatar"
+        src="https://lh3.googleusercontent.com/proxy/kJSp2lMqhS1KugncXoJjKthRCfx2PgkBknH2Xu4CLq_vuc4aLfepKWeMbd5-SywygH5nrJgj0REM_zbStyEuZDVNZkULyvdQoKh1bs1l2UqOKfBfG9YS_tZJFre3giLe4IgldVzL1HW_P6X6"> -->
+      <!-- <i class="far fa-user" style="font-size: 48px; border: 2px solid red; border-radius: 50%;"></i> -->
     </div>
 
-  </div>
-  <div class="avatar-container">
-    <!-- <img class="avatar" src="../../../../../assets/imgs/user.svg"> -->
-    <img class="avatar"
-      src="https://lh3.googleusercontent.com/proxy/kJSp2lMqhS1KugncXoJjKthRCfx2PgkBknH2Xu4CLq_vuc4aLfepKWeMbd5-SywygH5nrJgj0REM_zbStyEuZDVNZkULyvdQoKh1bs1l2UqOKfBfG9YS_tZJFre3giLe4IgldVzL1HW_P6X6">
+    <div class="name-container">
+      <div class="name">{{name}}</div>
+    </div>
+    <!-- <div class="route-container" [class.selected]="currentLink == 'home'" (click)="goHome()">
+      Home
+    </div> -->
+    <div class="route-container" [class.selected]="currentLink.indexOf('bank') != -1" (click)="goYour()">
+      Yours
+    </div>
+    <div class="route-container" [class.selected]="currentLink.indexOf('result') != -1" (click)="goResult()">
+      Results
+    </div>
   </div>
 
-  <div class="name-container">
-    <div class="name">{{name}}</div>
-  </div>
-  <!-- <div class="route-container" [class.selected]="currentLink == 'home'" (click)="goHome()">
-    Home
-  </div> -->
-  <div class="route-container" [class.selected]="currentLink.indexOf('bank') != -1" (click)="goYour()">
-    Yours
-  </div>
-  <div class="route-container" [class.selected]="currentLink.indexOf('result') != -1" (click)="goResult()">
-    Results
-  </div>
 </div>
