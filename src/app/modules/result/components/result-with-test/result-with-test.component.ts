@@ -21,9 +21,11 @@ export class ResultWithTestComponent implements OnInit {
     private bankService: BankService
   ) {}
 
-  randomNumber1 : any = (Math.random()* 10).toFixed(2);
-  randomNumber2 : any = (Math.random()* 10).toFixed(2);
+  randomNumber1: any = (Math.random() * 10).toFixed(2);
+  randomNumber2: any = (Math.random() * 10).toFixed(2);
   averageScore: any;
+
+  isFetched: boolean = false;
 
   userNames: string[] = [];
   scores: any[] = [];
@@ -36,6 +38,7 @@ export class ResultWithTestComponent implements OnInit {
   idTest: string = '';
   test: any;
 
+  totalResults: number = 0;
   listResults: any = [];
 
   ngOnInit(): void {
@@ -47,25 +50,39 @@ export class ResultWithTestComponent implements OnInit {
 
     this.getAllResultsByIdTest();
   }
-  getAllResultsByIdTest() {
-    this.resultService.getResultsByIdTest(this.idTest).subscribe((res) => {
-      console.log(res);
-      this.listResults = res.data.sort((a: any, b: any) => b.score - a.score);
+  getAllResultsByIdTest(time = 7) {
+    this.scores = [];
+    this.userNames = [];
 
-      console.log(this.listResults);
+    const firstFetched = this.resultService
+      .getResultsByIdTest({ id: this.idTest, time: time })
+      .subscribe((res) => {
+        console.log(res);
+        this.totalResults = res.totalResults;
+        this.listResults = res.data.sort((a: any, b: any) => b.score - a.score);
 
-      for (let result of this.listResults) {
-        // console.log(result.score);
-        this.scores.push(result.score);
-        this.resultService
-          .getUserNameByIdUser(result.idUser)
-          .subscribe((res) => {
-            this.userNames.push(res.name);
-          });
-      }
+        console.log(this.listResults);
 
-      this.averageScore = +(this.scores.reduce((a, b) => a + b, 0) / this.scores.length).toFixed(3) * 10;
-    });
+        for (let result of this.listResults) {
+          // console.log(result.score);
+          this.scores.push(result.score);
+          this.resultService
+            .getUserNameByIdUser(result.idUser)
+            .subscribe((res) => {
+              this.userNames.push(res.name);
+            });
+        }
+
+        firstFetched.unsubscribe();
+
+        this.averageScore =
+          +(
+            this.scores.reduce((a, b) => a + b, 0) / this.scores.length
+          ).toFixed(2) * 10;
+        this.averageScore = this.averageScore.toFixed(2);
+
+        this.isFetched = true;
+      });
   }
 
   getTest() {

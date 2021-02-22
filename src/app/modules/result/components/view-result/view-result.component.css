@@ -1,36 +1,79 @@
 .view-result-container {
   display: flex;
 }
+
 * {
-    font-family: PoppinsLight;
+  font-family: PoppinsLight;
 }
+
 .table {
   /* border: 1px solid red; */
   background-color: #fff;
   width: 827px;
+
+  margin: 0 auto;
+  border-radius: 12px;
 }
+
 .loading {
   margin-left: 240px;
 }
+
 .list-result {
   font-size: 24px;
-  margin-left: 120px;
+  /* margin-left: 120px; */
+  height: 350px;
 }
+
 thead {
   background-color: white;
 }
+
 .question-col {
   width: 300px;
 }
-.score-col {
-}
+
+.score-col {}
+
 .time-col {
   width: 200px;
 }
+
 .table th {
   font-size: 16px;
   font-weight: 600;
 }
+
 .table td {
   font-size: 16px;
+}
+
+.info-cards {
+  margin: 0 auto;
+  margin-bottom: 50px;
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+.card {
+  margin-right: 20px;
+  width: 240px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.card span {
+  font-size: 24px;
+  /* color: #c4c5c6; */
+  font-weight: 1000;
+}
+
+.card div {
+  font-size: 20px;
+}
+
+a {
+  font-size: 20px;
+  font-weight: 800
 }

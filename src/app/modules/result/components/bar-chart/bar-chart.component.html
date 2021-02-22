@@ -1,4 +1,4 @@
-<div style="display: block;" class="chart" *ngIf="!(+barChartLabels[0] > 100)">
+<div style="display: block;" class="chart" *ngIf="!(+barChartLabels[0] >= 100)">
   <div style="font-weight: 800; font-size: 24px;">Score statistics</div>  
   <canvas baseChart 
       [datasets]="barChartData"

@@ -8,8 +8,11 @@ import { Label, Color } from 'ng2-charts';
   styleUrls: ['./test-result-bar-chart.component.css'],
 })
 export class TestResultBarChartComponent implements OnInit {
-  @Input() results: any;
+  @Input() resultsAreReceived: any;
   @Input() test: any;
+  @Input() maxLength: any;
+
+  results: any = [];
 
   constructor() {}
   questions = [];
@@ -25,9 +28,14 @@ export class TestResultBarChartComponent implements OnInit {
       backgroundColor: '#5cc2a4',
     },
   ];
+
+  ngOnChanges(changes: any) {
+    this.results = changes.resultsAreReceived.currentValue;
+
+    this.countRightAnswers();
+  }
   ngOnInit(): void {
-    console.log(this.results);
-    console.log(this.test);
+    this.results = this.resultsAreReceived
 
     this.questions = this.test.questions;
 
@@ -47,15 +55,23 @@ export class TestResultBarChartComponent implements OnInit {
               beginAtZero: true,
               min: this.results && 0,
               stepSize: 1,
-              max: this.results && this.results.length,
+              max: this.maxLength,
             },
           },
         ],
+      },
+      plugins: {
+        datalabels: {
+          algin: 'end',
+          color: 'white',
+        },
       },
     };
   }
 
   countRightAnswers() {
+    this.barChartData[0].data = [];
+    
     for (let i = 0; i < this.questions.length; i++) {
       let count = 0;
       for (let result of this.results) {

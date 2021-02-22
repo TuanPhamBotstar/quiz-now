@@ -2,6 +2,7 @@
   <app-nav-bar></app-nav-bar>
   <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="form-question" [class.deleted]="isDeleted">
     <div class="question__title">
+      <label>Question:</label>
       <input type="text" formControlName="title">
     </div>
     <div class="question__level">

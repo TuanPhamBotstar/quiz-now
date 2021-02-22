@@ -48,14 +48,17 @@ input[type="checkbox"] {
   height: 24px;
 }
 
-.question__title input {
+.question__title {
   font-family: PoppinsBlack;
   width: 817px;
   font-size: 24px;
   background: #fff;
-  padding: 10px 20px;
+  padding: 0px 0px;
 }
-
+.question__title label {
+  margin-right: 20px;
+  text-decoration: underline;
+}
 label[for="level"] {
   font-size: 24px;
 }

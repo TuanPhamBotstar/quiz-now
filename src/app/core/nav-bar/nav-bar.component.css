@@ -45,7 +45,7 @@
 }
 .name {
   margin-top: 20px;
-  margin-bottom: 80px;
+  margin-bottom: 20px;
 
   font-style: normal;
   font-weight: 600;
@@ -57,7 +57,7 @@
 .route-container {
   cursor: pointer;
   /* margin-bottom: 20px; */
-  padding: 20px;
+  padding: 15px;
   text-align: center;
   font-style: normal;
   font-weight: 600;

@@ -9,16 +9,31 @@ import { TestModule } from 'src/app/modules/test/test.module';
   styleUrls: ['./line-chart.component.css'],
 })
 export class LineChartComponent implements OnInit {
-  @Input() results: any;
+  @Input() resultsAreReceived: any;
+  @Input() maxLength: any;
 
+  results: any = [];
+
+  min: any;
+  max: any;
+  mils: number = 3600 * 1000 * 24;
+  range: any;
+
+  ngOnChanges(changes: any) {
+    // console.log(changes);
+
+    this.results = changes.resultsAreReceived.currentValue;
+    this.results = this.results.sort((a: any, b: any) => a.time - b.time);
+
+    console.log(this.results);
+    this.getLabels();
+  }
   constructor() {}
   objectData: any = {};
 
-  public lineChartData: any[] = [{ data: [], label: 'Users', lineTension: 0 }];
+  public lineChartData: any[] = [{ data: [], label: 'Users' }];
   public lineChartLabels: Label[] = [];
-  // public lineChartOptions: any & { annotation: any } = {
-  //   responsive: true,
-  // };
+
   public lineChartOptions: any;
   public lineChartColors: Color[] = [
     {
@@ -30,16 +45,15 @@ export class LineChartComponent implements OnInit {
   public lineChartType: any = 'line';
   public lineChartPlugins = [];
 
-  ngOnInit(): void {
-    this.results = this.results.sort((a: any, b: any) => a.time - b.time);
+  getLabels() {
+    this.min = this.changeTimeStamp(this.results[0].time);
+    this.max = this.changeTimeStamp(this.results[this.results.length - 1].time);
 
-    const min = this.changeTimeStamp(this.results[0].time);
-    const max = this.changeTimeStamp(
-      this.results[this.results.length - 1].time
-    );
+    this.lineChartLabels = [];
+    this.lineChartData[0].data = [];
+    this.objectData = {};
 
-    const mils = 3600 * 1000 * 24;
-    const range = (max - min) / mils;
+    this.range = (this.max - this.min) / this.mils;
 
     for (let result of this.results) {
       console.log(result.time);
@@ -53,13 +67,13 @@ export class LineChartComponent implements OnInit {
     console.log(this.objectData);
     const firstLength = Object.keys(this.objectData).length;
 
-    // let test = Object.keys(this.objectData);
-    // test = test.map((t) => this.convertToDate(+t));
-    // console.log(test);
-    for (let i = firstLength - 1; i <= range; i++) {
+    for (let i = firstLength - 1; i <= this.range; i++) {
       console.log(i - (firstLength - 1) + 1);
-      if (this.objectData[min + (i - (firstLength - 1) + 1) * mils] >= 1) {
-      } else this.objectData[min + (i - (firstLength - 1) + 1) * mils] = 0;
+      if (
+        this.objectData[this.min + (i - (firstLength - 1) + 1) * this.mils] >= 1
+      ) {
+      } else
+        this.objectData[this.min + (i - (firstLength - 1) + 1) * this.mils] = 0;
     }
     console.log(this.objectData);
     this.lineChartLabels = Object.keys(this.objectData);
@@ -84,7 +98,13 @@ export class LineChartComponent implements OnInit {
     this.lineChartLabels = this.lineChartLabels.map((label) =>
       this.convertToDate(+label)
     );
-    console.log(this.lineChartLabels);
+  }
+  ngOnInit(): void {
+    this.results = this.resultsAreReceived;
+
+    this.results = this.results.sort((a: any, b: any) => a.time - b.time);
+
+    this.getLabels();
     // console.log(this.lineChartData[0].data);
 
     this.lineChartOptions = {
@@ -96,7 +116,7 @@ export class LineChartComponent implements OnInit {
               beginAtZero: true,
               min: this.results && 0,
               stepSize: 1,
-              max: this.results && Math.max(...this.lineChartData[0].data),
+              max: this.maxLength,
             },
           },
         ],

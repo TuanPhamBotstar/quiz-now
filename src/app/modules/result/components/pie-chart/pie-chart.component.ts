@@ -13,7 +13,9 @@ import {
   styleUrls: ['./pie-chart.component.css'],
 })
 export class PieChartComponent implements OnInit {
-  @Input() results: any;
+  @Input() resultsAreReceived: any;
+
+  results: any = [];
 
   weakStudent: number = 0;
   averageStudent: number = 0;
@@ -26,7 +28,7 @@ export class PieChartComponent implements OnInit {
       labels: {
         render: 'percentage',
         fontColor: ['green', 'white', 'red'],
-        precision: 2
+        precision: 2,
       },
     },
   };
@@ -41,20 +43,44 @@ export class PieChartComponent implements OnInit {
     monkeyPatchChartJsLegend();
   }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: any) {
+    this.results = changes.resultsAreReceived.currentValue;
+    console.log(this.results);
+    this.getLabels();
+  }
+  getLabels() {
+    this.pieChartData = [];
+
+    this.goodStudent = 0;
+    this.excellentStudent = 0;
+    this.averageStudent = 0;
+    this.weakStudent = 0;
+
     for (let result of this.results) {
       if (result.score >= 0.9) this.excellentStudent++;
       else if (result.score > 0.65) this.goodStudent++;
       else if (result.score >= 0.5) this.averageStudent++;
       else this.weakStudent++;
     }
-    const total = this.weakStudent + this.averageStudent + this.goodStudent + this.excellentStudent;
+
+    const total =
+      this.weakStudent +
+      this.averageStudent +
+      this.goodStudent +
+      this.excellentStudent;
 
     this.pieChartData = [
-      +(this.weakStudent/total).toFixed(2) * 100,
-      +(this.averageStudent/total).toFixed(2) * 100,
-      +(this.goodStudent/total).toFixed(2) * 100,
-      +(this.excellentStudent/total).toFixed(2) * 100,
+      +(this.weakStudent / total).toFixed(2) * 100,
+      +(this.averageStudent / total).toFixed(2) * 100,
+      +(this.goodStudent / total).toFixed(2) * 100,
+      +(this.excellentStudent / total).toFixed(2) * 100,
     ];
+    this.pieChartData = this.pieChartData.map((data: any) => Math.round(data));
+  }
+  ngOnInit(): void {
+    this.results = this.resultsAreReceived;
+
+    console.log(this.results);
+    this.getLabels();
   }
 }

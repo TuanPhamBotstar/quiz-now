@@ -5,11 +5,18 @@
 * {
   font-family: PoppinsLight;
 }
-
-.score-chart {
-  margin-top: 50px;
+button {
+  outline: none;
+  border: 0;
 }
-
+.score-chart {
+  /* margin-top: 50px; */
+}
+.button-change-view {
+  border-radius: 2px;
+  background-color: #fff;
+  margin-right: 5px;
+}
 .right-answer-chart {
   margin-top: 40px;
 }
@@ -23,6 +30,7 @@ table {
 .info {
   font-size: 16px;
   margin-top: 10px;
+  margin-bottom: 30px;
 }
 
 th {

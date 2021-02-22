@@ -5,19 +5,22 @@
     <div *ngIf="bankName" class="path">
       <a routerLink="/bank/view">Yours</a> > <a routerLink="/bank/view/{{bankId}}">{{bankName}}</a> > Questions
     </div>
-  <button class="button-add-question" (click)="openModal()">Add question</button>
-    <div *ngFor="let question of questions">
-      <div class="view-bank-question" (click)="goToQuestion(question._id)">
-        <div class="question__title">
-          {{question.title}}
-        </div>
-        <div class="question__level">
-          {{question.level}}
+    <button class="button-add-question" (click)="openModal()">Add question</button>
+    <div>
+      <div *ngFor="let question of questions">
+        <div class="view-bank-question" (click)="goToQuestion(question._id)">
+          <div class="question__title">
+            {{question.title}}
+          </div>
+          <div class="question__level">
+            {{question.level}}
+          </div>
         </div>
       </div>
     </div>
     <app-pagination *ngIf="pages != 0" [goRoute]="link" (changePageEvent)="getBankQuestions($event)"
-      [pageNumber]="pages" [currentPage]="currentPage.toString()"></app-pagination>
+      [pageNumber]="pages" [currentPage]="currentPage.toString()" class="pagination"></app-pagination>
+
 
   </div>
   <div *ngIf="showModalAdd" class="modal-confirm">

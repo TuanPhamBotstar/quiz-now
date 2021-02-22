@@ -19,7 +19,6 @@ export class ResultService {
     return this.store.select(getResultsUser)
   }
   getResultsByIdUser(page: any): Observable<any> {
-    console.log('hello')
     return this.http.get<any>('http://localhost:3000/result/user/' + page);
   }
   getResults(): Observable<any> {
@@ -29,10 +28,12 @@ export class ResultService {
     return this.http.get<any>('http://localhost:3000/result/id/' + id);
   }
 
-  getResultsByIdTest(id: any):Observable<any> {
-    return this.http.get<any>('http://localhost:3000/result/test/' + id);
+  getResultsByIdTest(info: any):Observable<any> {
+    return this.http.post<any>('http://localhost:3000/result/test/', info);
   }
-
+  getResultsAndAnalyze(): Observable<any> {
+    return this.http.get<any>('http://localhost:3000/result/analyze');
+  }
 
   getResultsByIdUserStore(page: any) {
     this.store.dispatch(new GetAllResults(page));

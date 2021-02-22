@@ -4,10 +4,12 @@ input {
   /* background: rgb(197,123,191);
 background: linear-gradient(90deg, rgba(197,123,191,1) 0%, rgba(254,139,143,1) 35%, rgba(134,103,247,1) 100%); */
 }
+
 .over-bg {
   /* background-image: url('./assets/imgs/bg.jpg'); */
   /* filter: blur(20px); */
 }
+
 a {
   text-decoration: none;
   color: black;
@@ -29,7 +31,7 @@ a:hover {
   font-family: PoppinsBlack !important;
 
   font-style: normal;
-  font-size: 28px;
+  font-size: 16px;
   line-height: 42px;
 
   margin-top: 15px;
@@ -44,6 +46,11 @@ a:hover {
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   padding: 20px 20px;
+}
+
+.pagination-fix-position {
+  position: absolute;
+  bottom: 2%;
 }
 
 .component-container {

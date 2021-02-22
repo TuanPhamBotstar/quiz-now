@@ -2,32 +2,45 @@
   <app-nav-bar></app-nav-bar>
   <div class="view-result component-container">
     <div class="path">Results</div>
+    <div class="info-cards">
+      <div class="number-tests card">
+        <a>
+          Tests</a>
+        <div class="display: flex">
+          <i class="fas fa-stream"></i> &nbsp;<span>{{numberOfResults}}</span>
+        </div>
+      </div>
+      <div class="best-score card">
+        <a>Highest score</a>
+        <div class="display: flex">
+          <i class="fas fa-futbol"></i> &nbsp;<span>{{maxScore}}</span>
+        </div>
+      </div>
+      <div class="ave-score card">
+        <a>Average score</a>
+        <div class="display: flex">
+          <i class="fas fa-futbol"></i> &nbsp;<span>{{+((averageScore).toFixed(2)) * 10}}</span>
+        </div>
+      </div>
+      <div class="worst-score card">
+        <a>Lowest score</a>
+        <div class="display: flex">
+          <i class="fas fa-futbol"></i> &nbsp;<span>{{minScore.toFixed(2)}}</span>
+        </div>
+      </div>
+    </div>
     <div *ngIf="listResults.length === 0 && !isFetched" class="loading">
       <app-loader></app-loader>
     </div>
 
+    <app-pie-chart-overview *ngIf="listScores.length > 0" [results]="listScores"></app-pie-chart-overview>
+
     <div class="list-result" *ngIf="listResults.length > 0">
-      
+
       <table class="table">
-        <!-- <div *ngIf="!fetchedTest">
-          <div *ngFor="let result of listResults; let i = index">
-            <app-result [result]="result" [i]="i+1 + (currentPage*1 - 1)*5" (fetched)="changeStateFetchedTest($event)">
-            </app-result>
-          </div>
-        </div>
-        <div *ngIf="fetchedTest">
-          <div *ngFor="let test of listTests; let i = index">
-            <tr>
-              <th scope="row">{{i}}</th>
-              <td class="title-col">{{test.title}}</td>
-              <td class="time-col">{{test.time | count: "min"}}</td>
-              <td class="question-col">{{test.questions.length | count: "que"}}</td>
-              <td class="score-col">{{(listResults[i].score * 10).toFixed(2)}}</td>
-            </tr>
-          </div>
-        </div> -->
         <div *ngFor="let result of listResults; let i = index">
-          <app-result [result]="result" [i]="i+1 + (currentPage*1 - 1)*5" (fetched)="changeStateFetchedTest($event)"></app-result>
+          <app-result [result]="result" [i]="i+1 + (currentPage*1 - 1)*5" (fetched)="changeStateFetchedTest($event)">
+          </app-result>
         </div>
 
       </table>
@@ -35,6 +48,7 @@
         [goRoute]="'/result'" (changePageEvent)="getResultsByIdUser($event)"></app-pagination>
     </div>
 
+    <div id="scrollId" style="height: 240px"></div>
 
   </div>
 

@@ -15,11 +15,12 @@ import { ResultWithTestComponent } from './components/result-with-test/result-wi
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import { PieChartOverviewComponent } from './components/pie-chart-overview/pie-chart-overview.component';
 
 
 
 @NgModule({
-  declarations: [ViewResultComponent, ResultComponent, DetailResultComponent, ResultWithTestComponent, BarChartComponent, LineChartComponent, PieChartComponent],
+  declarations: [ViewResultComponent, ResultComponent, DetailResultComponent, ResultWithTestComponent, BarChartComponent, LineChartComponent, PieChartComponent, PieChartOverviewComponent],
   imports: [
     CommonModule,
     CoreModule,

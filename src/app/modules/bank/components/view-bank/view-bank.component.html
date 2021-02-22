@@ -7,7 +7,7 @@
     <div style="display: flex">
       <app-search-bank (eventSearchResults)="receiveSearchBanks($event)"></app-search-bank>
 
-      <button class="button__create-bank" (click)="goToCreate()">New bank</button>
+      <!-- <button class="button__create-bank" (click)="goToCreate()">New bank</button> -->
     </div>
 
 
@@ -18,22 +18,28 @@
       Empty
     </div>
 
-    <div class="list-banks data-board" *ngIf="banks.length > 0">
-      <div *ngFor="let bank of banks" class="bank">
-        <div class="bank-title" (click)="goToBankDetail(bank._id)">
-          {{bank.title}}
+    <div class="list-banks" *ngIf="banks.length > 0">
+      <div class="row">
+        <div class="bank create-div">
+          <div (click)="goToCreate()"><i class="fas fa-plus"></i> New bank</div>
         </div>
-        <div class="bank-static">
-          <div class="test-number">
-            {{bank.idTests.length| count:"test"}}
+        <div *ngFor="let bank of banks" class="bank">
+          <div class="bank-static">
+            <div class="bank-title" (click)="goToBankDetail(bank._id)">
+              {{bank.title}}
+            </div>
+            <div class="test-number">
+              {{bank.idTests.length| count:"test"}}
+            </div>
           </div>
-          &nbsp;
-          <div class="question-number">
-            - {{bank.idQuestions.length| count:"question"}}
-          </div>
-        </div>
 
+          <div class="question-number">
+            {{bank.idQuestions.length| count:"question"}}
+          </div>
+
+        </div>
       </div>
+
       <app-pagination *ngIf="pages != 0" [goRoute]="'/bank/view'" [pageNumber]="pages"
         (changePageEvent)="getBanks($event)" class="pagination" [currentPage]="currentPage.toString()"></app-pagination>
     </div>

@@ -46,7 +46,7 @@ export class PaginationComponent implements OnInit {
     console.log(this.pageItems);
   }
   optimizePagination(currentPage: number, pageNumber: number): any {
-    console.log('current page: ',currentPage);
+    console.log('current page: ', currentPage);
     if (pageNumber <= 5) return this.pages;
     if (currentPage + 4 >= pageNumber)
       return this.pages.slice(this.pages.length - 5);
@@ -60,16 +60,22 @@ export class PaginationComponent implements OnInit {
       this.router.navigate([this.goRoute], {
         queryParams: { page: parseInt(this.param) - 1 },
       });
-      this.pageItems = this.optimizePagination(+this.param-1, this.pageNumber);
+      this.pageItems = this.optimizePagination(
+        +this.param - 1,
+        this.pageNumber
+      );
       this.changePageEvent.emit((parseInt(this.param) - 1).toString());
     } else if (page === 'Next' && parseInt(this.param) + 1 <= this.pageNumber) {
       this.router.navigate([this.goRoute], {
         queryParams: { page: parseInt(this.param) + 1 },
       });
-      this.pageItems = this.optimizePagination(+this.param+1, this.pageNumber);
+      this.pageItems = this.optimizePagination(
+        +this.param + 1,
+        this.pageNumber
+      );
       this.changePageEvent.emit((parseInt(this.param) + 1).toString());
-    } else if (page != 'Previous' && page != 'Next' && page != "...") {
-      console.log(page)
+    } else if (page != 'Previous' && page != 'Next' && page != '...') {
+      console.log(page);
       this.router.navigate([this.goRoute], { queryParams: { page: page } });
       this.pageItems = this.optimizePagination(+page, this.pageNumber);
       this.changePageEvent.emit(page);
