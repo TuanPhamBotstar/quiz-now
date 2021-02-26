@@ -3,8 +3,8 @@ import { BankService, Bank } from '../../services/bank.service';
 import { TestService, Test } from '../../../test/services/test.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
 import { filter, take } from 'rxjs/operators';
+import { ToastManagementService } from 'src/app/shared/components/toast-management/toast-management.service';
 
 @Component({
   selector: 'app-view-bank-detail',
@@ -29,7 +29,7 @@ export class ViewBankDetailComponent implements OnInit {
     private testService: TestService,
     private router: Router,
     private route: ActivatedRoute,
-    private _location: Location
+    private toastManagementService: ToastManagementService
   ) {}
 
   ngOnInit(): void {
@@ -44,19 +44,25 @@ export class ViewBankDetailComponent implements OnInit {
       this.pages = res.data;
     });
   }
+  showToast(string: any) {
+    this.toastManagementService.show(string, {
+      classname: 'bg-success text-light',
+      delay: 5000,
+    });
+  }
   goToTestDetail(id: any) {
     this.router.navigate([`/bank/view/${this.bankId}/test/${id}`]);
   }
-  openModal() {
-    this.showModalDelete = true;
-  }
-  deleteBank(id: any) {
-    console.log(id);
-    if (id) {
-      this.bankService.deleteBankStore(id);
-      this._location.back();
-    } else this.showModalDelete = false;
-  }
+  // openModal() {
+  //   this.showModalDelete = true;
+  // }
+  // deleteBank(id: any) {
+  //   console.log(id);
+  //   if (id) {
+  //     this.bankService.deleteBankStore(id);
+  //     this._location.back();
+  //   } else this.showModalDelete = false;
+  // }
   getBankId() {
     this.bankService.getOneBankDataStore().subscribe((res) => {
       console.log(res);
@@ -66,7 +72,6 @@ export class ViewBankDetailComponent implements OnInit {
   }
   getBank() {
     this.bankService.getBanksDataStore().subscribe((res) => {
-      console.log(res);
       for (let bank of res) {
         if (bank._id === this.bankId) {
           this.bank = bank;

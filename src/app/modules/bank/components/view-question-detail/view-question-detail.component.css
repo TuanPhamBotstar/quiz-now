@@ -26,41 +26,46 @@ button {
 }
 
 .form-question {
-  margin-top: 60px;
-  margin-left: 60px;
   height: 100%;
-
-  padding: 40px 40px;
+  padding: 10px 30px;
   background: #FFFFFF;
   box-shadow: 0px 0px 70px -30px #C4C4C4;
-  border-radius: 32px;
+  border-radius: 16px;
   position: relative;
+  margin: 0 auto;
+  margin-top: 10%;
 }
 
 .form-answers {
   margin-top: 10px;
   margin-left: 30px;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 input[type="checkbox"] {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
 }
 
 .question__title {
   font-family: PoppinsBlack;
-  width: 817px;
-  font-size: 24px;
+  width: 100%;
+  font-size: 20px;
   background: #fff;
   padding: 0px 0px;
 }
+
+.question__title input {
+  width: 527px;
+}
+
 .question__title label {
   margin-right: 20px;
   text-decoration: underline;
 }
+
 label[for="level"] {
-  font-size: 24px;
+  font-size: 16px;
 }
 
 button[type="submit"] {

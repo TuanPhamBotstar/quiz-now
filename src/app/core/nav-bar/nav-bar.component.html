@@ -25,15 +25,36 @@
     <div style="border-bottom: 2px solid white; width: 100%; margin-bottom: 30px">
 
     </div>
-    <!-- <div class="route-container" [class.selected]="currentLink == 'home'" (click)="goHome()">
-      Home
-    </div> -->
-    <div class="route-container" [class.selected]="currentLink.indexOf('bank') != -1" (click)="goYour()">
-      Yours
+    <div>
+      <div class="route-container " [class.selected]="currentLink.indexOf('bank') != -1" (click)="goYour()">
+        <i class="fas fa-university"></i> Yours
+      </div>
+      <div *ngIf="changeNavBar === 'true'" class="feature-drop">
+        <div [class.levelSelected]="levelName === 'dashboard'" class="spi-feature">
+          <div (click)="goToDashboard()">Dashboard</div>
+        </div>
+        <div [class.levelSelected]="levelName === 'tests'" class="spi-feature">
+          <div (click)="goToViewTests()">Tests</div>
+        </div>
+        <div [class.levelSelected]="levelName === 'questions'" class="spi-feature">
+          <div (click)="goToViewQuestions()">Questions</div>
+        </div>
+        <div class="spi-feature">
+          <div *ngIf="!showConfigDropdown" (click)="changeConfigDropdown()">Config &nbsp;<i
+              class="fas fa-caret-right"></i></div>
+          <div *ngIf="showConfigDropdown" (click)="changeConfigDropdown()">Config &nbsp;<i
+              class="fas fa-caret-down"></i></div>
+
+          <div *ngIf="showConfigDropdown">
+            <div class="feature" (click)="openModal()">Delete</div>
+          </div>
+        </div>
+      </div>
+      <div class="route-container" [class.selected]="currentLink.indexOf('result') != -1" (click)="goResult()">
+        <i class="fas fa-trophy"></i> Results
+      </div>
     </div>
-    <div class="route-container" [class.selected]="currentLink.indexOf('result') != -1" (click)="goResult()">
-      Results
-    </div>
+    <app-modal-delete [bankId]="bankId" [showModalDelete]="showModalDelete" (emitCloseModal)="closeModal()" (emitGoBack)="goBack($event)"></app-modal-delete>
   </div>
 
 </div>

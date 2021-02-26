@@ -11,7 +11,7 @@ export class TestResultBarChartComponent implements OnInit {
   @Input() resultsAreReceived: any;
   @Input() test: any;
   @Input() maxLength: any;
-
+  
   results: any = [];
 
   constructor() {}

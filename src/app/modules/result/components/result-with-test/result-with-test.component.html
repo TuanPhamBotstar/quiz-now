@@ -1,9 +1,9 @@
 <div class="result-with-test-container">
-  <app-nav-bar></app-nav-bar>
-  <div class="component-container">
+  <app-nav-bar [changeNavBar]="'true'" [levelName]="'tests'" [bankId]="idBank"></app-nav-bar>
+  <div style="margin-bottom: 30px;" class="component-container">
     <div class="path">
-      <a routerLink="/bank/view" style="font-weight: 800">Yours</a> > <a routerLink="/bank/view/{{bank._id}}"
-        style="font-weight: 800">{{bank.title}}</a> >
+      <a routerLink="/bank/view">Yours</a> > <a routerLink="/bank/view/{{bank._id}}"
+        >{{bank.title}}</a> >
       {{test.title}}
     </div>
     <div *ngIf="listResults.length == 0 && !isFetched">
@@ -32,23 +32,23 @@
         <a>+{{randomNumber2}}%</a>
       </div>
     </div>
+    <div style="margin-bottom: 12px;"><a routerLink="/bank/view/{{idBank}}/test/{{idTest}}/detail" [state]="{bankTitle: bank.title, testTitle: test.title}">View detail</a></div>
     <div style="display: flex; margin-bottom: 12px;">
-      <button class="button-change-view" (click)="getAllResultsByIdTest(30)">1m</button>
-      <button class="button-change-view" (click)="getAllResultsByIdTest(7)">1w</button>
-      <button class="button-change-view" (click)="getAllResultsByIdTest(1)">1d</button>
+      <button class="button-change-view" (click)="getAllResultsByIdTest(30)"
+        [class.selected]="infoSelected == '1m'">1m</button>
+      <button class="button-change-view" (click)="getAllResultsByIdTest(7)"
+        [class.selected]="infoSelected == '1w'">1w</button>
+      <button class="button-change-view" (click)="getAllResultsByIdTest(1)"
+        [class.selected]="infoSelected == '1d'">1d</button>
     </div>
-    <div *ngIf="listResults.length > 0">  
-      <div *ngIf="listResults.length > 0 && test" style="display: flex">
-        <div class="result-with-test">
+    <div *ngIf="listResults.length > 0">
+      <div *ngIf="listResults.length > 0 && test" style="display: flex" class="layout-score">
+        <div class="result-with-test" style="height: 500x">
           <div class="score-chart">
-            <app-bar-chart [resultsAreReceived]="listResults" [maxLength]="totalResults"></app-bar-chart>
-          </div>
-          <div class="right-answer-chart">
-            <app-test-result-bar-chart [resultsAreReceived]="listResults" [test]="test" [maxLength]="totalResults">
-            </app-test-result-bar-chart>
+            <app-bar-chart [idTest]="idTest" [time]="time" [resultsAreReceived]="listResults" [maxLength]="totalResults"></app-bar-chart>
           </div>
         </div>
-        <div>
+        <div  style="height: 450px">
           <div *ngIf="listResults.length > 0" class="rank">
             <table>
               <thead>
@@ -67,13 +67,16 @@
               </tbody>
             </table>
           </div>
-          <app-pie-chart [resultsAreReceived]="listResults"></app-pie-chart>
-          <app-line-chart [resultsAreReceived]="listResults" [maxLength]="totalResults"></app-line-chart>
+          <app-pie-chart [idTest]="idTest" [time] = "time"[resultsAreReceived]="listResults"></app-pie-chart>
 
         </div>
+
       </div>
-
-
+      <div class="right-answer-chart">
+        <app-test-result-bar-chart  [resultsAreReceived]="listResults" [test]="test" [maxLength]="totalResults">
+        </app-test-result-bar-chart>
+      </div>
+      <app-line-chart [idTest]="idTest" [time]="time" [maxLength]="totalResults"></app-line-chart>
     </div>
   </div>
 

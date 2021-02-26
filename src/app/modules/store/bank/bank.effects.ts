@@ -21,8 +21,8 @@ export class BankEffects {
     map((action: bankActions.GetAllBanks) => {
       return action.payload;
     }),
-    switchMap((page) => {
-      return this.bankService.getBanks(page);
+    switchMap((payload) => {
+      return this.bankService.getBanks(payload.page);
     }),
     map((res) => {
       return new bankActions.GetAllBanksSuccess(res.data);
@@ -71,8 +71,7 @@ export class BankEffects {
     ofType(bankActions.GET_BANK_QUESTIONS),
     map((action: bankActions.GetBankQuestions) => action.payload),
     switchMap((info) => {
-      console.log(info);
-
+      console.log(info)
       return this.bankService.getBankQuestions(info);
     }),
     map((questions) => {
@@ -106,8 +105,6 @@ export class BankEffects {
     map((action: bankActions.UpdateQuestion) => action.payload),
     switchMap((question) => this.bankService.updateQuestion(question)),
     map((question) => {
-      console.log(question);
-
       return new bankActions.UpdateQuestionSuccess(question.data);
     }),
     catchError((err) => [new bankActions.UpdateQuestionError(err)])

@@ -27,16 +27,31 @@ export class PieChartOverviewComponent implements OnInit {
     plugins: {
       labels: {
         render: 'percentage',
-        fontColor: ['green', 'white', 'red'],
+        // fontColor: 'white',
         precision: 2,
       },
+      datalabels: {
+        color: 'white',
+        font: {
+          size: 20
+        }
+      }
     },
+    title: {
+      text: 'Overview',
+      display: true,
+      fontSize: 20
+    },
+    
   };
-  public pieChartLabels: Label[] = ['Weak', 'Average', 'Good', 'Excellent'];
+  public pieChartLabels: Label[] = ['Weak score', 'Average score', 'Good score', 'Excellent score'];
   public pieChartData: SingleDataSet = [];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
+  public pieChartColors = [{
+    backgroundColor: ['#E95B54', '#FBCE4A', '#3CAF85', '#309FDB']
+  }];
 
   constructor(private resultService: ResultService) {
     monkeyPatchChartJsTooltip();

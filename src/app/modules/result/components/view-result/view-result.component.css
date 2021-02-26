@@ -9,7 +9,7 @@
 .table {
   /* border: 1px solid red; */
   background-color: #fff;
-  width: 827px;
+  width: 80%;
 
   margin: 0 auto;
   border-radius: 12px;
@@ -52,6 +52,8 @@ thead {
   margin: 0 auto;
   margin-bottom: 50px;
   display: flex;
+  width: 80%;
+  align-items: center;
   /* justify-content: space-between; */
 }
 

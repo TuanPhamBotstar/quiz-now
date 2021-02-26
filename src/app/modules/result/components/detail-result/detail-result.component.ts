@@ -41,7 +41,7 @@ export class DetailResultComponent implements OnInit {
             .subscribe((res) => {
               if (res) {
                 this.result = res.data;
-                this.getTest(this.result.idTest)
+                this.getTest(this.result.idTest);
               }
             });
         }
@@ -52,35 +52,6 @@ export class DetailResultComponent implements OnInit {
     this.testService.getTestById(id).subscribe((res) => {
       this.test = res.data;
       console.log(this.test);
-
-      // for (let i = 0; i < this.result.userAnswers.length; i++) {
-      //   if (this.result.userAnswers[i].length > 1) {
-      //     let flag = true;
-      //     let count = 0;
-      //     for (let j = 0; j < this.result.userAnswers[i].length; j++) {
-      //       if (
-      //         this.test.questions[i].answers[j].title.indexOf(
-      //           this.result.userAnswers[i][j]
-      //         ) != -1 &&
-      //         this.test.questions[i].answers[j].isTrue
-      //       ) {
-      //         flag = false;
-      //         break;
-      //       }
-      //     }
-      //     if (count === this.result.userAnswers[i].length) {
-      //       this.rightAnswers.push(true);
-      //     } else this.rightAnswers.push(false);
-      //   } else if (
-      //     this.result.userAnswers[i][0] ===
-      //       this.test.questions[i].answers[0].title &&
-      //     this.test.questions.answers[i].isTrue
-      //   ) {
-      //     this.rightAnswers.push(true);
-      //   } else this.rightAnswers.push(false);
-      // }
-
-      // console.log(this.rightAnswers);
     });
   }
 }

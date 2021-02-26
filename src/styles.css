@@ -1,13 +1,7 @@
 body,
 input {
   background-color: #F3f6f9;
-  /* background: rgb(197,123,191);
-background: linear-gradient(90deg, rgba(197,123,191,1) 0%, rgba(254,139,143,1) 35%, rgba(134,103,247,1) 100%); */
-}
 
-.over-bg {
-  /* background-image: url('./assets/imgs/bg.jpg'); */
-  /* filter: blur(20px); */
 }
 
 a {
@@ -54,11 +48,21 @@ a:hover {
 }
 
 .component-container {
-  margin-left: 80px;
-  /* background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18); */
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 5%;
+}
+.search-input {
+  width: 300px;
+  height: 38px;
+  border: 0;
+  outline: none;
+  padding: 8px 16px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 70px -30px #C4C4C4;
+  border-radius: 24px;
+}
+.search-input:focus {
+  border-color: #4dabf7;
+  box-shadow: inset 0 1px 1px rgb(0 0 0 / 1%), 0 0 8px rgb(34 139 230 / 50%);
 }

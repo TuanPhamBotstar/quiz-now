@@ -26,6 +26,7 @@ export class ResultWithTestComponent implements OnInit {
   averageScore: any;
 
   isFetched: boolean = false;
+  time: number = 7;
 
   userNames: string[] = [];
   scores: any[] = [];
@@ -41,6 +42,8 @@ export class ResultWithTestComponent implements OnInit {
   totalResults: number = 0;
   listResults: any = [];
 
+  infoSelected: string = '1w';
+
   ngOnInit(): void {
     this.idBank = location.pathname.slice(11, 35);
     this.idTest = location.pathname.slice(41, 65);
@@ -51,8 +54,22 @@ export class ResultWithTestComponent implements OnInit {
     this.getAllResultsByIdTest();
   }
   getAllResultsByIdTest(time = 7) {
+    this.time = time;
+    
     this.scores = [];
     this.userNames = [];
+
+    switch (time) {
+      case 7:
+        this.infoSelected = '1w';
+        break;
+      case 30:
+        this.infoSelected = '1m';
+        break;
+      default:
+        this.infoSelected = '1d';
+        break;
+    }
 
     const firstFetched = this.resultService
       .getResultsByIdTest({ id: this.idTest, time: time })

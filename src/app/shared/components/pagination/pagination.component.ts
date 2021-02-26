@@ -43,10 +43,8 @@ export class PaginationComponent implements OnInit {
       +this.currentPage,
       this.pageNumber
     );
-    console.log(this.pageItems);
   }
   optimizePagination(currentPage: number, pageNumber: number): any {
-    console.log('current page: ', currentPage);
     if (pageNumber <= 5) return this.pages;
     if (currentPage + 4 >= pageNumber)
       return this.pages.slice(this.pages.length - 5);

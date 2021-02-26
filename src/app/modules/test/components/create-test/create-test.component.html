@@ -1,6 +1,6 @@
-<div *ngIf="bank" class="create-test-container">
-  <app-nav-bar></app-nav-bar>
-  <div class="create-test component-container">
+<div class="create-test-container">
+  <app-nav-bar [changeNavBar]="'true'" [bankId]="bankId"></app-nav-bar>
+  <div *ngIf="bank" class="create-test component-container">
     <div class="path">
       <a routerLink="/bank/view">Yours</a> > <a routerLink="/bank/view/{{bankId}}">{{bank.title}}</a> > New Test
     </div>

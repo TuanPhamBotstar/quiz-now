@@ -18,6 +18,8 @@ export interface BankArrayState {
   action: string | any;
   done: boolean;
   error?: Error | any;
+  limitItemsQuestion: number;
+  limitItemsBank: number;
 }
 const initialArrayState: BankArrayState = {
   banks: [],
@@ -30,6 +32,8 @@ const initialArrayState: BankArrayState = {
   action: null,
   done: false,
   error: null,
+  limitItemsQuestion: 0,
+  limitItemsBank: 0
 };
 
 export function reducer(state = initialArrayState, action: AppAction) {
@@ -39,6 +43,7 @@ export function reducer(state = initialArrayState, action: AppAction) {
         ...state,
         action: bankActions.GET_BANKS,
         done: false,
+        limitItemsBank: action.payload.limitItems
       };
     }
     case bankActions.GET_BANKS_SUCCESS:
@@ -98,6 +103,7 @@ export function reducer(state = initialArrayState, action: AppAction) {
         ...state,
         action: bankActions.GET_BANK_QUESTIONS,
         done: false,
+        limitItemsQuestion: action.payload.limitItems
       };
     case bankActions.GET_BANK_QUESTIONS_SUCCESS:
       return {
@@ -141,7 +147,9 @@ export function reducer(state = initialArrayState, action: AppAction) {
       };
     case bankActions.ADD_QUESTION_SUCCESS: {
       let newQuestions = [...state.questions];
-      if (newQuestions.length < 5) {
+      const limitItems = state.limitItemsQuestion;
+
+      if (newQuestions.length < limitItems) {
         newQuestions = [...state.questions, action.payload];
       } else newQuestions = [...state.questions];
       let newSelected = {
@@ -194,9 +202,11 @@ export function reducer(state = initialArrayState, action: AppAction) {
           console.log(index);
           newQuestions = [...state.questions];
           newQuestions[index] = action.payload;
+          console.log(newQuestions, action.payload)
         }
       } else newQuestions = state.questions;
 
+      // console.log(newQuestions)
       return {
         ...state,
         action: bankActions.UPDATE_QUESTION_SUCCESS,
@@ -294,7 +304,7 @@ export function reducer(state = initialArrayState, action: AppAction) {
     case bankActions.CREATE_BANK_SUCCESS: {
       console.log(action);
       let newBanks: any = [];
-      if (state.banks.length < 5) {
+      if (state.banks.length < state.limitItemsBank) {
         newBanks = [...state.banks, action.payload];
       } else newBanks = [...state.banks];
       return {
@@ -391,7 +401,8 @@ export function reducer(state = initialArrayState, action: AppAction) {
   }
 }
 
-export const getBankState = createFeatureSelector<BankArrayState>('banks');
+export const getBankState = createFeatureSelector<BankArrayState>('stores');
+
 export const getAllBanks = createSelector(
   getBankState,
   (state: BankArrayState) => {
@@ -422,6 +433,7 @@ export const getAllTest = createSelector(
 export const getBankQuestions = createSelector(
   getBankState,
   (state: BankArrayState) => {
+    console.log(state);
     return state.questions;
   }
 );

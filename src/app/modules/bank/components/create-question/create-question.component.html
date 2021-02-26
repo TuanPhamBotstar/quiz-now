@@ -8,7 +8,13 @@
           <label class="tab">
             <input type="text" formControlName="title">
             &nbsp;
-            <input type="checkbox" formControlName="isTrue">
+            <span>
+              <input type="checkbox" formControlName="isTrue">
+            </span>
+            &nbsp;
+            <span (click)="removeAnswer(i)">
+              <i style="cursor: pointer" class="far fa-trash-alt"></i>
+            </span>
           </label>
         </div>
       </div>

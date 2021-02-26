@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-
+import { Component, OnInit, Input,} from '@angular/core';
+import {Location} from '@angular/common';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { BankService } from '../../services/bank.service';
 
@@ -9,7 +9,7 @@ import { BankService } from '../../services/bank.service';
   styleUrls: ['./create-bank.component.css'],
 })
 export class CreateBankComponent implements OnInit {
-  constructor(private fb: FormBuilder, private bankService: BankService) {}
+  constructor(private fb: FormBuilder, private bankService: BankService, private _location: Location) {}
 
   bankLength: number = 0;
   finishAddQuestion: boolean = false;
@@ -37,9 +37,6 @@ export class CreateBankComponent implements OnInit {
     console.log(i)
     console.log(event);
 
-    // this.bankForm.value.questions[
-    //   this.bankForm.value.questions.length - 1
-    // ].answers = event;
     this.bankForm.value.questions[i].answers = event;
   }
 
@@ -56,6 +53,7 @@ export class CreateBankComponent implements OnInit {
   onSubmit() {
     this.bankService.createBankStore(this.bankForm.value);
 
+    this._location.back();
     console.log(this.bankForm.value);
   }
   ngOnInit(): void {}

@@ -4,45 +4,68 @@
     <div class="path">
       Yours
     </div>
-    <div style="display: flex">
+    <div style="display: flex;padding: 0" class="container">
       <app-search-bank (eventSearchResults)="receiveSearchBanks($event)"></app-search-bank>
-
-      <!-- <button class="button__create-bank" (click)="goToCreate()">New bank</button> -->
     </div>
 
 
-    <div *ngIf="banks.length === 0 && !isFetched" class="data-board" style="margin-top: 20px">
+    <div *ngIf="banks.length === 0 && !isFetched">
       <app-loader></app-loader>
     </div>
-    <div *ngIf="banks.length === 0 && isFetched" class="data-board" style="margin-top: 20px">
-      Empty
-    </div>
-
-    <div class="list-banks" *ngIf="banks.length > 0">
+    <div class="container" *ngIf="banks.length === 0 && isFetched" style="margin-top: 20px">
       <div class="row">
-        <div class="bank create-div">
-          <div (click)="goToCreate()"><i class="fas fa-plus"></i> New bank</div>
-        </div>
-        <div *ngFor="let bank of banks" class="bank">
-          <div class="bank-static">
-            <div class="bank-title" (click)="goToBankDetail(bank._id)">
-              {{bank.title}}
-            </div>
-            <div class="test-number">
-              {{bank.idTests.length| count:"test"}}
-            </div>
+        <div class="col-md-3 mb-3">
+          <div class="bank create-div">
+            <div (click)="goToCreate()"><i class="fas fa-plus"></i> <br>New bank</div>
           </div>
-
-          <div class="question-number">
-            {{bank.idQuestions.length| count:"question"}}
-          </div>
-
         </div>
       </div>
-
-      <app-pagination *ngIf="pages != 0" [goRoute]="'/bank/view'" [pageNumber]="pages"
-        (changePageEvent)="getBanks($event)" class="pagination" [currentPage]="currentPage.toString()"></app-pagination>
     </div>
 
+    <div class="list-banks container" *ngIf="banks.length > 0">
+      <div class="row">
+        <div class="col-md-3 mb-3">
+          <div class="bank create-div">
+            <div (click)="goToCreate()"><i class="fas fa-plus"></i> <br>New bank</div>
+          </div>
+        </div>
+
+        <div *ngFor="let bank of banks; let i = index" class="col-md-3 mb-3">
+          <div class="bank">
+            <div style="text-align: right; padding: 0px 8px; position: relative">
+              <span style="cursor: pointer" (click)="changeStateDropdown(i)"><i id="{{i}}"
+                  class="fas fa-ellipsis-h"></i>
+              </span>
+            </div>
+            <div *ngIf="showDropdown && i === indexDropdown" class="dropdown-config">
+              <div class="item" (click)="changeShowModalDelete(bank._id)"><i class="far fa-minus-square"></i> Remove
+              </div>
+              <div class="item" (click)="goToBankDetail(bank._id)"> <i class="far fa-eye"></i> View</div>
+            </div>
+            <div class="bank-title">
+              <div>
+                <div style="text-align: center; cursor: pointer" (click)="goToBankDetail(bank._id)">{{bank.title}}</div>
+                <div style="display: flex">
+                  <div class="test-number">
+                    {{bank.idTests.length| count:"test"}}&nbsp;
+                  </div>
+                  <div class="question-number">
+                    - {{bank.idQuestions.length| count:"question"}}
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <app-modal-delete [bankId]="idToDelete" [showModalDelete]="showModalDelete"
+        (emitCloseModal)="changeShowModalDelete('')"></app-modal-delete>
+    </div>
+    <app-pagination *ngIf="pages != 0" [goRoute]="'/bank/view'" [pageNumber]="pages"
+      (changePageEvent)="getBanks($event)" [currentPage]="currentPage.toString()"></app-pagination>
   </div>
-</div>

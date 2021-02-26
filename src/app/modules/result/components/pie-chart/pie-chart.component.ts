@@ -6,6 +6,7 @@ import {
   monkeyPatchChartJsLegend,
   monkeyPatchChartJsTooltip,
 } from 'ng2-charts';
+import { ResultService } from '../../services/result.service';
 
 @Component({
   selector: 'app-pie-chart',
@@ -14,8 +15,14 @@ import {
 })
 export class PieChartComponent implements OnInit {
   @Input() resultsAreReceived: any;
+  @Input() idTest: any;
+  @Input() time: any = 7;
 
   results: any = [];
+
+  resultObserver: any;
+
+  shouldRender: boolean = false;
 
   weakStudent: number = 0;
   averageStudent: number = 0;
@@ -33,54 +40,40 @@ export class PieChartComponent implements OnInit {
     },
   };
   public pieChartLabels: Label[] = ['Weak', 'Average', 'Good', 'Excellent'];
-  public pieChartData: SingleDataSet = [];
+  public pieChartData: SingleDataSet = [0, 0, 0, 0];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
 
-  constructor() {
+  constructor(private resultService: ResultService) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }
 
   ngOnChanges(changes: any) {
-    this.results = changes.resultsAreReceived.currentValue;
-    console.log(this.results);
+    console.log('ha');
+    if (this.resultObserver) this.resultObserver.unsubscribe();
+  
     this.getLabels();
   }
   getLabels() {
-    this.pieChartData = [];
+    this.shouldRender = false;
+    
+    this.resultObserver = this.resultService
+      .analyzeScoreWithPieChart(this.idTest, this.time + '')
+      .subscribe((res) => {
+        console.log(res);
+        const sum = res.data.reduce((total: any, first:any) => {
+          return total + first.count;
+        }, 0)
 
-    this.goodStudent = 0;
-    this.excellentStudent = 0;
-    this.averageStudent = 0;
-    this.weakStudent = 0;
-
-    for (let result of this.results) {
-      if (result.score >= 0.9) this.excellentStudent++;
-      else if (result.score > 0.65) this.goodStudent++;
-      else if (result.score >= 0.5) this.averageStudent++;
-      else this.weakStudent++;
-    }
-
-    const total =
-      this.weakStudent +
-      this.averageStudent +
-      this.goodStudent +
-      this.excellentStudent;
-
-    this.pieChartData = [
-      +(this.weakStudent / total).toFixed(2) * 100,
-      +(this.averageStudent / total).toFixed(2) * 100,
-      +(this.goodStudent / total).toFixed(2) * 100,
-      +(this.excellentStudent / total).toFixed(2) * 100,
-    ];
-    this.pieChartData = this.pieChartData.map((data: any) => Math.round(data));
+        for (let data of res.data) {
+          this.pieChartData[data._id] = (+(data.count/sum).toFixed(3))*100;
+        }
+        this.shouldRender = true;
+      });
   }
   ngOnInit(): void {
-    this.results = this.resultsAreReceived;
-
-    console.log(this.results);
     this.getLabels();
   }
 }

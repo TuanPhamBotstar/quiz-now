@@ -42,6 +42,10 @@ export class CreateQuestionComponent implements OnInit {
       })
     );
   }
+  removeAnswer(index: any) {
+    this.answers.removeAt(index);
+    if (this.answers.length <= 1) this.finishAddQuestion = false;
+  }
   onSubmit() {
     let flag = false;
 

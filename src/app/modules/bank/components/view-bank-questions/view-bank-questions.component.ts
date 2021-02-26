@@ -18,6 +18,10 @@ export class ViewBankQuestionsComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  questionId: string = '';
+
+  questionsObserver: any;
+
   bankId: string | any;
   questions: Question[] = [];
   bankName: string | any;
@@ -26,6 +30,9 @@ export class ViewBankQuestionsComponent implements OnInit {
   currentPage: string = '0';
 
   showModalAdd: boolean = false;
+  showModalModify: boolean = false;
+  hidePagination: boolean = false;
+  isFetched: boolean = false;
 
   link: any;
   ngOnInit(): void {
@@ -51,7 +58,6 @@ export class ViewBankQuestionsComponent implements OnInit {
   getPage() {
     this.bankService.getPageQuestions(this.bankId).subscribe((res) => {
       if (res.data) this.pages = res.data;
-      console.log(this.pages);
     });
   }
   addAnswers(event: any) {
@@ -82,18 +88,45 @@ export class ViewBankQuestionsComponent implements OnInit {
     this.bankId = id;
   }
   getBankQuestions(page: any) {
+    if (this.questionsObserver) {
+      this.questionsObserver.unsubscribe();
+    }
+    if (page != this.currentPage) {
+      this.bankService.getBankQuestionsStore(this.bankId, page);
+    }
     this.getPage();
     this.currentPage = page;
-    this.bankService.getBankQuestionsStore(this.bankId, page);
 
-    this.bankService.getQuestionsDataStore().subscribe((res) => {
+    this.questionsObserver = this.bankService.getQuestionsDataStore().subscribe((res) => {
+      console.log(res);
+
+      if (res.length === 0 && !this.isFetched) {
+        this.bankService.getBankQuestionsStore(this.bankId, page);
+        this.isFetched = true;
+      }
       this.questions = res;
-    });
+    })
+
   }
   closeModal(): void {
     this.showModalAdd = false;
   }
+  closeModalModify() {
+    this.showModalModify = false;
+  }
+  receiveSearchResults($event: any) {
+    if ($event.length > 0) {
+      this.questions = $event;
+      this.hidePagination = true;
+    } else {
+      this.hidePagination = false;
+      this.getBankQuestions(this.currentPage);
+    }
+  }
   goToQuestion(id: any) {
-    this.router.navigate([`/bank/question/${id}`]);
+    this.questionId = id;
+    this.showModalModify = true;
+
+    // this.router.navigate([`/bank/question/${id}`]);
   }
 }

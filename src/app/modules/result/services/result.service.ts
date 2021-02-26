@@ -27,14 +27,32 @@ export class ResultService {
   getResultsByIdResult(id: any): Observable<any> {
     return this.http.get<any>('http://localhost:3000/result/id/' + id);
   }
-
+  getResultsByIdTestAndIdUser(info: any) {
+    console.log(info)
+    return this.http.get<any>(`http://localhost:3000/result/test/${info.idTest}/user/${info.idUser}`);
+  }
+  getResultsByIdTestAndPage(info: any): Observable<any> {
+    return this.http.get<any>(`http://localhost:3000/result/test/${info.id}/${info.page}/${info.limitItems}`);
+  }
   getResultsByIdTest(info: any):Observable<any> {
     return this.http.post<any>('http://localhost:3000/result/test/', info);
   }
+  
   getResultsAndAnalyze(): Observable<any> {
     return this.http.get<any>('http://localhost:3000/result/analyze');
   }
-
+  analyzeWithScore(info: any, time: any): Observable<any> {
+    return this.http.get<any>(`http://localhost:3000/result/analyze/score/${info}/${time}` );
+  }
+  analyzeScoreWithPieChart(info: any, time: any): Observable<any> {
+    return this.http.get<any>(`http://localhost:3000/result/analyze/score/pie/${info}/${time}`);
+  }
+  analyzeTimeWithLineChart(info: any, time: any):Observable<any> {
+    return this.http.get<any>(`http://localhost:3000/result/analyze/score/line/${info}/${time}`);
+  }
+  analyzeWithBankId(bankId: any): Observable<any> {
+    return this.http.get<any>('http://localhost:3000/result/analyze/bank/' + bankId)
+  }
   getResultsByIdUserStore(page: any) {
     this.store.dispatch(new GetAllResults(page));
   }

@@ -15,6 +15,9 @@ export class TimerPipe implements PipeTransform {
       if (HOUR < 10) {
         res += '0' + '' + HOUR;
         res += ' : ';
+      } else {
+        res += HOUR;
+        res += ' : '
       }
     }
 
@@ -27,7 +30,6 @@ export class TimerPipe implements PipeTransform {
     if (SECOND < 10) {
       res += '0' + '' + SECOND;
     } else res += SECOND;
-
 
     return res;
   }

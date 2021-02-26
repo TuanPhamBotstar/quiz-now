@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Store } from '@ngrx/store';
@@ -28,17 +28,16 @@ import { Question } from '../models/question';
 export class BankService {
   constructor(private http: HttpClient, private store: Store<AppState>) {}
 
-  getPage(): Observable<any> {
-    return this.http.get<any>('http://localhost:3000/bank/page');
+  getPage(limitItems = 11): Observable<any> {
+    return this.http.get<any>(`http://localhost:3000/bank/page/${limitItems}`);
   }
   getBankInfo(bankId: any): Observable<any> {
     return this.http.get<any>('http://localhost:3000/bank/get/' + bankId);
   }
-  getBanks(page: string): Observable<any> {
-    return this.http.get<any>('http://localhost:3000/bank/get/page/' + page);
+  getBanks(page: string, limitItems = 11): Observable<any> {
+    return this.http.get<any>(`http://localhost:3000/bank/get/page/${page}/${limitItems}`);
   }
   getBankQuestions(info: any): Observable<any> {
-    console.log(info);
     return this.http.post<any>('http://localhost:3000/bank/get/questions', info);
   }
   createBank(bank: any): Observable<any> {
@@ -56,8 +55,11 @@ export class BankService {
   searchBankByName(name: any, page = '1') {
     return this.http.post<any>('http://localhost:3000/bank/search/', {name: name, page: page});
   }
-  getPageQuestions(id: any) {
-    return this.http.get<any>('http://localhost:3000/bank/question/page/' + id);
+  searchQuestionByName(name: any) {
+    return this.http.get<any>('http://localhost:3000/bank/question/search/' + name);
+  }
+  getPageQuestions(id: any, limitItems = 10) {
+    return this.http.get<any>(`http://localhost:3000/bank/question/page/${id}/${limitItems}`);
   }
   getQuestion(id: any): Observable<any> {
     return this.http.get<any>('http://localhost:3000/bank/question/' + id);
@@ -85,8 +87,8 @@ export class BankService {
   getOneBankDataStore() {
     return this.store.select(getOneBank);
   }
-  getBanksStore(page: string) {
-    this.store.dispatch(new GetAllBanks(page));
+  getBanksStore(page: string, limitItems = 11) {
+    this.store.dispatch(new GetAllBanks({page: page, limitItems: limitItems}));
 
     // this.store.select(getAllBanks);
   }
@@ -98,10 +100,10 @@ export class BankService {
   }
   getBankInfoStore(id: any) {
     this.store.dispatch(new GetBankById(id));
-    return this.store.select(getOneBank);
+    return this.store.select(getOneBank); 
   }
-  getBankQuestionsStore(id: any, page = '1') {
-    this.store.dispatch(new GetBankQuestions({id: id, page: page}));
+  getBankQuestionsStore(id: any, page = '1', limitItems = 10) {
+    this.store.dispatch(new GetBankQuestions({id: id, page: page, limitItems: limitItems}));
   }
 
   getQuestionStore(id: any) {

@@ -58,7 +58,7 @@ export const DELETE_BANK_BY_ID_ERROR = '[BANK] Delete bank by id error';
 
 export class GetAllBanks implements Action {
   readonly type = GET_BANKS;
-  constructor(public payload: string) {}
+  constructor(public payload: any) {}
 }
 export class GetAllBanksSuccess implements Action {
   readonly type = GET_BANKS_SUCCESS;

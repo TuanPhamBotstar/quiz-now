@@ -6,10 +6,11 @@ import { CountPipe } from './pipes/count.pipe';
 import { TimerPipe } from './pipes/timer.pipe';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ModalDeleteComponent } from './components/modal-delete/modal-delete.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [CountPipe, TimerPipe, PaginationComponent, LoaderComponent],
-  exports: [CountPipe, TimerPipe, PaginationComponent, LoaderComponent],
+  declarations: [CountPipe, TimerPipe, PaginationComponent, LoaderComponent, ModalDeleteComponent],
+  exports: [CountPipe, TimerPipe, PaginationComponent, LoaderComponent, ModalDeleteComponent],
 })
 export class SharedModule {}

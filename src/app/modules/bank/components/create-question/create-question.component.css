@@ -5,7 +5,11 @@ input {
   padding: 4px 16px;
   font-size: 16px;
 }
-
+input {
+  background: #fff;
+  border: 2px solid rgb(199, 196, 196);
+  border-radius: 4px;
+}
 .button__add-answer {
   color: #759AF1;
   background-color: transparent;
@@ -17,7 +21,7 @@ input {
 
 input[type="checkbox"] {
   width: 24px;
-  height: 24px;
+  transform: scale(1.5);
 }
 
 input[formControlName="title"] {

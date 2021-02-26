@@ -17,14 +17,23 @@ import { BankModule } from './modules/bank/bank.module';
 import { TestModule } from './modules/test/test.module';
 import { HomeModule } from './modules/home/home.module';
 import { ResultModule } from './modules/result/result.module';
-import { StoreModule } from '@ngrx/store';
+import { combineReducers, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducer } from './modules/store/bank/bank.reducers';
 import { BankEffects } from './modules/store/bank/bank.effects';
 import { ViewResultComponent } from './modules/result/components/view-result/view-result.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 
+import { resultReducer } from './modules/store/result/result.reducers';
+
+// const REDUCER = combineReducers({
+//   featureA: reducer,
+//   featureB: reducer
+// }, {
+// })
 @NgModule({
   declarations: [AppComponent, ToastManagementComponent],
   imports: [
@@ -36,7 +45,9 @@ import { environment } from '../environments/environment';
     TestModule,
     HomeModule,
     ResultModule,
-    StoreModule.forRoot({ banks: reducer }),
+    SharedModule,
+    CoreModule,
+    StoreModule.forRoot({ stores: reducer}),
     EffectsModule.forRoot([BankEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

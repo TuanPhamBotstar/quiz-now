@@ -3,7 +3,53 @@
   <div *ngIf="test" class="questions component-container">
     <div class="path">Results > {{test.title}}</div>
     <button ngxClipboard [cbContent]="test.link">Copy link</button>
+
+    <div class="title">Test: {{test.title}}'s info</div>
+    <div class="detail">
+      <div class="info">
+        <div class="info-title"><i class="far fa-question-circle"></i> Total questions</div>
+        <div class="number">{{test.numberOfHardQuestions + test.numberOfEasyQuestions + test.numberOfNormalQuestions}}
+        </div>
+      </div>
+      <div class="info">
+        <div class="info-title"><i class="far fa-clock"></i> Time (minutes)</div>
+        <div class="number">{{test.time}} </div>
+      </div>
+      <div class="info">
+        <div class="info-title">Easy questions</div>
+        <div class="number">{{test.numberOfEasyQuestions}}</div>
+      </div>
+      <div class="info">
+        <div class="info-title">Normal questions</div>
+        <div class="number">{{test.numberOfNormalQuestions}}</div>
+      </div>
+      <div class="info">
+        <div class="info-title">Hard questions</div>
+        <div class="number">{{test.numberOfHardQuestions}}</div>
+      </div>
+
+    </div>
+    <div style="text-align: center; font-size: 36px; font-weight: 600; margin: 30px 0">Your answers</div>
     <div *ngFor="let question of test.questions; let i = index" class="question">
+      <div class="question-bar">
+        <div class="question-title"><span class="question-order">Question {{i+1}}</span>: {{question.title}}</div>
+      </div>
+      <ul class="answers">
+        <div *ngFor="let answer of question.answers; let j = index">
+          <div>
+            <span>
+              <input  *ngIf="result.userAnswers[i].answers.indexOf(answer.title) === -1" type="checkbox" disabled>
+              <input  *ngIf="result.userAnswers[i].answers.indexOf(answer.title) !== -1" type="checkbox" disabled checked >
+              &nbsp;
+              <span>
+                <label>{{answer.title}}</label>
+              </span>
+            </span>
+          </div>
+
+        </div>
+      </ul>
+      <!-- <div *ngFor="let question of test.questions; let i = index" class="question">
       <div class="question-bar">
         <div class="question-title"><span class="question-order">Question {{i+1}}</span>: {{question.title}}</div>
         <div class="question-state">
@@ -38,9 +84,8 @@
             </span>
           </div>
 
-          <!-- <div [class.trueAnswer]="answer.isTrue">{{answer.title}}</div> -->
         </div>
       </ul>
+    </div> -->
     </div>
   </div>
-</div>

@@ -2,12 +2,6 @@
   display: flex;
 }
 
-button {
-  outline: none;
-  border: 0;
-  color: white;
-}
-
 .path div {
   font-family: PoppinsLight;
   font-size: 16px;
@@ -15,23 +9,23 @@ button {
   cursor: pointer;
 }
 
+button {
+  outline: none;
+  border: 0;
+  color: white;
+}
+
 .list-test {
-  position: relative;
-  width: 526px;
+  width: 1027px;
   height: 564px;
   padding: 15px 30px;
   margin-left: 240px;
   background-color: white;
-  
+
   background: #FFFFFF;
   box-shadow: 0px 0px 70px -30px #C4C4C4;
   border-radius: 32px;
-  /* background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.18); */
+  margin: 0 auto;
 }
 
 .pagination {
@@ -45,22 +39,35 @@ button {
   font-weight: 600;
   font-size: 24px;
   line-height: 48px;
+  display: flex;
+
 }
 
 .button__generate-test {
-  width: 100px;
-  height: 36px;
+  width: 24px;
+  height: 24px;
+
+  border-radius: 50%;
+  margin-left: 30px;
+
+  text-align: center;
 
   background: #5F45EA;
-  border-radius: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1%;
+  box-shadow: 0px 0px 70px 5px #c4c4c4
 }
 
 .test-card {
-  position: relative;
+  /* position: relative; */
+  margin: 0 auto;
 
   margin-bottom: 10px;
   display: flex;
-  width: 480px;
+  justify-content: space-between;
+  width: 927px;
   height: 71px;
 
   background: #FFFFFF;
@@ -71,8 +78,7 @@ button {
 .test-card-title {
   margin-left: 20px;
   cursor: pointer;
-
-  flex-basis: 150px;
+  flex-basis: 200px;
 
   display: flex;
   align-items: center;
@@ -81,8 +87,6 @@ button {
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
-  /* identical to box height */
-
 
   color: #000000;
 }
@@ -92,34 +96,39 @@ button {
 }
 
 .test-card-detail {
-
   flex-basis: 180px;
-
+  
   display: flex;
+  justify-content: center;
   align-items: center;
   font-family: PoppinsBlack;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
+  flex-basis: 200px;
   line-height: 24px;
 }
 
-.test-card-detail p {
+.test-card-detail div {
   color: #759AF1;
 }
 
-.test-card-detail p span {
+.test-card-detail div span {
   color: #2D2D2D;
   font-weight: 400;
+}
+
+.test-card-copy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .test-card-copy button {
 
   flex-basis: 100px;
 
-  position: absolute;
-  right: 40px;
-  top: 15px;
   font-family: PoppinsBlack;
   font-style: normal;
   font-weight: 600;
@@ -132,71 +141,4 @@ button {
 
 .test-card-copy button:hover {
   color: #0F993E;
-}
-
-.button-delete {
-  position: absolute;
-  width: 132px;
-  height: 34px;
-  right: 30px;
-  bottom: 34px;
-
-  padding: 0;
-  background: #FE8B8F;
-  border-radius: 16px;
-}
-
-.modal-confirm {
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .3)
-}
-
-.modal-content {
-  position: absolute;
-  right: 0;
-  left: 0;
-  margin-left: auto;
-  margin-right: auto;
-  top: 35%;
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 400px;
-}
-
-.modal-title {
-  font-size: 20px;
-  font-family: PoppinsBlack;
-}
-
-.modal-detail {
-  font-size: 14px;
-  color: rgba(0, 0, 0, .6)
-}
-
-.button-choice {
-  display: flex;
-  justify-content: space-around
-}
-
-.button-yes {
-  width: 68px;
-  color: rgba(0, 0, 0, .5);
-  background: #fff;
-  border: 3px solid red;
-  border-radius: 14px;
-}
-
-.button-no {
-  width: 68px;
-  color: black;
-  background: #fff;
-  border: 3px solid green;
-  border-radius: 14px;
 }

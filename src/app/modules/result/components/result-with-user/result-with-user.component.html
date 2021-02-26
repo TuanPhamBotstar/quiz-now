@@ -1,0 +1,40 @@
+<div class="result-with-user-container">
+  <app-nav-bar [changeNavBar]="'true'" [levelName]="'tests'" [bankId]="idBank"></app-nav-bar>
+  <div class="result-with-user component-container">
+    <div *ngIf="bankTitle" class="path">
+      <a routerLink="/bank/view" >Yours</a> > <a
+        routerLink="/bank/view/{{idBank}}">{{bankTitle}}</a> > <a routerLink="/bank/view/{{idBank}}/test/{{idTest}}"
+        >{{testTitle}}</a> > Detail
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <th scope="col">Rank</th>
+        <th scope="col">Name</th>
+        <th scope="col">Time</th>
+        <th scope="col">Score</th>
+        <th scope="col">Detail</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let result of results; let i = index">
+          <th>{{i + 1}}</th>
+          <td class="name-col">{{result.name}}</td>
+          <td>{{convertNumber(result.month) + "/" + convertNumber(result.day) + "/" + convertNumber(result.year)}} -
+            <span>{{convertNumber(result.hour)}}:{{convertNumber(result.minutes)}}</span>
+          </td>
+          <th class="score-col">{{(result.score*10).toFixed(1) + ""}}</th>
+          <th><a routerLink="/bank/view/{{idBank}}/test/{{idTest}}/detail/{{result._id}}"
+              [state]="{bankTitle: bankTitle, testTitle: testTitle, userName: result.name, test: test}"><i
+                class="far fa-eye"></i></a></th>
+        </tr>
+
+      </tbody>
+    </table>
+    <div *ngIf="idTest">
+      <app-pagination *ngIf="pages != 0" [goRoute]="'/bank/view/' + idBank + '/test/' + idTest + '/detail'"
+        [pageNumber]="pages" (changePageEvent)="getResults($event)" [currentPage]="currentPage.toString()">
+      </app-pagination>
+    </div>
+
+  </div>
+
+</div>

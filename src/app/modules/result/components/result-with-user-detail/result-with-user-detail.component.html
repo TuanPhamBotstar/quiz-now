@@ -1,0 +1,51 @@
+<div class="result-with-user-detail-container">
+  <app-nav-bar [changeNavBar]="'true'" [levelName]="'tests'"></app-nav-bar>
+  <div class="component-container">
+    <div *ngIf="test" class="path" style="font-weight: 600">
+      <a routerLink="/bank/view">Yours</a> > <a routerLink="/bank/view/{{idBank}}">{{bankTitle}}</a> > <a
+        routerLink="/bank/view/{{idBank}}/test/{{idTest}}">{{testTitle}}</a> > <a
+        routerLink="/bank/view/{{idBank}}/test/{{idTest}}/detail">Detail</a>
+    </div>
+
+    <div class="results-container">
+      <!-- <div *ngFor="let question of test.questions; let i = index" class="question">
+      <div class="question-bar">
+        <div class="question-title"><span class="question-order">Question {{i+1}}</span>: {{question.title}}</div>
+        <div class="question-state">
+          <span style="color: #28a745; font-weight: 600" *ngIf="result.userAnswers[i].isTrue">1/1</span>
+          <span style="color: #dc3545; font-weight: 600" *ngIf="!result.userAnswers[i].isTrue">0/1</span>
+        </div>
+      </div>
+
+      <ul class="answers">
+        <div *ngFor="let answer of question.answers; let j = index">
+          <div>
+            <span *ngIf="answer.isTrue">
+              <img src="../../../../../assets/imgs/checkmark.png">
+              &nbsp;
+              <span>
+                <label>{{answer.title}}</label>
+              </span>
+            </span>
+            <span *ngIf="!answer.isTrue && result.userAnswers[i].answers.indexOf(answer.title) != -1">
+              <img src="../../../../../assets/imgs/wrong.png">
+              &nbsp;
+              <span>
+                <label>{{answer.title}}</label>
+              </span>
+            </span>
+            <span *ngIf="!answer.isTrue && result.userAnswers[i].answers.indexOf(answer.title) == -1">
+              <input type="radio">
+              &nbsp;
+              <span>
+                <label>{{answer.title}}</label>
+              </span>
+            </span>
+          </div>
+
+        </div>
+      </ul>
+    </div> -->
+    </div>
+  </div>
+</div>

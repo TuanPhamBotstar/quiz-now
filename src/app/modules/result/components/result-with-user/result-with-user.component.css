@@ -1,0 +1,25 @@
+.result-with-user-container {
+    display: flex;
+}
+.table {
+    background: #fff
+}
+.name-col {
+    font-weight: 500;
+}
+.score-col {
+    font-weight: 500;
+}
+.table tbody th,td{
+    font-size: 20px
+}
+.table thead th{
+    font-size: 24px!important;
+}
+td,th {
+    text-align: center;
+    
+}
+thead {
+    background: #fff
+}
