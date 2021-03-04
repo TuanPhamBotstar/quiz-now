@@ -56,6 +56,10 @@ export const DELETE_BANK_BY_ID = '[BANK] Delete bank by id';
 export const DELETE_BANK_BY_ID_SUCCESS = '[BANK] Delete bank by id success';
 export const DELETE_BANK_BY_ID_ERROR = '[BANK] Delete bank by id error';
 
+export const UPDATE_BANK_BY_ID = '[BANK] Update bank by id';
+export const UPDATE_BANK_BY_ID_SUCCESS = '[BANK] Update bank by id success';
+export const UPDATE_BANK_BY_ID_ERROR = '[BANK] Update bank by id error';
+
 export class GetAllBanks implements Action {
   readonly type = GET_BANKS;
   constructor(public payload: any) {}
@@ -247,6 +251,21 @@ export class CreateTestSuccess implements Action {
 }
 export class CreateTestError implements Action {
   readonly type = CREATE_TEST_ERROR;
+
+  constructor(public payload: Error) {}
+}
+export class UpdateBankById implements Action {
+  readonly type = UPDATE_BANK_BY_ID;
+
+  constructor(public payload: any) {}
+}
+export class UpdateBankByIdSuccess implements Action {
+  readonly type = UPDATE_BANK_BY_ID_SUCCESS;
+
+  constructor(public payload: any) {}
+}
+export class UpdateBankByIdError implements Action {
+  readonly type = UPDATE_BANK_BY_ID_ERROR;
 
   constructor(public payload: Error) {}
 }

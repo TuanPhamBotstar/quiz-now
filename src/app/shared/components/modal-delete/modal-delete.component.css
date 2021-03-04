@@ -29,6 +29,7 @@ button {
   .modal-title {
     font-size: 20px;
     font-family: PoppinsBlack;
+    color: black;
   }
   
   .modal-detail {
@@ -42,7 +43,7 @@ button {
   }
   
   .button-yes {
-    width: 68px;
+    width: 78px;
     color: rgba(0, 0, 0, .5);
     background: #fff;
     border: 3px solid red;
@@ -50,7 +51,7 @@ button {
   }
   
   .button-no {
-    width: 68px;
+    width: 78px;
     color: black;
     background: #fff;
     border: 3px solid green;

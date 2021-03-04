@@ -1,22 +1,29 @@
 <app-modal-require *ngIf="test && !showModal" [test]="test" (infoEmitEvent)="receiveInfo($event)"></app-modal-require>
 
 <div *ngIf="!isFinished && test">
-  <div class="questions-container">
-    <div class="container">
-      <div class="row">
-        <div *ngFor="let question of test.questions; let i = index" class="col-3">
-          <div style="cursor: pointer" class="question__number" (click)="scroll('question' + i)" [class.selected]="saveStateAnswer[i]">{{i+1}}
+  <div class="info-container mt-5 px-2 py-3">
+    <div class="questions-container ">
+      <div class="container">
+        <div class="row">
+          <div *ngFor="let question of test.questions; let i = index" class="col-3">
+            <div style="cursor: pointer" class="question__number" (click)="scroll('question' + i)"
+              [class.selected]="saveStateAnswer[i]">{{i+1}}
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <app-timer *ngIf="showModal" [time]="test.time*60" (finishedEvent)="submitAnswers()"></app-timer>
+    <div style="display: flex; justify-content: center">
+      <button class="button-submit-test" id="target" (click)="onSubmit()">Finish</button>
+    </div>
   </div>
 
-  <app-timer *ngIf="showModal" [time]="test.time*60" (finishedEvent)="submitAnswers()"></app-timer>
 
-  <div class="container">
+
+  <div class="container mb-5">
     <div *ngIf="test" class="do-test-container">
-      <div class="do-test__header">
+      <div class="do-test__header mt-5">
         <div class="do-test__title">
           <span>{{test.title}}</span>
           &nbsp;
@@ -27,10 +34,11 @@
         </div>
       </div>
       <form [formGroup]="userForm" (ngSubmit)=onSubmit()>
-        <div class="do-test__questions">
+        <div class="do-test__questions ">
           <div formArrayName="answers">
-            <div class="do-test__question__answers">
-              <div *ngFor="let answerGroup of answersFormGroup; let i = index" class="do-test__question-container">
+            <div class="do-test__question__answers ">
+              <div *ngFor="let answerGroup of answersFormGroup; let i = index"
+                class="do-test__question-container mt-2 p-2 rounded">
                 <div class="do-test__question__title" id="question{{i}}">
                   <span>Question {{i+1}}</span>{{': ' + test.questions[i].title}}
                 </div>
@@ -59,13 +67,13 @@
             </div>
           </div>
         </div>
-        <button class="button-submit-test" id="target" type="submit">Done</button>
       </form>
 
     </div>
 
   </div>
-
+  <app-modal-confirm [testId]="test._id" [showModalConfirm]="showModalConfirm" [value]="userForm.value"
+    (emitEventCloseModal)="finishTest($event)"></app-modal-confirm>
 </div>
 <div *ngIf="isFinished">
   <app-finish-test [test]="test" [score]="score"></app-finish-test>

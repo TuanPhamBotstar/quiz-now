@@ -7,13 +7,16 @@ button {
   border: 0;
   color: white;
 }
-
+div:focus {
+  outline: none;
+}
 .nav-bar {
   background-color: #032349;
   border-radius: 0px;
   color: white;
-  width: 231px;
-  height: 100vh;
+  width: 4vw;
+  top: 8vh;
+  height: 92vh;
   position: fixed;
 }
 
@@ -71,13 +74,8 @@ button {
 
 .route-container {
   cursor: pointer;
-  /* margin-bottom: 20px; */
-  padding: 15px;
   text-align: left;
   font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 38px;
 }
 
 .selected {
@@ -87,12 +85,10 @@ button {
 
 .feature-drop {
   text-align: left;
-  /* width: 60%; */
   margin: 0 auto;
 }
 
 .feature-drop div {
-  /* padding: 10px 0; */
 }
 
 .feature {
@@ -102,65 +98,40 @@ button {
 }
 
 .spi-feature {
-  padding: 10px 15%;
   cursor: pointer;
+  margin-bottom: .5rem
 }
 
 .levelSelected {
   background: rgba(95, 69, 234, .5)
 }
-
-/* .modal-confirm {
-  position: fixed;
-  z-index: 3;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .3)
+.expand-bar {
+  font-size: 2em;
+  cursor: pointer
 }
-
-.modal-content {
-  position: absolute;
-  right: 0;
-  left: 0;
-  margin-left: auto;
-  margin-right: auto;
-  top: 35%;
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 400px;
-}
-
-.modal-title {
+.img-icon {
   font-size: 20px;
-  font-family: PoppinsBlack;
+  color: white;
+  text-align: center;
 }
-
-.modal-detail {
-  font-size: 14px;
-  color: rgba(0, 0, 0, .6)
+.img-icon-2 {
+  font-size: 16px;
 }
-
-.button-choice {
-  display: flex;
-  justify-content: space-around
+.line-footer {
+  border-bottom: 2px solid gray
 }
-
-.button-yes {
-  width: 68px;
-  color: rgba(0, 0, 0, .5);
-  background: #fff;
-  border: 3px solid red;
-  border-radius: 14px;
+.detail-icon {
+  display: none
 }
-
-.button-no {
-  width: 68px;
+.img-icon:hover .detail-icon {
+  display: inline-block;
+  position: absolute;
+  background: white;
   color: black;
-  background: #fff;
-  border: 3px solid green;
-  border-radius: 14px;
-} */
+  font-size: 12px;
+  left: 4.5vw;
+  width: 5vw;
+  border-radius: 4px;
+  padding: 0;
+  box-shadow: 0 0 0.1875rem 0 rgb(0 0 0 / 50%);
+}

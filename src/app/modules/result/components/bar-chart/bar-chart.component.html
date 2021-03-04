@@ -1,12 +1,6 @@
-<div style="display: block;" class="chart" *ngIf="!(+barChartLabels[0] >= 100)">
-  <div style="font-weight: 800; font-size: 24px;">Score statistics</div>  
-  <canvas baseChart 
-      [datasets]="barChartData"
-      [labels]="barChartLabels"
-      [options]="barChartOptions"
-      [plugins]="barChartPlugins"
-      [legend]="barChartLegend"
-      [chartType]="barChartType"
-      [colors]="barChartColor">
-    </canvas>
-  </div>
+<div style="display: block; position: relative" class="chart rounded p-3 w-100">
+  <div style="font-weight: 800; font-size: 16px;">Score statistics</div>
+  <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" height="80"
+    [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColor">
+</canvas>
+</div>

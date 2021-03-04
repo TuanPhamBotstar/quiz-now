@@ -18,47 +18,49 @@ input {
 }
 
 .create-bank-form {
-  margin-left: 50px;
-  margin-top: 50px;
+  width: 80%;
+  margin: 0 auto;
 }
-.bankForm__title {
+
+.bankForm__title input {
+  width: 100%;
   font-size: 24px;
 }
-.button__add-question {
-  margin-top: 20px;
-  margin-bottom: 20px;
 
-  width: 127px;
-  height: 44px;
-  font-size: 16px;
-  background: #5F45EA;
-  border-radius: 32px;
-}
 
 .question-form {
-  width: 827px;
+  width: 60%;
   padding: 16px;
-  margin-bottom: 20px;
-  
+  margin: 0 auto;
   background: #FFFFFF;
   box-shadow: 0px 0px 70px -30px #C4C4C4;
-  border-radius: 32px;
+  border-radius: 8px;
 }
 
 .input__question {
-  width: 800px;
+  width: 100%;
   padding: 16px;
 }
 
-.button__submit {
-  position: absolute;
-  right: 10px;
-  top: 80px;
+.button__add-question {
+  position: fixed;
+  bottom: 6vh;
+  box-shadow: 0px 10px 70px -30px #c4c4c4;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 16px;
+  background: #5F45EA;
+}
 
-  background: #0F993E;
-  border-radius: 32px;
-  width: 107px;
-  height: 34px;
+.button__submit {
+  position: fixed;
+  bottom: 6vh;
+  right: 8vw;
+  background: #0f993e;
+  border-radius: 8px;
+  width: 127px;
+  height: 44px;
 }
 
 label {
@@ -72,13 +74,23 @@ select {
 option[value="easy"] {
   color: #0f993e
 }
+
 option[value="normal"] {
   color: #E89528;
 }
+
 option[value="hard"] {
   color: #F22D2D
 }
 
 .level {
   margin-top: 20px;
+}
+
+.remove-icon {
+  position: absolute;
+  top: -1vh;
+  right: 0vw;
+  font-size: 1.25rem;
+  cursor: pointer;
 }

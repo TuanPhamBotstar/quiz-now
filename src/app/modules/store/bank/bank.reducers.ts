@@ -33,7 +33,7 @@ const initialArrayState: BankArrayState = {
   done: false,
   error: null,
   limitItemsQuestion: 0,
-  limitItemsBank: 0
+  limitItemsBank: 0,
 };
 
 export function reducer(state = initialArrayState, action: AppAction) {
@@ -43,7 +43,7 @@ export function reducer(state = initialArrayState, action: AppAction) {
         ...state,
         action: bankActions.GET_BANKS,
         done: false,
-        limitItemsBank: action.payload.limitItems
+        limitItemsBank: action.payload.limitItems,
       };
     }
     case bankActions.GET_BANKS_SUCCESS:
@@ -103,7 +103,7 @@ export function reducer(state = initialArrayState, action: AppAction) {
         ...state,
         action: bankActions.GET_BANK_QUESTIONS,
         done: false,
-        limitItemsQuestion: action.payload.limitItems
+        limitItemsQuestion: action.payload.limitItems,
       };
     case bankActions.GET_BANK_QUESTIONS_SUCCESS:
       return {
@@ -154,12 +154,16 @@ export function reducer(state = initialArrayState, action: AppAction) {
       } else newQuestions = [...state.questions];
       let newSelected = {
         ...state.selected,
-        idQuestions: [...state.selected.idQuestions, action.payload._id]
-      }
+        idQuestions: [...state.selected.idQuestions, action.payload._id],
+      };
       let newBanks = [...state.banks];
       for (let i = 0; i < state.banks.length; i++) {
         if (state.banks[i]._id === state.selected._id) {
-          newBanks = [...newBanks.slice(0, i), newSelected, ...newBanks.slice(i+1)]
+          newBanks = [
+            ...newBanks.slice(0, i),
+            newSelected,
+            ...newBanks.slice(i + 1),
+          ];
         }
       }
       return {
@@ -168,7 +172,7 @@ export function reducer(state = initialArrayState, action: AppAction) {
         done: true,
         questions: newQuestions,
         selected: newSelected,
-        banks: newBanks
+        banks: newBanks,
       };
     }
     case bankActions.ADD_QUESTION_ERROR:
@@ -202,7 +206,7 @@ export function reducer(state = initialArrayState, action: AppAction) {
           console.log(index);
           newQuestions = [...state.questions];
           newQuestions[index] = action.payload;
-          console.log(newQuestions, action.payload)
+          console.log(newQuestions, action.payload);
         }
       } else newQuestions = state.questions;
 
@@ -360,7 +364,7 @@ export function reducer(state = initialArrayState, action: AppAction) {
       // let newTests = [...state.tests, action.payload];
       let newTests = [...state.selected.idTests, action.payload];
       let newBanks = [...state.banks];
-      
+
       let newSelected = { ...state.selected, idTests: newTests };
 
       for (let bank of newBanks) {
@@ -386,7 +390,7 @@ export function reducer(state = initialArrayState, action: AppAction) {
         done: true,
         tests: newTests,
         banks: newBanks,
-        selected: newSelected
+        selected: newSelected,
       };
     }
     case bankActions.CREATE_TEST_ERROR:
@@ -396,6 +400,39 @@ export function reducer(state = initialArrayState, action: AppAction) {
         done: true,
         error: action.payload,
       };
+    case bankActions.UPDATE_BANK_BY_ID:
+      return {
+        ...state,
+        action: bankActions.UPDATE_BANK_BY_ID,
+        done: false,
+      };
+    case bankActions.UPDATE_BANK_BY_ID_SUCCESS: {
+      console.log(action.payload)
+      let selectedBank: any;
+
+      for (let bank of state.banks) {
+        if (bank._id === action.payload[0]._id) {
+          selectedBank = bank;
+        }
+      }
+      const index = state.banks.indexOf(selectedBank) 
+      let newBanks = [...state.banks.slice(0, index), action.payload[0], ...state.banks.slice(index + 1)]
+
+      return {
+        ...state,
+        action: bankActions.UPDATE_BANK_BY_ID_SUCCESS,
+        done: true,
+        banks: newBanks
+      };
+    }
+    case bankActions.UPDATE_BANK_BY_ID_ERROR: {
+      return {
+        ...state,
+        action: bankActions.UPDATE_BANK_BY_ID_ERROR,
+        done: true,
+      }
+    }
+
     default:
       return;
   }

@@ -33,13 +33,14 @@ button {
   border-radius: 16px;
   position: relative;
   margin: 0 auto;
-  margin-top: 10%;
 }
 
 .form-answers {
-  margin-top: 10px;
-  margin-left: 30px;
   font-size: 20px;
+}
+
+input[type="text"] {
+  width: 100%;
 }
 
 input[type="checkbox"] {
@@ -48,33 +49,29 @@ input[type="checkbox"] {
 }
 
 .question__title {
-  font-family: PoppinsBlack;
   width: 100%;
-  font-size: 20px;
   background: #fff;
   padding: 0px 0px;
 }
-
+.question__title label {
+  font-family: PoppinsBlack;
+}
 .question__title input {
   width: 527px;
 }
 
 .question__title label {
   margin-right: 20px;
-  text-decoration: underline;
+  font-size: 16px;
 }
 
 label[for="level"] {
+  font-family: PoppinsBlack;
   font-size: 16px;
 }
 
 button[type="submit"] {
-  position: absolute;
-  right: 50px;
-  bottom: 20px;
-
-  padding: 10px 20px;
-  border-radius: 32px;
+  border-radius: 8px;
 
   background-color: #0F993E;
   color: #fff;
@@ -82,9 +79,18 @@ button[type="submit"] {
 
 .button__delete {
   position: absolute;
-  top: 20px;
+  bottom:20px;
   right: 20px;
-  color: red;
+  color: #ff000080;
   background-color: #fff;
+  cursor: pointer;
+}
+.button__delete:hover {
+  color: red;
+  font-weight: 400
+}
+.add-answer {
+  font-size: 16px;
+  color: #548d9f;
   cursor: pointer;
 }

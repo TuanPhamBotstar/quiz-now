@@ -167,4 +167,18 @@ export class BankEffects {
     }),
     catchError((err) => [new bankActions.CreateTestError(err)])
   );
+  @Effect()
+  updateBank$ = this.actions$.pipe(
+    ofType(bankActions.UPDATE_BANK_BY_ID),
+    map((action: bankActions.UpdateBankById) => {
+      return action.payload
+    }),
+    switchMap((bank) => {
+      return this.bankService.updateBank(bank.id, bank.title);
+    }),
+    map((res ) => {
+      return new bankActions.UpdateBankByIdSuccess(res.data)
+    }),
+    catchError((err) => [new bankActions.UpdateBankByIdError(err)])
+  )
 }

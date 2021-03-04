@@ -1,0 +1,53 @@
+.table {
+  background-color: #fff;
+  width: 100%;
+
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+.col {
+  padding: .5rem
+}
+
+.list-result {
+  font-size: 24px;
+}
+
+thead {
+  background-color: white;
+}
+
+.score-col {
+  width: 10vw;
+  text-align: center;
+  font-weight: 600;
+}
+
+.order-col {
+  width: 3vw;
+  text-align: center;
+}
+
+.name-col {
+  width: 10vw;
+  font-weight: 600
+}
+
+.time-col {
+  width: 13vw;
+  text-align: center;
+}
+
+.table th {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.table td {
+  font-size: 16px;
+}
+
+tr:focus {
+  outline: none;
+}

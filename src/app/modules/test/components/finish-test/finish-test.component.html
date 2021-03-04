@@ -1,7 +1,15 @@
 <div class="container">
-  <h1>Finished</h1>
-
-  <div class="score" *ngIf="test.knowTheResult">Your score is: {{(score*10).toFixed(2)}} </div>
-  <div class="score" *ngIf="!test.knowTheResult">You can not see score. Thanks </div>
-  <a routerLink="/bank/view">Redirect to Home page</a>
+  <div>
+    <h1>Finished</h1>
+  </div>
+  <div class="noti">
+    <div class="noti-title">You have finished</div>
+    <div class="score" *ngIf="test.knowTheResult">Your score is: {{(score*10).toFixed(2)}} </div>
+    <div class="score" *ngIf="!test.knowTheResult">You can not see score. Thanks </div>
+    <div routerLink="/bank/view" style="cursor: pointer"><i class="fas fa-directions"></i>&nbsp; Go to Home page
+    </div>
+    <div class="img">
+      <img src="assets/imgs/finish.svg">
+    </div>
+  </div>
 </div>

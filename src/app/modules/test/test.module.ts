@@ -17,9 +17,11 @@ import { TimerComponent } from './components/timer/timer.component';
 import { FinishTestComponent } from './components/finish-test/finish-test.component';
 import { ModalRequireComponent } from './components/modal-require/modal-require.component';
 import { TestResultBarChartComponent } from './components/test-result-bar-chart/test-result-bar-chart.component';
+import { ModalConfirmComponent } from './components/modal-confirm/modal-confirm.component';
+import { ViewTestQuestionsComponent } from './components/view-test-questions/view-test-questions.component';
 
 @NgModule({
-  declarations: [CreateTestComponent, ViewTestComponent, DoTestComponent, TimerComponent, FinishTestComponent, ModalRequireComponent, TestResultBarChartComponent],
+  declarations: [CreateTestComponent, ViewTestComponent, DoTestComponent, TimerComponent, FinishTestComponent, ModalRequireComponent, TestResultBarChartComponent, ModalConfirmComponent, ViewTestQuestionsComponent],
   imports: [
     CommonModule,
     CoreModule,

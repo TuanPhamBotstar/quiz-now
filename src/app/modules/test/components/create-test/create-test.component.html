@@ -1,17 +1,7 @@
 <div class="create-test-container">
   <app-nav-bar [changeNavBar]="'true'" [bankId]="bankId"></app-nav-bar>
-  <div *ngIf="bank" class="create-test component-container">
-    <div class="path">
-      <a routerLink="/bank/view">Yours</a> > <a routerLink="/bank/view/{{bankId}}">{{bank.title}}</a> > New Test
-    </div>
-    <!-- <div class="bank-info">
-      <div>This bank has: </div>
-      <ul>
-        <li>{{bank.numberOfEasyQuestions}} easy questions.</li>
-        <li>{{bank.numberOfNormalQuestions}} normal questions.</li>
-        <li>{{bank.numberOfHardQuestions}} hard questions.</li>
-      </ul>
-    </div> -->
+  <div *ngIf="bank" class="create-test component-container mt-5">
+
     <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
       <div class="create-test-form">
         <div class="create-test-form-title">
@@ -42,15 +32,6 @@
             [step]="1" [showStepIndicator]="true">
           </npn-slider>
         </div>
-        <div class="input-question">
-          <div class="input-question-title">
-            Time:
-          </div>
-          <div class="input-question-number">
-            <input type="number" min="1" value="1" formControlName="time" placeholder="1">
-            minutes
-          </div>
-        </div>
         <div class="create-test-form-setting">
           <div class="create-test-form-setting__title">
             SETTING
@@ -70,6 +51,16 @@
                 *ngIf="(testFormControl.title.touched || submitted) && testFormControl.title.errors?.required">
                 Name is required
               </span>
+            </div>
+          </div>
+          <div class="input-question input-setting">
+            <div class="input-question-title">
+              Time:
+            </div>
+            &nbsp;
+            <div class="input-question-number">
+              <input type="number" min="1" value="1" formControlName="time" placeholder="1">
+              minutes
             </div>
           </div>
           <div formArrayName="requireInfo" class="require-info">
@@ -92,7 +83,7 @@
             </div>
           </div>
           <div class="input-question input-setting">
-              <input type="checkbox" id="inputKnowTheResult" class="input-checkbox" formControlName="knowTheResult">
+            <input type="checkbox" id="inputKnowTheResult" class="input-checkbox" formControlName="knowTheResult">
             &nbsp;
             <span>
               <label for="inputKnowTheResult" class="input-question-title">Candidate can see the result after

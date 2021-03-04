@@ -10,18 +10,10 @@
     </div>
   </div>
   <div *ngIf="results" class="component-container">
-    <div class="path">
-      <a routerLink="/bank/view">Yours</a> > <a routerLink="/bank/view/{{bankId}}">{{results.title}}</a> > Questions
-    </div>
 
     <app-bar-chart-bank [results]="results.results" [bankName]="results.title" class="chart">
     </app-bar-chart-bank>
 
-  <!-- <div class="table">
-    <table>
-      <th></th>
-    </table>
-  </div> -->
   </div>
 
 </div>

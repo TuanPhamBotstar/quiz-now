@@ -1,24 +1,35 @@
 <div class="result-with-test-container">
   <app-nav-bar [changeNavBar]="'true'" [levelName]="'tests'" [bankId]="idBank"></app-nav-bar>
   <div style="margin-bottom: 30px;" class="component-container">
-    <div class="path">
-      <a routerLink="/bank/view">Yours</a> > <a routerLink="/bank/view/{{bank._id}}"
-        >{{bank.title}}</a> >
-      {{test.title}}
-    </div>
     <div *ngIf="listResults.length == 0 && !isFetched">
       <app-loader></app-loader>
     </div>
-    <div style="display: flex">
-      <div class="info">
+
+    <div style="display: flex; justify-content: space-between">
+      <div style="display: flex;">
+        <button class="button-change-view py-1 px-1" (click)="getAllResultsByIdTest(30)"
+          [class.selected]="infoSelected == '1m'">1m</button>
+        <button class="button-change-view py-1 px-1" (click)="getAllResultsByIdTest(7)"
+          [class.selected]="infoSelected == '1w'">1w</button>
+        <button class="button-change-view py-1 px-1" (click)="getAllResultsByIdTest(1)"
+          [class.selected]="infoSelected == '1d'">1d</button>
+        <!-- <button class="button-change-view rounded mr-2 py-1" (click)="getAllResultsByIdTest(0)"
+          [class.selected]="infoSelected == '0'">All</button> -->
+      </div>
+    </div>
+    <div class="infos-card mb-3 mt-3 rounded">
+      <div class="info first-info">
         <div style="color: #c2c3c4; font-size: 20px">
           Users
         </div>
         <span>
           <i class="fas fa-users"></i>
-          {{totalResults || 0}}</span>
+          {{listResults.length|| 0}}</span>
         &nbsp;
         <a>+{{randomNumber1}}%</a>
+      </div>
+      <div class="line-outside">
+        <div class="line"></div>
       </div>
       <div class="info ave-score">
         <div style="color: #c2c3c4; font-size: 20px">
@@ -32,24 +43,23 @@
         <a>+{{randomNumber2}}%</a>
       </div>
     </div>
-    <div style="margin-bottom: 12px;"><a routerLink="/bank/view/{{idBank}}/test/{{idTest}}/detail" [state]="{bankTitle: bank.title, testTitle: test.title}">View detail</a></div>
-    <div style="display: flex; margin-bottom: 12px;">
-      <button class="button-change-view" (click)="getAllResultsByIdTest(30)"
-        [class.selected]="infoSelected == '1m'">1m</button>
-      <button class="button-change-view" (click)="getAllResultsByIdTest(7)"
-        [class.selected]="infoSelected == '1w'">1w</button>
-      <button class="button-change-view" (click)="getAllResultsByIdTest(1)"
-        [class.selected]="infoSelected == '1d'">1d</button>
-    </div>
-    <div *ngIf="listResults.length > 0">
-      <div *ngIf="listResults.length > 0 && test" style="display: flex" class="layout-score">
-        <div class="result-with-test" style="height: 500x">
+    <!-- <div *ngIf="listResults.length === 0 && isFetched">
+      <div class="no-data">
+        <img style=" width: 200px;
+        height: 200px;" src="../../../../../assets/imgs/no-data.svg">
+        <div style="text-align: center">No results found</div>
+      </div>
+    </div> -->
+    <div *ngIf="isFetched" [class.noResults]="listResults.length === 0">
+      <div class="layout-score px-2 rounded">
+        <div class="result-with-test">
           <div class="score-chart">
-            <app-bar-chart [idTest]="idTest" [time]="time" [resultsAreReceived]="listResults" [maxLength]="totalResults"></app-bar-chart>
+            <app-bar-chart [idTest]="idTest" [time]="time" [resultsAreReceived]="listResults"></app-bar-chart>
           </div>
         </div>
-        <div  style="height: 450px">
-          <div *ngIf="listResults.length > 0" class="rank">
+        <div
+          style="display: flex; justify-content: space-between; width: 90%; margin: 0 auto">
+          <div class="rank rounded table-striped">
             <table>
               <thead>
                 <tr>
@@ -60,23 +70,34 @@
               </thead>
               <tbody>
                 <tr *ngFor="let result of listResults.slice(0, 5); let i = index">
-                  <th scope="row">{{i + 1}}</th>
+                  <th *ngIf="i+1 === 1" scope="row"><img src="/assets/imgs/gold.svg" class="img-medal">&nbsp;{{i + 1}}
+                  </th>
+                  <th *ngIf="i+1 === 2" scope="row"><img src="/assets/imgs/silver.svg" class="img-medal">{{i + 1}}</th>
+                  <th *ngIf="i+1 === 3" scope="row"><img src="/assets/imgs/copper.svg" class="img-medal">{{i + 1}}</th>
+
+                  <th *ngIf="i+1 !== 1 && i+1 != 2 && i+1 != 3" scope="row">{{i + 1}}</th>
                   <th scope="row">{{userNames[i]}}</th>
                   <th *ngIf="scores[i] >= 0" scope="row">{{(scores[i]*10).toFixed(2)}}</th>
                 </tr>
               </tbody>
             </table>
           </div>
-          <app-pie-chart [idTest]="idTest" [time] = "time"[resultsAreReceived]="listResults"></app-pie-chart>
-
+          <div class="line-divide-table">
+            <div class="line-table"></div>
+          </div>
+          <app-pie-chart [idTest]="idTest" [time]="time" [resultsAreReceived]="listResults"></app-pie-chart>
         </div>
 
       </div>
-      <div class="right-answer-chart">
-        <app-test-result-bar-chart  [resultsAreReceived]="listResults" [test]="test" [maxLength]="totalResults">
+      <div class="right-answer-chart mt-3">
+        <app-test-result-bar-chart [resultsAreReceived]="listResults" [test]="test" [maxLength]="totalResults">
         </app-test-result-bar-chart>
       </div>
+      <div class="mt-3"></div>
       <app-line-chart [idTest]="idTest" [time]="time" [maxLength]="totalResults"></app-line-chart>
+      <!-- <div class="blur-div">
+        <span>No results</span>
+      </div> -->
     </div>
   </div>
 

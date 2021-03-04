@@ -10,8 +10,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ViewBankComponent implements OnInit {
   @HostListener('click', ['$event']) onClick($event: any) {
-    
-    this.showDropdown = !this.showDropdown
+    if (!this.showModalDelete) {
+      if (this.showDropdown) {
+        this.indexDropdown = null;
+      }
+      this.showDropdown = !this.showDropdown;
+    }
   }
   constructor(
     private bankService: BankService,
@@ -27,6 +31,7 @@ export class ViewBankComponent implements OnInit {
 
   showModalDelete: boolean = false;
   idToDelete: string = '';
+  hidePagination: boolean = false;
 
   showDropdown: boolean = false;
   indexDropdown: any = null;
@@ -60,7 +65,6 @@ export class ViewBankComponent implements OnInit {
   getPage() {
     this.bankService.getPage().subscribe((res) => {
       this.pages = res.data;
-      console.log(res);
     });
   }
   receiveSearchBanks(event: any): void {
@@ -72,11 +76,14 @@ export class ViewBankComponent implements OnInit {
       this.searchBanks = event.results;
       if (this.searchBanks.length > 0) {
         this.banks = this.searchBanks;
-      } else
+        this.hidePagination = true;
+      } else {
+        this.hidePagination = false;
         this.bankService.getBanksDataStore().subscribe((res) => {
           console.log(res);
           this.banks = res;
         });
+      }
     }
   }
   goToCreate() {
@@ -92,18 +99,23 @@ export class ViewBankComponent implements OnInit {
           this.banks = res.data;
         });
   }
-  changeStateDropdown(index: any) {
+  changeStateDropdown(index: any, e: Event) {
+    console.log(e)
     this.indexDropdown = index;
+    console.log(this.indexDropdown);
+    console.log(index);
+    e.preventDefault();
   }
   changeShowModalDelete(id: any) {
-    console.log(id);
-    console.log(this.idToDelete);
-
     this.showModalDelete = !this.showModalDelete;
+    // if (!id) this.showModalDelete = false;
     this.idToDelete = id;
+
+    console.log(id);
+    if (!id) this.showDropdown = false;
   }
   goToBankDetail(id: any) {
     this.bankService.getBankInfoStore(id);
-    this.router.navigate([`/bank/view/${id}`]);
+    this.router.navigate([`/bank/view/${id}/tests`]);
   }
 }

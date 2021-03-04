@@ -1,0 +1,26 @@
+<div class="bar-container">
+  <div class="logo " style="display:flex">
+    <div class="logo">
+      <img src="../../../assets/imgs/logo.svg">
+    </div>
+    &nbsp;
+    <div class="title">
+      Quiznow
+    </div>
+  </div>
+  <div *ngIf="changeBar" class="mode">
+    <div class="p-2" routerLink="bank/view/{{idBank}}/tests/{{idTest}}" routerLinkActive="active-link"><i class="fas fa-chart-area"></i></div>
+    <div class="p-2" routerLink="bank/view/{{idBank}}/test/{{idTest}}/detail" routerLinkActive="active-link"><i class="fas fa-table"></i></div>
+  </div>
+  <div class="ava ">
+    <div class="name py-2">
+      {{name}}
+    </div>
+    <div class="img p-2" (click)="changeStateDropdown()" style="cursor: pointer">
+      <img src="../../../assets/imgs/user.jpg">
+    </div>
+  </div>
+  <div *ngIf="showDropdown" class="dropdown rounded">
+    <div class="p-2" style="cursor: pointer" (click)="logOut()"><i class="fas fa-sign-out-alt" style="color: black"></i> Logout</div>
+  </div>
+</div>

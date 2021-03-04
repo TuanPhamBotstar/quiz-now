@@ -2,35 +2,43 @@
   <app-nav-bar [changeNavBar]="'true'" [bankId]="bankId" (emitEventCreate)="goToCreateTest()"
     (emitEventView)="goToViewQuestions()" [levelName]="'tests'"></app-nav-bar>
   <div *ngIf="bank" class="view-bank-detail component-container">
-    <div class="path">
-      <a routerLink="/bank/view">Yours</a> > {{bank ? bank.title : ""}}
-    </div>
-    <div class="list-test">
-      <div class="list-test-title">
+    <div class="list-test px-5 py-3 mt-3">
+      <div class="list-test-title px-2">
         <p>{{bank.idTests.length | count: "test"}} created</p>
         <button class="button__generate-test" (click)="goToCreateTest()">
           +
         </button>
       </div>
-      <div *ngFor="let test of listTest">
-        <div class="test-card">
-          <div class="test-card-title " (click)="goToTestDetail(test._id)">
-            <div>{{test.title}}</div>
-          </div>
-          <div class="test-card-detail">
-              <div>{{test.questions.length | count:"que"}} - <span>{{test.time | count:"min"}}</span></div>
-          </div>
-          <div class="test-card-copy">
-            <button ngxClipboard [cbContent]="test.link" (click)="showToast('Copied')">Copy link</button>
-            <!-- <p ngxClipboard [cbContent]="{{test.link}}">Copy link</p> -->
-          </div>
-        </div>
+      <div></div>
+      <div *ngIf="!listTest && !isFetched">
+        <app-loader></app-loader>
       </div>
-      <app-pagination *ngIf="pages > 0" [goRoute]="'/bank/view/'+bankId" [pageNumber]="pages"
-        (changePageEvent)="getTestByBank($event)" [currentPage]="currentPage.toString()"
-        class="pagination-fix-position"></app-pagination>
-    </div>
+      <div *ngIf="listTest" class="list-test-container">
+        <div *ngFor="let test of listTest; let i = index">
+          <div style="display: flex">
+            <div class="test-card w-100 p-2" routerLink="{{test._id}}" [class.endTestCard]="i === listTest.length - 1">
+              <div style="display: flex" class="w-100">
+                <div class="test-card-title ">
+                  <div>{{test.title}}</div>
+                </div>
+                <div class="test-card-detail">
+                  <div>({{test.questions.length | count:"que"}} - <span>{{test.time | count:"min"}})</span></div>
+                </div>
+              </div>
+              <div class="test-card-copy">
+                <button ngxClipboard [cbContent]="test.link" (click)="showToast('Copied', $event)"><i
+                    class="far fa-copy"></i></button>
+              </div>
+            </div>
+          </div>
 
+        </div>
+        <app-pagination *ngIf="pages > 0" [goRoute]="'/bank/view/'+bankId+'/tests'" [pageNumber]="pages"
+          (changePageEvent)="getTestByBank($event)" [currentPage]="currentPage.toString()"
+          class="mt-3">
+        </app-pagination>
+      </div>
+    </div>
 
   </div>
 </div>

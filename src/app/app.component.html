@@ -4,6 +4,14 @@
   <app-landing-page *ngIf="!isLogin && !isSend">
   </app-landing-page>
 
-  <router-outlet *ngIf="isLogin"></router-outlet>
+  <div *ngIf="isLogin">
+    <div >
+      <app-bar [changeBar]="changeBar" [idBank]="idBank" [idTest]="idTest"></app-bar>
+    </div>
+    <!-- <div *ngIf="!changeBar">
+      <app-bar></app-bar>
+    </div> -->
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
+  </div>
 
 </div>

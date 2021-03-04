@@ -1,51 +1,106 @@
 <div class="result-with-user-detail-container">
-  <app-nav-bar [changeNavBar]="'true'" [levelName]="'tests'"></app-nav-bar>
+  <app-nav-bar [changeNavBar]="'true'" [levelName]="'tests'" [bankId]="idBank"></app-nav-bar>
   <div class="component-container">
-    <div *ngIf="test" class="path" style="font-weight: 600">
-      <a routerLink="/bank/view">Yours</a> > <a routerLink="/bank/view/{{idBank}}">{{bankTitle}}</a> > <a
-        routerLink="/bank/view/{{idBank}}/test/{{idTest}}">{{testTitle}}</a> > <a
-        routerLink="/bank/view/{{idBank}}/test/{{idTest}}/detail">Detail</a>
+    <div *ngIf="test" class="path">
+      <a
+        routerLink="/bank/view/{{idBank}}/tests/{{idTest}}">{{testTitle}}</a> > <a
+        routerLink="/bank/view/{{idBank}}/test/{{idTest}}/detail">Detail</a> > {{result.name[0]}}
     </div>
 
-    <div class="results-container">
-      <!-- <div *ngFor="let question of test.questions; let i = index" class="question">
-      <div class="question-bar">
-        <div class="question-title"><span class="question-order">Question {{i+1}}</span>: {{question.title}}</div>
-        <div class="question-state">
-          <span style="color: #28a745; font-weight: 600" *ngIf="result.userAnswers[i].isTrue">1/1</span>
-          <span style="color: #dc3545; font-weight: 600" *ngIf="!result.userAnswers[i].isTrue">0/1</span>
+    <div *ngIf="!result && !isFetched">
+      <app-loader></app-loader>
+    </div>
+    <div *ngIf="result" class="infos">
+      <div class="info p-3">
+        <div class="title">
+          Name
+        </div>
+        <div class="value">
+          {{result.name[0]}}
         </div>
       </div>
-
-      <ul class="answers">
-        <div *ngFor="let answer of question.answers; let j = index">
-          <div>
-            <span *ngIf="answer.isTrue">
-              <img src="../../../../../assets/imgs/checkmark.png">
-              &nbsp;
-              <span>
-                <label>{{answer.title}}</label>
-              </span>
-            </span>
-            <span *ngIf="!answer.isTrue && result.userAnswers[i].answers.indexOf(answer.title) != -1">
-              <img src="../../../../../assets/imgs/wrong.png">
-              &nbsp;
-              <span>
-                <label>{{answer.title}}</label>
-              </span>
-            </span>
-            <span *ngIf="!answer.isTrue && result.userAnswers[i].answers.indexOf(answer.title) == -1">
-              <input type="radio">
-              &nbsp;
-              <span>
-                <label>{{answer.title}}</label>
-              </span>
-            </span>
-          </div>
-
+      <div class="info p-3">
+        <div class="title">
+          Score
         </div>
-      </ul>
-    </div> -->
+        <div class="value">
+          {{(result.score * 10).toFixed(2)}}
+        </div>
+      </div>
+      <div class="info p-3 info-end">
+        <div class="title">
+          Questions
+        </div>
+        <div class="value">
+          {{rightAnswers}}/{{test.questions.length}}
+        </div>
+      </div>
+    </div>
+    <div *ngIf="test && result" class="results-container mt-5">
+      <div *ngFor="let question of test.questions; let i = index" class="question p-2 rounded">
+        <div class="question-bar">
+          <div class="question-title"><span class="question-order">Question {{i+1}}</span>: {{question.title}}</div>
+          <div *ngIf="result" class="question-state">
+            <span style="color: #28a745; font-weight: 600" *ngIf="result.userAnswers[i].isTrue">&nbsp;<i class="fas fa-check"></i></span>
+            <span style="color: #dc3545; font-weight: 600" *ngIf="!result.userAnswers[i].isTrue">&nbsp;<i class="fas fa-times"></i></span>
+          </div>
+        </div>
+
+        <ul class="answers">
+          <div *ngFor="let answer of question.answers; let j = index">
+            <div *ngIf="!question.isManyAnswers">
+              <span *ngIf="answer.isTrue">
+                <span class="right-choice">
+                  <i class="fas fa-check-circle"></i>
+                </span>
+                &nbsp;
+                <span>
+                  <label>{{answer.title}}</label>
+                </span>
+              </span>
+              <span *ngIf="!answer.isTrue && result.userAnswers[i].answers.indexOf(answer.title) != -1 ">
+                <span class="wrong-choice">
+                  <i class="fas fa-times-circle"></i>
+                </span>
+                &nbsp;
+                <span>
+                  <label>{{answer.title}}</label>
+                </span>
+              </span>
+              <span *ngIf="!answer.isTrue && result.userAnswers[i].answers.indexOf(answer.title) == -1">
+                <i class="far fa-circle"></i>
+                &nbsp;
+                <label>{{answer.title}}</label>
+              </span>
+            </div>
+            <div *ngIf="question.isManyAnswers">
+              <span *ngIf="answer.isTrue">
+                <span class="right-choice">
+                  <i class="fas fa-check-square"></i>
+                </span>
+                &nbsp;
+                <span>
+                  <label>{{answer.title}}</label>
+                </span>
+              </span>
+              <span *ngIf="!answer.isTrue && result.userAnswers[i].answers.indexOf(answer.title) != -1 ">
+                <span class="wrong-choice">
+                  <i class="fas fa-times"></i>
+                </span>
+                &nbsp;
+                <span>
+                  <label>{{answer.title}}</label>
+                </span>
+              </span>
+              <span *ngIf="!answer.isTrue && result.userAnswers[i].answers.indexOf(answer.title) == -1">
+                <i class="far fa-square"></i>
+                &nbsp;
+                <label>{{answer.title}}</label>
+              </span>
+            </div>
+          </div>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

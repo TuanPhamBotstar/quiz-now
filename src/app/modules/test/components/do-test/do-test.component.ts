@@ -23,17 +23,23 @@ export class DoTestComponent implements OnInit {
     //   console.log('y: ', window.scrollY);
     //   console.log('offsetHeight: ', document.body.offsetHeight);
     // }
-    const number = Math.ceil(window.scrollY/240);
+    const number = Math.ceil(window.scrollY / 240);
     console.log(number);
-    this.testService.getOneQuestionInTest({shortId: window.location.href.slice(34), number: number}).subscribe(res => {
-      console.log(res);
-    })
+    this.testService
+      .getOneQuestionInTest({
+        shortId: window.location.href.slice(34),
+        number: number,
+      })
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 
   test: Test | any;
   isFinished: boolean = false;
   showModal: boolean = false;
   score: number = 0;
+  showModalConfirm: boolean = false;
 
   userForm: FormGroup = this.fb.group({
     info: [''],
@@ -67,18 +73,24 @@ export class DoTestComponent implements OnInit {
     this.showModal = true;
   }
   submitAnswers() {
-    console.log(this.userForm.value);
-    this.testService
-      .submitTest(Object.assign({ testId: this.test._id }, this.userForm.value))
-      .subscribe((res) => {
-        if (res.data) this.score = res.data;
-        this.isFinished = true;
-      });
+    // this.testService
+    //   .submitTest(Object.assign({ testId: this.test._id }, this.userForm.value))
+    //   .subscribe((res) => {
+    //     if (res.data) this.score = res.data;
+    //     this.isFinished = true;
+    //   });
+    this.showModalConfirm = true;
   }
   onSubmit() {
     this.submitAnswers();
   }
-
+  finishTest(e: any) {
+    if (e === false) this.showModalConfirm = false;
+    else {
+      this.score = e;
+      this.isFinished = true;
+    }
+  }
   onChoseAnswer(answer: any, i: any, type: any): void {
     if (type === 'checkbox' || this.answers.at(i).value.length === 0) {
       if (this.answers.at(i).value.indexOf(answer) === -1)

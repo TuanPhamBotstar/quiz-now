@@ -19,6 +19,7 @@ import {
   GetBankQuestions,
   GetQuestionById,
   UpdateQuestion,
+  UpdateBankById
 } from '../../store/bank/bank.actions';
 import { Question } from '../models/question';
 
@@ -51,6 +52,9 @@ export class BankService {
   deleteBank(id: any): Observable<any> {
     console.log(id);
     return this.http.delete<any>('http://localhost:3000/bank/delete/' + id);
+  }
+  updateBank(id: any, title: any): Observable<any> {
+    return this.http.post<any>('http://localhost:3000/bank/update/', {id: id, title: title})
   }
   searchBankByName(name: any, page = '1') {
     return this.http.post<any>('http://localhost:3000/bank/search/', {name: name, page: page});
@@ -97,6 +101,9 @@ export class BankService {
   }
   deleteBankStore(id: any) {
     this.store.dispatch(new DeleteBank(id));
+  }
+  updateBankStore(bank: any) {
+    this.store.dispatch(new UpdateBankById(bank))
   }
   getBankInfoStore(id: any) {
     this.store.dispatch(new GetBankById(id));

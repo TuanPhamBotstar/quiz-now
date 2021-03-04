@@ -1,8 +1,7 @@
 <div class="view-result-container">
-  <app-nav-bar></app-nav-bar>
+  <app-nav-bar [changeNavBar]="'results'"></app-nav-bar>
   <div class="view-result component-container">
-    <div class="path">Results</div>
-    <div class="info-cards">
+    <div class="info-cards mt-3">
       <div class="number-tests card">
         <a>
           Tests</a>
@@ -10,16 +9,16 @@
           <i class="fas fa-stream"></i> &nbsp;<span>{{numberOfResults}}</span>
         </div>
       </div>
-      <div class="best-score card">
-        <a>Highest score</a>
-        <div class="display: flex">
-          <i class="fas fa-futbol"></i> &nbsp;<span>{{maxScore}}</span>
-        </div>
-      </div>
       <div class="ave-score card">
         <a>Average score</a>
         <div class="display: flex">
-          <i class="fas fa-futbol"></i> &nbsp;<span>{{+((averageScore).toFixed(2)) * 10}}</span>
+          <i class="fas fa-futbol"></i> &nbsp;<span>{{+((averageScore  * 10).toFixed(2))}}</span>
+        </div>
+      </div>
+      <div class="best-score card">
+        <a>Highest score</a>
+        <div class="display: flex">
+          <i class="fas fa-futbol"></i> &nbsp;<span>{{maxScore.toFixed(2)}}</span>
         </div>
       </div>
       <div class="worst-score card">
@@ -29,25 +28,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="listResults.length === 0 && !isFetched" class="loading">
-      <app-loader></app-loader>
-    </div>
-
     <app-pie-chart-overview *ngIf="listScores.length > 0" [results]="listScores"></app-pie-chart-overview>
-
-    <div class="list-result" *ngIf="listResults.length > 0">
-      <div style="text-align: center; font-weight: bold; margin-bottom: 20px">Your results</div>
-      <table class="table">
-        <div *ngFor="let result of listResults; let i = index">
-          <app-result [result]="result" [i]="i+1 + (currentPage*1 - 1)*5" (fetched)="changeStateFetchedTest($event)">
-          </app-result>
-        </div>
-      </table>
-      <app-pagination *ngIf="pages > 0 && fetchedTest " [pageNumber]="pages" [currentPage]="currentPage.toString()"
-        [goRoute]="'/result'" (changePageEvent)="getResultsByIdUser($event)"></app-pagination>
-    </div>
-
-    <div id="scrollId" style="height: 240px"></div>
 
   </div>
 

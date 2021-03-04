@@ -11,7 +11,7 @@ export class TestResultBarChartComponent implements OnInit {
   @Input() resultsAreReceived: any;
   @Input() test: any;
   @Input() maxLength: any;
-  
+
   results: any = [];
 
   constructor() {}
@@ -30,12 +30,16 @@ export class TestResultBarChartComponent implements OnInit {
   ];
 
   ngOnChanges(changes: any) {
-    this.results = changes.resultsAreReceived.currentValue;
+    if (changes.resultsAreReceived) {
+      this.results = changes.resultsAreReceived.currentValue;
+    }
 
     this.countRightAnswers();
   }
   ngOnInit(): void {
-    this.results = this.resultsAreReceived
+    this.results = this.resultsAreReceived;
+
+    console.log(this.results);
 
     this.questions = this.test.questions;
 
@@ -44,7 +48,22 @@ export class TestResultBarChartComponent implements OnInit {
     }
 
     this.countRightAnswers();
+  }
 
+  countRightAnswers() {
+    this.barChartData[0].data = [];
+    let maxLength = 0;
+
+    for (let i = 0; i < this.questions.length; i++) {
+      let count = 0;
+      for (let result of this.results) {
+        if (result.userAnswers[i].isTrue) count++;
+      }
+      if (this.barChartData[0].data) {
+        if (count > maxLength) maxLength = count;
+        this.barChartData[0].data.push(count);
+      }
+    }
     this.barChartOptions = {
       bezierCurve: false,
       responsive: true,
@@ -55,7 +74,19 @@ export class TestResultBarChartComponent implements OnInit {
               beginAtZero: true,
               min: this.results && 0,
               stepSize: 1,
-              max: this.maxLength,
+              max: Math.ceil(1.1 * maxLength),
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Users',
+            },
+          },
+        ],
+        xAxes: [
+          {
+            scaleLabel: {
+              display: true,
+              labelString: 'Questions',
             },
           },
         ],
@@ -67,18 +98,6 @@ export class TestResultBarChartComponent implements OnInit {
         },
       },
     };
-  }
-
-  countRightAnswers() {
-    this.barChartData[0].data = [];
-    
-    for (let i = 0; i < this.questions.length; i++) {
-      let count = 0;
-      for (let result of this.results) {
-        if (result.userAnswers[i].isTrue) count++;
-      }
-      if (this.barChartData[0].data) this.barChartData[0].data.push(count);
-    }
 
     console.log(this.barChartData[0].data);
   }

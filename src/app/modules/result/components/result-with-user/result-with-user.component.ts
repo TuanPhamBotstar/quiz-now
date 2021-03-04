@@ -18,7 +18,11 @@ export class ResultWithUserComponent implements OnInit {
     private bankService: BankService,
     private testService: TestService,
     private resultService: ResultService
-  ) {}
+  ) {
+    this.getInfos();
+  }
+
+  isFetched: boolean = false;
 
   idBank: string = '';
   idTest: string = '';
@@ -35,8 +39,6 @@ export class ResultWithUserComponent implements OnInit {
   currentPage: string = '1';
 
   ngOnInit(): void {
-    this.getInfos();
-
     this.currentPage = this.route.snapshot.queryParamMap.get('page') || '1';
   }
 
@@ -62,8 +64,8 @@ export class ResultWithUserComponent implements OnInit {
       });
     }
   }
-  getResults(page:any = 1, limitItems:any = 10) {
-    this.currentPage = page + "";
+  getResults(page: any = 1, limitItems: any = 8) {
+    this.currentPage = page + '';
 
     this.resultService
       .getResultsByIdTestAndPage({
@@ -72,9 +74,11 @@ export class ResultWithUserComponent implements OnInit {
         limitItems: limitItems || 10,
       })
       .subscribe((res) => {
-        console.log(res);
         this.results = res.data;
+        console.log(this.results);
         this.pages = res.pages;
+
+        this.isFetched = true;
       });
   }
   convertNumber(n: number) {

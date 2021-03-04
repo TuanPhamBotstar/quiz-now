@@ -3,8 +3,8 @@
 }
 
 input[type="radio"] {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
 }
 
 .question-bar {
@@ -19,13 +19,11 @@ input[type="radio"] {
 
 .question {
   width: 100%;
-  padding: 10px;
   margin: 0 auto;
-  font-size: 24px;
+  font-size: 16px;
   background: #FFFFFF;
   box-shadow: 0px 10px 70px -30px #C4C4C4;
-  margin-top: 10px;
-  border-radius: 12px;
+  border-radius: 4px;
 }
 
 .title {
@@ -45,22 +43,28 @@ input[type="radio"] {
   display: flex;
   margin: 0 auto;
   text-align: center;
+  width: 100%;
+  justify-content: space-between;
+  background-color: white;
 }
 .info {
-  font-size:20px;
-  width: 20%;
-  margin-right: 12px;
-  padding: 30px 16px;
-  background: white;
-  box-shadow: 0px 10px 70px -30px #c4c4c4;
+  width: 100%;
+  text-align: left;
+  padding: 1rem;
   border-radius: 8px;
+  border-right: 3px solid #F3f6f9
 }
 .info-title {
-  font-size: 24px;
+  font-size: 16px;
+  color: #181919
 }
 .info .number {
   text-align: center;
-  font-size: 36px;
+  font-size: 20px;
+  font-weight: 600
+}
+.info .text {
+  font-size: 20px
 }
 .choices {
   padding: 10px;
@@ -90,5 +94,9 @@ button:hover {
   font-weight: 600;
 }
 input[type="checkbox"] {
-  transform: scale(1.5)
+  width: 16px;
+  height: 16px;
+}
+.answers {
+  margin-bottom: 0;
 }

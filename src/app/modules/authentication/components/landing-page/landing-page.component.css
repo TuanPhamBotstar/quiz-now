@@ -63,13 +63,12 @@
 
 .main-div-login,
 .main-div-register {
-  margin-top: 80px;
   display: flex;
   justify-content: space-between;
 }
 
-.main-div-register {
-  margin-top: 60px;
+.main-div-login {
+  margin-top: 5rem;
 }
 
 .image__dot-1 {

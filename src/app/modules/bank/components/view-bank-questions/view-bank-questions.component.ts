@@ -3,7 +3,7 @@ import { BankService } from '../../services/bank.service';
 
 import { Question } from '../../models/question';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-view-bank-questions',
@@ -22,6 +22,8 @@ export class ViewBankQuestionsComponent implements OnInit {
 
   questionsObserver: any;
 
+  selectedQuestion: any;
+
   bankId: string | any;
   questions: Question[] = [];
   bankName: string | any;
@@ -32,6 +34,7 @@ export class ViewBankQuestionsComponent implements OnInit {
   showModalAdd: boolean = false;
   showModalModify: boolean = false;
   hidePagination: boolean = false;
+
   isFetched: boolean = false;
 
   link: any;
@@ -52,6 +55,12 @@ export class ViewBankQuestionsComponent implements OnInit {
     level: [''],
     answers: this.fb.array([]),
   });
+  get answers() {
+    return this.questionForm.controls.answers as FormArray;
+  }
+  get answersFormGroup() {
+    return this.answers.controls as FormGroup[];
+  }
   openModal() {
     this.showModalAdd = true;
   }
@@ -97,16 +106,17 @@ export class ViewBankQuestionsComponent implements OnInit {
     this.getPage();
     this.currentPage = page;
 
-    this.questionsObserver = this.bankService.getQuestionsDataStore().subscribe((res) => {
-      console.log(res);
+    this.questionsObserver = this.bankService
+      .getQuestionsDataStore()
+      .subscribe((res) => {
+        console.log(res);
 
-      if (res.length === 0 && !this.isFetched) {
-        this.bankService.getBankQuestionsStore(this.bankId, page);
-        this.isFetched = true;
-      }
-      this.questions = res;
-    })
-
+        if (res.length === 0 && !this.isFetched) {
+          this.bankService.getBankQuestionsStore(this.bankId, page);
+          this.isFetched = true;
+        }
+        this.questions = res;
+      });
   }
   closeModal(): void {
     this.showModalAdd = false;
@@ -123,8 +133,10 @@ export class ViewBankQuestionsComponent implements OnInit {
       this.getBankQuestions(this.currentPage);
     }
   }
-  goToQuestion(id: any) {
-    this.questionId = id;
+  goToQuestion(question: any) {
+    this.selectedQuestion = question;
+    console.log(question);
+    this.questionId = question._id;
     this.showModalModify = true;
 
     // this.router.navigate([`/bank/question/${id}`]);

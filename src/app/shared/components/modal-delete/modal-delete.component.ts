@@ -13,9 +13,6 @@ export class ModalDeleteComponent implements OnInit {
   @Output() emitGoBack = new EventEmitter<boolean>();
   constructor(private bankService: BankService) {}
 
-  ngOnChanges(changes: any) {
-    console.log(changes);
-  }
   ngOnInit(): void {}
 
   deleteBank(id: any) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TestService } from 'src/app/modules/test/services/test.service';
 import { ResultService } from '../../services/result.service';
 
@@ -12,6 +12,8 @@ import { BankService } from 'src/app/modules/bank/services/bank.service';
   styleUrls: ['./result-with-test.component.css'],
 })
 export class ResultWithTestComponent implements OnInit {
+  @Output() eventChangeBar = new EventEmitter<boolean>();
+
   constructor(
     private resultService: ResultService,
     private location: Location,
@@ -19,7 +21,10 @@ export class ResultWithTestComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private bankService: BankService
-  ) {}
+  ) {
+    this.idBank = this.route.snapshot.paramMap.get('idBank') + '';
+    this.idTest = this.route.snapshot.paramMap.get('id') + '';
+  }
 
   randomNumber1: any = (Math.random() * 10).toFixed(2);
   randomNumber2: any = (Math.random() * 10).toFixed(2);
@@ -45,8 +50,7 @@ export class ResultWithTestComponent implements OnInit {
   infoSelected: string = '1w';
 
   ngOnInit(): void {
-    this.idBank = location.pathname.slice(11, 35);
-    this.idTest = location.pathname.slice(41, 65);
+    this.eventChangeBar.emit(true);
 
     this.getTest();
     this.getBank();
@@ -55,7 +59,7 @@ export class ResultWithTestComponent implements OnInit {
   }
   getAllResultsByIdTest(time = 7) {
     this.time = time;
-    
+
     this.scores = [];
     this.userNames = [];
 
@@ -65,6 +69,9 @@ export class ResultWithTestComponent implements OnInit {
         break;
       case 30:
         this.infoSelected = '1m';
+        break;
+      case 0:
+        this.infoSelected = '0';
         break;
       default:
         this.infoSelected = '1d';
@@ -76,27 +83,24 @@ export class ResultWithTestComponent implements OnInit {
       .subscribe((res) => {
         console.log(res);
         this.totalResults = res.totalResults;
-        this.listResults = res.data.sort((a: any, b: any) => b.score - a.score);
+        this.listResults = res.data;
 
         console.log(this.listResults);
 
         for (let result of this.listResults) {
-          // console.log(result.score);
           this.scores.push(result.score);
-          this.resultService
-            .getUserNameByIdUser(result.idUser)
-            .subscribe((res) => {
-              this.userNames.push(res.name);
-            });
+          this.userNames.push(result.user);
         }
 
         firstFetched.unsubscribe();
 
-        this.averageScore =
-          +(
-            this.scores.reduce((a, b) => a + b, 0) / this.scores.length
-          ).toFixed(2) * 10;
-        this.averageScore = this.averageScore.toFixed(2);
+        if (this.scores.length > 0) {
+          this.averageScore =
+            +(
+              this.scores.reduce((a, b) => a + b, 0) / this.scores.length
+            ).toFixed(2) * 10;
+          this.averageScore = this.averageScore.toFixed(2);
+        } else this.averageScore = 0;
 
         this.isFetched = true;
       });

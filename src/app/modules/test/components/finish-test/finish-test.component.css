@@ -1,6 +1,23 @@
-.container {
-    margin-top: 80px;
-}
 .score {
+  font-size: 24px;
+}
+
+div {
+  outline: none;
+}
+.noti-title {
     font-size: 36px;
+    font-weight: 600
+}
+.noti {
+  display: flex;
+  height: 80vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.img img{
+    width: 400px;
+    height: 400px;
 }

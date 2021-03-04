@@ -26,6 +26,9 @@ export class NavBarComponent implements OnInit {
   showLogOutDropdown: boolean = false;
   showModalDelete: boolean = false;
   showConfigDropdown: boolean = false;
+  showModalConfig: boolean = false;
+
+  showBar: boolean = true;
 
   goHome() {
     this.router.navigate(['/home']);
@@ -34,9 +37,11 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['/bank/view'], { queryParams: { page: '1' } });
   }
   goResult() {
-    this.router.navigate(['/result'], { queryParams: { page: '1' } });
+    this.router.navigate(['/result/dashboard'], { queryParams: { page: '1' } });
   }
-
+  goToConfig() {
+    this.router.navigate([`/bank/config/${this.bankId}`])
+  }
   changeConfigDropdown() {
     this.showConfigDropdown = !this.showConfigDropdown;
   }
@@ -44,17 +49,14 @@ export class NavBarComponent implements OnInit {
   changeStateShowLogOut() {
     this.showLogOutDropdown = !this.showLogOutDropdown;
   }
-  logOut() {
-    localStorage.clear();
-    window.location.reload();
-  }
+
   emitDeleteBank() {
     this.emitEventDelete.emit(true);
     this.currentLink = 'delete';
   }
 
   goToViewTests() {
-    this.router.navigate([`/bank/view/${this.bankId}`]);
+    this.router.navigate([`/bank/view/${this.bankId}/tests`]);
   }
   goToCreateTest() {
     this.currentLink = 'create';
@@ -66,24 +68,31 @@ export class NavBarComponent implements OnInit {
     this.router.navigate([`/bank/view/${this.bankId}/questions`]);
   }
   goToDashboard() {
-    this.router.navigate([`/bank/dashboard/${this.bankId}`]);
+    this.router.navigate([`/bank/view/${this.bankId}/dashboard`]);
+  }
+  
+  openModalConfig() {
+    this.showModalConfig = true;
   }
   openModal() {
     this.showModalDelete = true;
   }
+  closeModalConfig() {
+    this.showModalConfig = false;
+  }
   closeModal() {
     this.showModalDelete = false;
+  }
+  changeStateModalConfig() {
+    this.showModalConfig = !this.showModalConfig
+  }
+  changeStateBar(state: boolean) {
+    this.showBar = state;
   }
   goBack(e: any) {
     if (e) this._location.back();
   }
-  // deleteBank(id: any) {
-  //   console.log(id);
-  //   if (id) {
-  //     this.bankService.deleteBankStore(id);
-  //     this._location.back();
-  //   } else this.showModalDelete = false;
-  // }
+
   ngOnInit(): void {
     this.currentLink = window.location.href.slice(22);
   }

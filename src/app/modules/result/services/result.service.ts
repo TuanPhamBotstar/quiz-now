@@ -13,10 +13,10 @@ export class ResultService {
   constructor(private http: HttpClient, private store: Store<AppState>) {}
 
   getPage(): Observable<any> {
-    return this.http.get<any>('http://localhost:3000/result/page')
+    return this.http.get<any>('http://localhost:3000/result/page');
   }
   getResultsDataStore(): Observable<any> {
-    return this.store.select(getResultsUser)
+    return this.store.select(getResultsUser);
   }
   getResultsByIdUser(page: any): Observable<any> {
     return this.http.get<any>('http://localhost:3000/result/user/' + page);
@@ -28,35 +28,46 @@ export class ResultService {
     return this.http.get<any>('http://localhost:3000/result/id/' + id);
   }
   getResultsByIdTestAndIdUser(info: any) {
-    console.log(info)
-    return this.http.get<any>(`http://localhost:3000/result/test/${info.idTest}/user/${info.idUser}`);
+    return this.http.get<any>(
+      `http://localhost:3000/result/test/${info.idTest}/user/${info.idUser}`
+    );
   }
   getResultsByIdTestAndPage(info: any): Observable<any> {
-    return this.http.get<any>(`http://localhost:3000/result/test/${info.id}/${info.page}/${info.limitItems}`);
+    return this.http.get<any>(
+      `http://localhost:3000/result/test/${info.id}/page/${info.page}/${info.limitItems}`
+    );
   }
-  getResultsByIdTest(info: any):Observable<any> {
+  getResultsByIdTest(info: any): Observable<any> {
     return this.http.post<any>('http://localhost:3000/result/test/', info);
   }
-  
+
   getResultsAndAnalyze(): Observable<any> {
     return this.http.get<any>('http://localhost:3000/result/analyze');
   }
   analyzeWithScore(info: any, time: any): Observable<any> {
-    return this.http.get<any>(`http://localhost:3000/result/analyze/score/${info}/${time}` );
+    return this.http.get<any>(
+      `http://localhost:3000/result/analyze/score/${info}/${time}`
+    );
   }
   analyzeScoreWithPieChart(info: any, time: any): Observable<any> {
-    return this.http.get<any>(`http://localhost:3000/result/analyze/score/pie/${info}/${time}`);
+    return this.http.get<any>(
+      `http://localhost:3000/result/analyze/score/pie/${info}/${time}`
+    );
   }
-  analyzeTimeWithLineChart(info: any, time: any):Observable<any> {
-    return this.http.get<any>(`http://localhost:3000/result/analyze/score/line/${info}/${time}`);
+  analyzeTimeWithLineChart(info: any, time: any): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:3000/result/analyze/score/line/${info}/${time}`
+    );
   }
   analyzeWithBankId(bankId: any): Observable<any> {
-    return this.http.get<any>('http://localhost:3000/result/analyze/bank/' + bankId)
-  }
+    return this.http.get<any>(
+      'http://localhost:3000/result/analyze/bank/' + bankId
+    );
+  } 
   getResultsByIdUserStore(page: any) {
     this.store.dispatch(new GetAllResults(page));
   }
-  getUserNameByIdUser(id: any) : Observable<any> {
+  getUserNameByIdUser(id: any): Observable<any> {
     return this.http.get<any>('http://localhost:3000/result/user/name/' + id);
   }
 }

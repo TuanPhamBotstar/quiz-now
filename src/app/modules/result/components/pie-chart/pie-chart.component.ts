@@ -29,21 +29,38 @@ export class PieChartComponent implements OnInit {
   goodStudent: number = 0;
   excellentStudent: number = 0;
 
-  public pieChartOptions: ChartOptions = {
+  tmpData: any = [];
+
+  pieChartOptions: ChartOptions = {
+    maintainAspectRatio: true,
     responsive: true,
     plugins: {
       labels: {
         render: 'percentage',
         fontColor: ['green', 'white', 'red'],
-        precision: 2,
+        precision: 0,
+      },
+      datalabels: {
+        color: 'white',
       },
     },
+    title: {
+      text: 'Score ratio',
+      display: true,
+      fontSize: 16,
+      position: 'bottom'
+    },
   };
-  public pieChartLabels: Label[] = ['Weak', 'Average', 'Good', 'Excellent'];
-  public pieChartData: SingleDataSet = [0, 0, 0, 0];
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartPlugins = [];
+  pieChartLabels: Label[] = ['Weak', 'Average', 'Good', 'Excellent'];
+  pieChartData: SingleDataSet = [1, 1, 1, 1];
+  pieChartType: ChartType = 'pie';
+  pieChartLegend = true;
+  pieChartPlugins = [];
+  chartColors: Array<any> = [
+    {
+      backgroundColor: ['#1E81A2', '#16607A', '#3DF0BB', '#09BB9F'],
+    },
+  ];
 
   constructor(private resultService: ResultService) {
     monkeyPatchChartJsTooltip();
@@ -51,26 +68,36 @@ export class PieChartComponent implements OnInit {
   }
 
   ngOnChanges(changes: any) {
-    console.log('ha');
     if (this.resultObserver) this.resultObserver.unsubscribe();
-  
+
     this.getLabels();
   }
   getLabels() {
     this.shouldRender = false;
-    
+
+    this.pieChartData = [];
+
+    this.tmpData = [];
+
     this.resultObserver = this.resultService
       .analyzeScoreWithPieChart(this.idTest, this.time + '')
       .subscribe((res) => {
-        console.log(res);
-        const sum = res.data.reduce((total: any, first:any) => {
-          return total + first.count;
-        }, 0)
+        if (res.data.length > 0) {
+          const sum = res.data.reduce((total: any, first: any) => {
+            return total + first.count;
+          }, 0);
 
-        for (let data of res.data) {
-          this.pieChartData[data._id] = (+(data.count/sum).toFixed(3))*100;
+          for (let data of res.data) {
+            this.tmpData[data._id] = +((data.count / sum) * 100).toFixed(2);
+          }
+
+          for (let i = 0; i < 4; i++) {
+            if (!this.tmpData[i]) this.tmpData[i] = 0;
+          }
+
+          if (this.tmpData) this.pieChartData = this.tmpData;
+          this.shouldRender = true;
         }
-        this.shouldRender = true;
       });
   }
   ngOnInit(): void {

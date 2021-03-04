@@ -15,32 +15,31 @@ button {
   color: white;
 }
 
+div {
+  outline: none;
+}
+
 .list-test {
-  width: 1027px;
-  height: 564px;
-  padding: 15px 30px;
-  margin-left: 240px;
+  width: 90%;
   background-color: white;
 
   background: #FFFFFF;
   box-shadow: 0px 0px 70px -30px #C4C4C4;
-  border-radius: 32px;
+  border-radius: 8px;
   margin: 0 auto;
 }
 
-.pagination {
-  position: absolute;
-  bottom: 2%;
+.list-test-container {
+  height: 95%;
 }
 
 .list-test-title {
   font-family: PoppinsLight;
   font-style: normal;
+  font-size: 16px;
   font-weight: 600;
-  font-size: 24px;
   line-height: 48px;
   display: flex;
-
 }
 
 .button__generate-test {
@@ -61,68 +60,51 @@ button {
 }
 
 .test-card {
-  /* position: relative; */
   margin: 0 auto;
-
-  margin-bottom: 10px;
+  cursor: pointer;
   display: flex;
-  justify-content: space-between;
-  width: 927px;
   height: 71px;
 
   background: #FFFFFF;
-  box-shadow: 0px 10px 70px -30px #C4C4C4;
-  border-radius: 32px;
+  border-bottom: 1px solid lightgrey
 }
-
+.test-card:hover {
+  /* box-shadow: inset 0 1px 1px rgb(0 0 0 / 1%), 0 0 8px rgb(34 139 230 / 50%); */
+  border-bottom: 2px solid rgb(34 139 230 / 50%);
+}
 .test-card-title {
-  margin-left: 20px;
-  cursor: pointer;
-  flex-basis: 200px;
-
+  /* flex-basis: 200px; */
   display: flex;
   align-items: center;
   font-family: PoppinsBlack;
   font-style: normal;
-  font-weight: 600;
   font-size: 16px;
   line-height: 24px;
 
   color: #000000;
 }
 
-.list-test-title {
-  margin-bottom: 20px;
-}
 
 .test-card-detail {
   flex-basis: 180px;
-  
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: PoppinsBlack;
   font-style: normal;
-  font-weight: 600;
   font-size: 16px;
-  flex-basis: 200px;
   line-height: 24px;
 }
 
-.test-card-detail div {
-  color: #759AF1;
+.test-card-detail {
+  color: #bbc0c1;
+  font-style: italic;
 }
-
-.test-card-detail div span {
-  color: #2D2D2D;
-  font-weight: 400;
-}
-
 .test-card-copy {
   display: flex;
   justify-content: center;
   align-items: center;
-
+  float: right; 
 }
 
 .test-card-copy button {
@@ -141,4 +123,19 @@ button {
 
 .test-card-copy button:hover {
   color: #0F993E;
+}
+.endTestCard {
+  border: 0;
+}
+@media screen and (max-width: 601px) {
+
+  .test-card-title,
+  .test-card-detail {
+    font-size: 12px;
+  }
+
+  .list-test-title {
+    font-size: 16px;
+  }
+
 }

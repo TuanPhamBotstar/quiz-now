@@ -29,6 +29,7 @@ export class DetailResultComponent implements OnInit {
       if (results) {
         for (let result of results) {
           if (result._id === this.resultId) {
+            console.log(result)
             this.result = result;
             console.log(this.result);
             this.getTest(this.result.idTest);
@@ -40,6 +41,7 @@ export class DetailResultComponent implements OnInit {
             .getResultsByIdResult(this.resultId)
             .subscribe((res) => {
               if (res) {
+                console.log(res);
                 this.result = res.data;
                 this.getTest(this.result.idTest);
               }

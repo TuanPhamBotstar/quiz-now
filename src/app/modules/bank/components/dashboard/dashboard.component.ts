@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { ResultService } from 'src/app/modules/result/services/result.service';
@@ -12,7 +13,8 @@ import { BankService } from '../../services/bank.service';
 export class DashboardComponent implements OnInit {
   constructor(
     private resultService: ResultService,
-    private bankService: BankService
+    private bankService: BankService,
+    private route: ActivatedRoute
   ) {}
 
   bankId: string = '';
@@ -23,7 +25,7 @@ export class DashboardComponent implements OnInit {
   isFetched: boolean = false;
   
   ngOnInit(): void {
-    this.linkId = window.location.href.slice(37, 37 + 24);
+    this.linkId = this.route.snapshot.paramMap.get('id') + "";
 
     this.getBankId();
     this.getResults();

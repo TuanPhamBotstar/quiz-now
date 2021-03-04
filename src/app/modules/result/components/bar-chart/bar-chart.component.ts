@@ -19,15 +19,15 @@ export class BarChartComponent implements OnInit {
   resultObserver: any;
 
   maxScore: number = 0;
-  public barChartOptions: ChartOptions | any;
+  barChartOptions: ChartOptions | any;
 
-  public barChartLabels: Label[] = [];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-  public barChartPlugins = [];
+  barChartLabels: Label[] = [];
+  barChartType: ChartType = 'bar';
+  barChartLegend = true;
+  barChartPlugins = [];
 
-  public barChartData: ChartDataSets[] = [{ data: [], label: 'Users' }];
-  public barChartColor: Color[] = [
+  barChartData: ChartDataSets[] = [{ data: [], label: 'Users' }];
+  barChartColor: Color[] = [
     {
       backgroundColor: '#568fc7',
     },
@@ -42,34 +42,59 @@ export class BarChartComponent implements OnInit {
     this.getLabels();
   }
   getLabels() {
-    this.resultObserver = this.resultService.analyzeWithScore(this.idTest, this.time + "").subscribe((res) => {
-      this.barChartLabels = res.data.map((result : any) => result._id)
-      this.barChartData[0].data = res.data.map((result: any) => result.count);
-    });
+    this.resultObserver = this.resultService
+      .analyzeWithScore(this.idTest, this.time + '')
+      .subscribe((res) => {
+        console.log(res);
 
+        this.barChartLabels = res.data.map((result: any) => result._id);
+        
+        this.barChartData[0].data = res.data.map((result: any) => result.count);
+
+        this.maxLength = Math.max(...res.data.map((r: any) => r.count)) + 1
+        
+
+        this.barChartOptions = {
+          responsive: true,
+          plugins: {
+            datalabels: {
+              algin: 'end',
+              color: 'white',
+            },
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                  min: this.results && 0,
+                  stepSize: 1,
+                  max: this.maxLength,
+                },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Users',
+                },
+              },
+            ],
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Scores',
+                },
+              },
+            ],
+          },
+          title: {
+            display: true,
+            text: 'Score spectrum',
+            fontSize: 20,
+          },
+        };
+      });
   }
   ngOnInit(): void {
     this.getLabels();
-    this.barChartOptions = {
-      responsive: true,
-      plugins: {
-        datalabels: {
-          algin: 'end',
-          color: 'white',
-        },
-      },
-      scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true,
-              min: this.results && 0,
-              stepSize: 1,
-              max: this.maxLength,
-            },
-          },
-        ],
-      },
-    };
   }
 }

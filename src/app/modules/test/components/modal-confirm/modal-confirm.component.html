@@ -1,0 +1,9 @@
+<div *ngIf="showModalConfirm" class="modal-confirm">
+  <div class="modal-content rounded">
+    <div class="modal-title mb-4">Finish ?</div>
+    <div class="button-choice">
+      <button class="button-yes" (click)="closeModal()">Discard</button>
+      <button class="button-no" (click)="submitAnswers()">Finish</button>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,8 @@
-<div class="chart" style="display: block;" >
-  <div style="font-weight: 800; font-size: 24px;">Right answers statistics</div>
+<div class="chart rounded p-3 w-100; " style="display: block;position: relative">
+  <div style="font-weight: 800; font-size: 16px;">Right answers statistics</div>
   <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-    [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColor" height="100" width="400">
+    [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColor"
+    height="80" width="400">
   </canvas>
+
 </div>

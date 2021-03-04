@@ -1,3 +1,99 @@
 .result-with-user-detail-container {
-    display: flex;
+  display: flex;
+}
+
+input[type="radio"] {
+  width: 24px;
+  height: 24px;
+}
+
+.question-bar {
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+.question-order {
+  font-weight: 600;
+  font-style: underline;
+}
+
+.question {
+  width: 100%;
+  margin: 0 auto;
+  background: #FFFFFF;
+  box-shadow: 0px 10px 70px -30px #C4C4C4;
+  margin-top: 10px;
+}
+
+.detail {
+  display: flex;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.choices {
+  padding: 10px;
+  background: #f6d9d8;
+  color: white;
+
+}
+
+.trueAnswer {
+  color: green;
+  font-family: PoppinsBlack;
+}
+
+.trueBox {
+  background: #0F993E;
+}
+
+button {
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: rgba(0, 0, 0, .6);
+}
+
+button:hover {
+  color: green;
+  font-weight: 600;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.5)
+}
+
+.infos {
+  display: flex;
+  justify-content: space-between
+}
+
+.info {
+  background: #fff;
+  width: 100%;
+  border-right: 5px solid #F3f6f9
+}
+
+.info-end {
+  border-right: 0;
+}
+
+.title {
+  font-size: 16px;
+  color: #c3c4c5;
+}
+
+.value {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.right-choice {
+    color: #56A957;
+}
+.wrong-choice {
+    color: #DF0202
+}
+.answers {
+  margin-bottom: 0;
 }

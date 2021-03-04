@@ -10,7 +10,7 @@ input {
 }
 
 .create-test-form {
-  width: 823px;
+  width: 80%;
   /* margin-left: 120px; */
   margin: 0 auto;
   padding-bottom: 32px;
@@ -78,12 +78,13 @@ input {
   height: 48px;
   background-color: #fff;
   font-weight: bold;
+  text-align: center;
 }
 
 .create-test-form-setting {
   margin: 0 auto;
 
-  width: 728px;
+  width: 80%;
 
   background: #FFFFFF;
   box-shadow: 0px 0px 70px -30px #C4C4C4;

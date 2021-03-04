@@ -73,10 +73,10 @@ export class PieChartOverviewComponent implements OnInit {
       this.weakScore + this.averageScore + this.goodScore + this.excellentScore;
 
     this.pieChartData = [
-      (+(this.weakScore / sum).toFixed(2) * 100),
-      +(this.averageScore / sum).toFixed(2) * 100,
-      +(this.goodScore / sum).toFixed(2) * 100,
-      Math.round(+(this.excellentScore / sum).toFixed(2) * 100),
+      (+(this.weakScore / sum * 100).toFixed(2)),
+      +(this.averageScore / sum * 100).toFixed(2),
+      +(this.goodScore / sum * 100).toFixed(2),
+      +(this.excellentScore / sum * 100).toFixed(2),
     ];
     
     console.log(this.excellentScore);

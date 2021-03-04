@@ -1,0 +1,61 @@
+button {
+  outline: none;
+  border: 0;
+}
+.name {
+  color: black;
+}
+.modal-confirm {
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .3)
+}
+
+.modal-content {
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: 35%;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 400px;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-family: PoppinsBlack;
+}
+
+.modal-detail {
+  font-size: 14px;
+  color: rgba(0, 0, 0, .6)
+}
+
+.button-choice {
+  display: flex;
+  justify-content: space-around
+}
+
+.button-yes {
+  width: 68px;
+  color: rgba(0, 0, 0, .5);
+  background: #fff;
+  border: 3px solid red;
+  border-radius: 14px;
+}
+
+.button-no {
+  width: 68px;
+  color: black;
+  background: #fff;
+  border: 3px solid green;
+  border-radius: 14px;
+}

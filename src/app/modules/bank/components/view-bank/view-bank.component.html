@@ -1,10 +1,7 @@
 <div class="view-bank-container">
   <app-nav-bar></app-nav-bar>
   <div class="view-bank component-container">
-    <div class="path">
-      Yours
-    </div>
-    <div style="display: flex;padding: 0" class="container">
+    <div style="display: flex;padding: 0" class="container mt-3">
       <app-search-bank (eventSearchResults)="receiveSearchBanks($event)"></app-search-bank>
     </div>
 
@@ -15,8 +12,8 @@
     <div class="container" *ngIf="banks.length === 0 && isFetched" style="margin-top: 20px">
       <div class="row">
         <div class="col-md-3 mb-3">
-          <div class="bank create-div">
-            <div (click)="goToCreate()"><i class="fas fa-plus"></i> <br>New bank</div>
+          <div class="bank create-div" (click)="goToCreate()">
+            <div ><i class="fas fa-plus"></i> <br>New bank</div>
           </div>
         </div>
       </div>
@@ -24,16 +21,16 @@
 
     <div class="list-banks container" *ngIf="banks.length > 0">
       <div class="row">
-        <div class="col-md-3 mb-3">
-          <div class="bank create-div">
-            <div (click)="goToCreate()"><i class="fas fa-plus"></i> <br>New bank</div>
+        <div class="col-md-3 mb-3" *ngIf="!hidePagination">
+          <div class="bank create-div" (click)="goToCreate()">
+            <div ><i class="fas fa-plus"></i> <br>New bank</div>
           </div>
         </div>
 
-        <div *ngFor="let bank of banks; let i = index" class="col-md-3 mb-3">
-          <div class="bank">
+        <div *ngFor="let bank of banks; let i = index" class="col-md-3 mb-4">
+          <div class="bank" >
             <div style="text-align: right; padding: 0px 8px; position: relative">
-              <span style="cursor: pointer" (click)="changeStateDropdown(i)"><i id="{{i}}"
+              <span style="cursor: pointer" (click)="changeStateDropdown(i, $event)"><i id="{{i}}"
                   class="fas fa-ellipsis-h"></i>
               </span>
             </div>
@@ -64,8 +61,9 @@
       </div>
 
       <app-modal-delete [bankId]="idToDelete" [showModalDelete]="showModalDelete"
-        (emitCloseModal)="changeShowModalDelete('')"></app-modal-delete>
+        (emitShowModal)="changeShowModalDelete($event)"></app-modal-delete>
     </div>
-    <app-pagination *ngIf="pages != 0" [goRoute]="'/bank/view'" [pageNumber]="pages"
+    <app-pagination *ngIf="pages != 0 && !hidePagination" [goRoute]="'/bank/view'" [pageNumber]="pages"
       (changePageEvent)="getBanks($event)" [currentPage]="currentPage.toString()"></app-pagination>
+
   </div>

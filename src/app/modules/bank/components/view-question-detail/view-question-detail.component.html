@@ -1,9 +1,9 @@
- <div style="width: 50%; margin: 0 auto">
+ <div style="width: 80%;margin: 0 auto" >
    <!-- <app-nav-bar [changeNavBar]="'true'" [levelName]="'questions'"></app-nav-bar> -->
    <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="form-question" [class.deleted]="isDeleted">
      <div class="question__title">
        <label>Question:</label>
-       <input type="text" formControlName="title">
+       <input type="text" formControlName="title" placeholder="Input question">
      </div>
      <div class="question__level">
        <label for="level">Level: &nbsp;</label>
@@ -14,15 +14,25 @@
        </select>
      </div>
      <div formArrayName="answers" class="form-answers">
-       <div *ngFor="let answer of answersFormGroup">
-         <div [formGroup]="answer">
-           <label style="font-size: 8px"><i class="fas fa-circle"></i>&nbsp;</label>
-           <input type="text" formControlName="title">
-           <input type="checkbox" formControlName="isTrue">
+       <div *ngFor="let answer of answersFormGroup; let i = index">
+         <div [formGroup]="answer" style="display: flex; flex-direction: row">
+           <div style="display: flex; justify-content: center; align-items: center">
+             <input type="checkbox" formControlName="isTrue">
+           </div>
+           &nbsp;
+           <div style="width: 100%;">
+             <input type="text" formControlName="title">
+           </div>
+           <div>
+            <span (click)="remove(i, $event)">
+              <i style="cursor: pointer" class="far fa-trash-alt"></i>
+            </span>
+          </div>
          </div>
        </div>
+      <div class="add-answer"(click)="addAnswer()">+ Answer</div>
      </div>
-     <button type="submit">Save</button>
+     <button type="submit" class="p-2 mt-2">Save</button>
      <div class="button__delete (click)" (click)="deleteQuestion()">{{!isDeleted ? "Delete" : "Cancel"}}</div>
 
    </form>

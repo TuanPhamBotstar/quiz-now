@@ -18,8 +18,9 @@ export class ViewBankDetailComponent implements OnInit {
   listTest: Test[] | any = [];
   pages: number = 0;
   currentPage: string = '1';
+  
   showModalDelete: boolean = false;
-
+  isFetched: boolean = false;
   reFetch: boolean = false;
   flagEmpty: boolean = false;
   flagNonEmpty: boolean = false;
@@ -44,25 +45,17 @@ export class ViewBankDetailComponent implements OnInit {
       this.pages = res.data;
     });
   }
-  showToast(string: any) {
+  showToast(string: any, e: any) {
     this.toastManagementService.show(string, {
       classname: 'bg-success text-light',
       delay: 5000,
     });
+    e.stopPropagation();
+
   }
   goToTestDetail(id: any) {
-    this.router.navigate([`/bank/view/${this.bankId}/test/${id}`]);
+    this.router.navigate([`/bank/view/${this.bankId}/tests/${id}`]);
   }
-  // openModal() {
-  //   this.showModalDelete = true;
-  // }
-  // deleteBank(id: any) {
-  //   console.log(id);
-  //   if (id) {
-  //     this.bankService.deleteBankStore(id);
-  //     this._location.back();
-  //   } else this.showModalDelete = false;
-  // }
   getBankId() {
     this.bankService.getOneBankDataStore().subscribe((res) => {
       console.log(res);

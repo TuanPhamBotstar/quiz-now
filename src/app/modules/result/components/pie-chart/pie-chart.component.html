@@ -1,11 +1,5 @@
-<div *ngIf="shouldRender" class="chart" style="display: block;">
-    <canvas baseChart 
-      [data]="pieChartData" 
-      [labels]="pieChartLabels" 
-      [chartType]="pieChartType"
-      [options]="pieChartOptions"
-      [plugins]="pieChartPlugins"
-      [legend]="pieChartLegend">
-    </canvas>
-  </div>
-  
+<div class="chart rounded p-2 h-100 w-100" style="display: block;">
+  <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" width="500" height="200"
+    [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend" [colors]="chartColors">
+  </canvas>
+</div>

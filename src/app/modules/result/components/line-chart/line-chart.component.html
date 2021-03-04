@@ -1,7 +1,7 @@
-<div style="display: block; margin-top: 20px;" class="chart">
-  <div style="font-weight: 800; font-size: 24px;">User's activities</div>
+<div style="display: block;" class="chart mt-2 p-3 rounded">
+  <div style="font-weight: 800; font-size: 16px;">User's activities</div>
 
-  <canvas baseChart width="400" height="100" [datasets]="lineChartData" [labels]="lineChartLabels"
+  <canvas baseChart width="400" height="80" [datasets]="lineChartData" [labels]="lineChartLabels"
     [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"
     [plugins]="lineChartPlugins">
   </canvas>

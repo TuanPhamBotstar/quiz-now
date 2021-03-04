@@ -17,6 +17,8 @@ export class ResultWithUserDetailComponent implements OnInit {
     private testService: TestService
   ) {}
 
+  isFetched: boolean = false;
+  
   idBank: string = '';
   idTest: string = '';
   idUser: string = '';
@@ -25,6 +27,9 @@ export class ResultWithUserDetailComponent implements OnInit {
   testTitle: string = '';
 
   test: any;
+  result: any;
+
+  rightAnswers: number = 0;
 
   ngOnInit(): void {
     this.route.params.subscribe((res) => {
@@ -34,8 +39,6 @@ export class ResultWithUserDetailComponent implements OnInit {
       this.idUser = res.idUser;
 
       this.test = res.test;
-
-      console.log(this.test);
     });
 
     if (history.state.bankTitle) {
@@ -61,8 +64,15 @@ export class ResultWithUserDetailComponent implements OnInit {
     });
   }
   getResult() {
-    this.resultService.getResultsByIdTestAndIdUser({idTest: this.idTest, idUser: this.idUser}).subscribe(res => {
-      console.log(res)
-    })
+    this.resultService
+      .getResultsByIdTestAndIdUser({ idTest: this.idTest, idUser: this.idUser })
+      .subscribe((res) => {
+        console.log(res);
+        this.result = res.data[0];
+
+        this.rightAnswers = this.result.userAnswers.filter((r: any) => r.isTrue).length 
+        
+        this.isFetched = true;
+      });
   }
 }

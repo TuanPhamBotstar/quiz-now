@@ -23,7 +23,7 @@ export class BarChartBankComponent implements OnInit {
       yAxisID: '1',
     });
     this.barChartData.push({
-      data: this.results.map((result: any) => (+result.score.toFixed(2) * 10)/(result.total)),
+      data: this.results.map((result: any) => ((+(result.score * 10).toFixed(2))/(result.total)).toFixed(2)),
       label: 'Score',
       yAxisID: '2',
     });

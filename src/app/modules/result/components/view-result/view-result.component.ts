@@ -48,36 +48,37 @@ export class ViewResultComponent implements OnInit {
   flag = false;
 
   ngOnInit(): void {
-
-    this.resultService.getResultsAndAnalyze().subscribe(res => {
-      this.averageScore = res.data.aveScore
-      this.maxScore = res.data.maxScore * 10
+    this.resultService.getResultsAndAnalyze().subscribe((res) => {
+      this.averageScore = res.data.aveScore;
+      this.maxScore = res.data.maxScore * 10;
       this.minScore = res.data.minScore * 10;
 
       this.listScores = res.data.scores;
-      console.log(this.listScores)
-    })
-    
+      console.log(this.listScores);
+    });
+
     this.getPage();
 
     this.element = document.getElementById('scrollId');
     // console.log(this.element);
 
-    this.currentPage = this.route.snapshot.queryParamMap.get('page') || '1';
+    // this.currentPage = this.route.snapshot.queryParamMap.get('page') || '1';
 
-    if (this.currentPage === '1') {
-      this.router.navigate(['/result'], { queryParams: { page: '1' } });
-    }
+    // if (this.currentPage === '1') {
+    //   this.router.navigate(['/result'], { queryParams: { page: '1' } });
+    // }
 
     this.resultService.getResultsDataStore().subscribe((res) => {
-      this.element.scrollIntoView({ behavior: 'smooth' });
+      // this.element.scrollIntoView({ behavior: 'smooth' });
 
       if (res.length == 0) {
         this.getResultsByIdUser(this.currentPage);
+        this.isFetched = true;
       }
       if (res.length > 0) {
         this.listResults = res;
         let sum = 0;
+        this.isFetched = true;
 
         for (var result of this.listResults) {
           sum += result.score;
@@ -103,13 +104,13 @@ export class ViewResultComponent implements OnInit {
 
     this.resultService.getResultsByIdUserStore(page);
   }
-  changeStateFetchedTest(test: any) {
-    this.listTests.push(test);
-    if (this.listTests.length === this.listResults.length) {
-      // console.log(this.listTests);
-      this.fetchedTest = true;
-    }
-  }
+  // changeStateFetchedTest(test: any) {
+  //   this.listTests.push(test);
+  //   if (this.listTests.length === this.listResults.length) {
+  //     // console.log(this.listTests);
+  //     this.fetchedTest = true;
+  //   }
+  // }
   goToResult(id: any) {
     this.router.navigate([`result/${id}`]);
   }

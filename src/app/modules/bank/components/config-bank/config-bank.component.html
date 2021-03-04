@@ -1,0 +1,24 @@
+<div class="config-bank-container" style="display: flex">
+  <app-nav-bar [changeNavBar]="'true'" [levelName]="'config'" [bankId]="bankId"></app-nav-bar>
+  <div class="config-bank component-container">
+    <div class="title">Edit bank's name</div>
+    <div class="edit-container p-5 mb-3 rounded" *ngIf="bankName">
+
+      <form [formGroup]="bankForm" (ngSubmit)="onSubmit()">
+        <input formControlName="title" type="text" class="my-3 py-2 px-1 rounded">
+        <br>
+        <button type="submit" class="button-edit py-2 px-1 rounded">Edit title</button>
+      </form>
+    </div>
+    <div class="title">Danger zone</div>
+    <div class="delete-container p-5 rounded" *ngIf="bankName">
+      <span>Type <span style="font-weight: 600">{{bankName}}</span> to delete</span>
+      <br>
+      <input type="text" class="my-3 py-2 px-1 rounded" placeholder="`Type bank's name to delete`" (keyup)="onKey($event)" >
+      <br>
+
+      <button *ngIf="!shouldDeleteBank" class="button-edit button-edit-not-done py-2 px-1 rounded">Delete</button>
+      <button *ngIf="shouldDeleteBank" (click)="deleteBank(bankId)" class="button-edit py-2 px-1 rounded">Delete</button>
+    </div>
+  </div>
+</div>

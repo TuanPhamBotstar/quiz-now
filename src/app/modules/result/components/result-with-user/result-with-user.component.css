@@ -1,6 +1,9 @@
 .result-with-user-container {
     display: flex;
 }
+div {
+    outline: none;
+}
 .table {
     background: #fff
 }
@@ -22,4 +25,10 @@ td,th {
 }
 thead {
     background: #fff
+}
+.mode {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    margin: 0 auto;
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { filter } from 'rxjs/internal/operators/filter';
+import { take } from 'rxjs/internal/operators/take';
 import { TestModule } from 'src/app/modules/test/test.module';
 import { ResultService } from '../../services/result.service';
 
@@ -30,7 +32,7 @@ export class LineChartComponent implements OnInit {
   constructor(private resultService: ResultService) {}
   objectData: any = {};
 
-  public lineChartData: any[] = [{ data: [], label: 'Users' }];
+  public lineChartData: any[] = [{ data: [], label: 'Users', borderWidth: 1 }];
   public lineChartLabels: Label[] = [];
 
   public lineChartOptions: any;
@@ -47,11 +49,13 @@ export class LineChartComponent implements OnInit {
   getLabels() {
     this.lineChartLabels = [];
     this.lineChartData[0].data = [];
-    this.objectData = {};
 
     this.resultObserver = this.resultService
       .analyzeTimeWithLineChart(this.idTest, this.time)
+      .pipe(take(1))
+      .pipe(filter((res: any) => res != null))
       .subscribe((res) => {
+        this.objectData = {};
         this.results = res.data;
 
         this.min = this.changeTimeStamp(this.results[0].time);
@@ -62,7 +66,6 @@ export class LineChartComponent implements OnInit {
         this.range = (this.max - this.min) / this.mils;
 
         for (let result of this.results) {
-          console.log(result.time);
           result.time = this.changeTimeStamp(result.time);
 
           if (this.objectData[result.time] >= 1) {
@@ -70,9 +73,9 @@ export class LineChartComponent implements OnInit {
           } else this.objectData[result.time] = 1;
         }
         const firstLength = Object.keys(this.objectData).length;
+        let test = Object.keys(this.objectData);
 
-        for (let i = firstLength - 1; i <= this.range; i++) {
-          console.log(i - (firstLength - 1) + 1);
+        for (let i = firstLength - 1; i < this.range + firstLength - 1; i++) {
           if (
             this.objectData[
               this.min + (i - (firstLength - 1) + 1) * this.mils
@@ -107,6 +110,8 @@ export class LineChartComponent implements OnInit {
         this.lineChartLabels = this.lineChartLabels.map((label) =>
           this.convertToDate(+label)
         );
+
+        console.log(this.lineChartLabels);
       });
   }
   ngOnInit(): void {
@@ -121,7 +126,19 @@ export class LineChartComponent implements OnInit {
               beginAtZero: true,
               min: this.results && 0,
               stepSize: 1,
-              max: this.maxLength,
+              // max: this.maxLength,
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Users',
+            },
+          },
+        ],
+        xAxes: [
+          {
+            scaleLabel: {
+              display: true,
+              labelString: 'Date',
             },
           },
         ],

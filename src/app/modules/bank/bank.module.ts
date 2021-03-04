@@ -21,6 +21,9 @@ import { BarChartBankComponent } from './components/bar-chart-bank/bar-chart-ban
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SearchQuestionComponent } from './components/search-question/search-question.component';
 
+import {BankRoutingModule} from './bank-routing.module';
+import { ConfigBankComponent } from './components/config-bank/config-bank.component';
+
 @NgModule({
   declarations: [
     CreateBankComponent,
@@ -34,6 +37,7 @@ import { SearchQuestionComponent } from './components/search-question/search-que
     BarChartBankComponent,
     DashboardComponent,
     SearchQuestionComponent,
+    ConfigBankComponent,
   ],
   imports: [
     CommonModule,
@@ -43,7 +47,8 @@ import { SearchQuestionComponent } from './components/search-question/search-que
     ClipboardModule,
     RouterModule,
     ChartsModule,
-    ClickOutsideModule
+    ClickOutsideModule,
+    BankRoutingModule
   ],
   exports: [],
 })
