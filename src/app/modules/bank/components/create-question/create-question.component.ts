@@ -16,9 +16,17 @@ export class CreateQuestionComponent implements OnInit {
     private toastManagementService: ToastManagementService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    for (let i = 0; i < 3; i++) {
+      this.answers.push(
+        this.fb.group({
+          title: [''],
+          isTrue: false,
+        })
+      );
+    }
+  }
 
-  finishAddQuestion: boolean = false;
   hideButton: boolean = false;
 
   questionForm: FormGroup = this.fb.group({
@@ -38,8 +46,6 @@ export class CreateQuestionComponent implements OnInit {
   }
 
   addAnswer() {
-    if (this.answers.length >= 1) this.finishAddQuestion = true;
-    else this.finishAddQuestion = false;
     this.answers.push(
       this.fb.group({
         title: [''],
@@ -47,14 +53,23 @@ export class CreateQuestionComponent implements OnInit {
       })
     );
   }
-  removeAnswer(index: any, e:any) {
+  removeAnswer(index: any, e: any) {
     this.answers.removeAt(index);
-    if (this.answers.length <= 1) this.finishAddQuestion = false;
+
     e.stopPropagation();
   }
   onSubmit() {
     let flag = false;
 
+    for (let answer of this.answers.value) {
+      if (!answer.title) {
+        this.toastManagementService.show('Invalid question', {
+          classname: 'bg-danger text-light',
+          delay: 2000,
+        });
+        return;
+      }
+    }
     for (let answer of this.answers.value) {
       if (answer.isTrue) {
         flag = true;
@@ -65,7 +80,7 @@ export class CreateQuestionComponent implements OnInit {
       this.newAnswersEvent.emit(this.questionForm.value);
       this.toastManagementService.show('Question is added', {
         classname: 'bg-success text-light',
-        delay: 3000,
+        delay: 2000,
       });
       this.hideButton = true;
     } else alert('Please choose correct answer');

@@ -2,38 +2,41 @@
   <app-nav-bar></app-nav-bar>
 
   <div class="create-bank-form my-5 component-container">
-    <form [formGroup]="bankForm">
+    <form [formGroup]="bankForm" style="width: 80%; margin: 0 auto">
       <div class="bankForm__title">
-        <i style="display: inline-block"class="fas fa-pen"></i>
         <input type="text" formControlName="title" placeholder="Enter bank's name">
       </div>
       <div formArrayName="questions">
         <br>
-        <span>This bank has {{bankLength}} questions</span>
+        <span>This bank has {{bankLength | count:"question"}} </span>
         <div *ngFor="let question of questionsFormGroup; let i=index" class="question-form my-3">
           <div [formGroup]="question" style="position: relative">
             <div>
-              <b>Question:</b> &nbsp;
+              <div class="label">Question:</div>
               <div style="width: 100%;">
                 <input type="text" formControlName="title" class="input__question">
               </div>
-              <div class="level">
-                <label for="level">Level: &nbsp;</label>
+              <div class="mt-3">
+                <div class="label" style="display: inline-block">Level: &nbsp;</div>
                 <select id="level" formControlName="level">
                   <option value="easy">Easy</option>
                   <option value="normal">Normal</option>
                   <option value="hard">Hard</option>
                 </select>
               </div>
+              <div class="label mt-3">Answers:</div>
             </div>
             <app-create-question (newAnswersEvent)="addAnswers($event, i)"></app-create-question>
-            <div class="remove-icon" (click)="removeQuestion(i)"><i class="far fa-minus-square"></i></div>
+            <div class="remove-icon" (click)="removeQuestion(i)"><i class="fas fa-minus-circle"></i></div>
           </div>
         </div>
       </div>
-      <button (click)="addQuestion()" class="button__add-question"><i class="fas fa-plus"></i></button>
-
-      <button type="submit" (click)="onSubmit()" class="button__submit  mr-3">Create</button>
+      <div>
+        <button (click)="addQuestion()" class="button__add-question btn"><i class="fas fa-plus"></i></button>
+      </div>
+      <div style="float: right">
+        <button type="submit" class="button__submit btn" (click)="onSubmit()">Create</button>
+      </div>
     </form>
   </div>
 

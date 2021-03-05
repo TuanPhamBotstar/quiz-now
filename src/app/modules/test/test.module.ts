@@ -19,6 +19,7 @@ import { ModalRequireComponent } from './components/modal-require/modal-require.
 import { TestResultBarChartComponent } from './components/test-result-bar-chart/test-result-bar-chart.component';
 import { ModalConfirmComponent } from './components/modal-confirm/modal-confirm.component';
 import { ViewTestQuestionsComponent } from './components/view-test-questions/view-test-questions.component';
+import { ResultModule } from '../result/result.module';
 
 @NgModule({
   declarations: [CreateTestComponent, ViewTestComponent, DoTestComponent, TimerComponent, FinishTestComponent, ModalRequireComponent, TestResultBarChartComponent, ModalConfirmComponent, ViewTestQuestionsComponent],
@@ -29,7 +30,7 @@ import { ViewTestQuestionsComponent } from './components/view-test-questions/vie
     SharedModule,
     ChartsModule,
     NpnSliderModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [CreateTestComponent, TestResultBarChartComponent]
 })

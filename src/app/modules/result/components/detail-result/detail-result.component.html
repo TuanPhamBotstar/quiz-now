@@ -21,12 +21,12 @@
         <div class="number">{{test.time}} </div>
       </div>
     </div>
-    <div class="mt-5">
-      <div *ngFor="let question of test.questions; let i = index" class="question mt-2 p-1">
+    <div class="mt-5" style="overflow-y:scroll; height: 60vh">
+      <div *ngFor="let question of test.questions; let i = index" class="question mt-2 py-2 px-3">
         <div class="question-bar">
           <div class="question-title"><span class="question-order">Question {{i+1}}</span>: {{question.title}}</div>
         </div>
-        <ul class="answers">
+        <div class="answers">
           <div *ngIf="!question.isManyAnswers">
             <div *ngFor="let answer of question.answers; let j = index">
               <div style="display:flex; flex-direction: row;align-items: center">
@@ -53,7 +53,7 @@
             </div>
           </div>
 
-        </ul>
+        </div>
 
       </div>
     </div>

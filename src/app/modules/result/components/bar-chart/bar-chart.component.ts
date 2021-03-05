@@ -48,53 +48,54 @@ export class BarChartComponent implements OnInit {
         console.log(res);
 
         this.barChartLabels = res.data.map((result: any) => result._id);
-        
+
         this.barChartData[0].data = res.data.map((result: any) => result.count);
 
-        this.maxLength = Math.max(...res.data.map((r: any) => r.count)) + 1
-        
+        this.maxLength = Math.max(...res.data.map((r: any) => r.count)) + 1;
 
-        this.barChartOptions = {
-          responsive: true,
-          plugins: {
-            datalabels: {
-              algin: 'end',
-              color: 'white',
-            },
-          },
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true,
-                  min: this.results && 0,
-                  stepSize: 1,
-                  max: this.maxLength,
-                },
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Users',
-                },
-              },
-            ],
-            xAxes: [
-              {
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Scores',
-                },
-              },
-            ],
-          },
-          title: {
-            display: true,
-            text: 'Score spectrum',
-            fontSize: 20,
-          },
-        };
+        this.barChartOptions.scales.yAxes[0].ticks.max = this.maxLength
       });
   }
   ngOnInit(): void {
     this.getLabels();
+
+    this.barChartOptions = {
+      responsive: true,
+      plugins: {
+        datalabels: {
+          algin: 'end',
+          color: 'white',
+        },
+      },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+              min: this.results && 0,
+              stepSize: 1,
+              max: this.maxLength,
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Users',
+            },
+          },
+        ],
+        xAxes: [
+          {
+            scaleLabel: {
+              display: true,
+              labelString: 'Scores',
+            },
+          },
+        ],
+      },
+      title: {
+        display: true,
+        text: 'Score spectrum',
+        fontSize: 20,
+      },
+    };
   }
 }

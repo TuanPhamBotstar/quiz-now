@@ -1,52 +1,61 @@
 <div class="result-with-user-detail-container">
   <app-nav-bar [changeNavBar]="'true'" [levelName]="'tests'" [bankId]="idBank"></app-nav-bar>
+  
+  <div *ngIf="!result && !isFetched">
+    <app-loader></app-loader>
+  </div>
+  
   <div class="component-container">
-    <div *ngIf="test" class="path">
-      <a
-        routerLink="/bank/view/{{idBank}}/tests/{{idTest}}">{{testTitle}}</a> > <a
-        routerLink="/bank/view/{{idBank}}/test/{{idTest}}/detail">Detail</a> > {{result.name[0]}}
+    <div>
+      <div>
+        <div *ngIf="test" class="path">
+          <a routerLink="/bank/view/{{idBank}}/tests/{{idTest}}">{{testTitle}}</a> > <a
+            routerLink="/bank/view/{{idBank}}/test/{{idTest}}/detail">Detail</a> > {{result.name[0]}}
+        </div>
+        <div *ngIf="result" class="infos">
+          <div class="info p-3">
+            <div class="title">
+              Name
+            </div>
+            <div class="value">
+              {{result.name[0]}}
+            </div>
+          </div>
+          <div class="info p-3">
+            <div class="title">
+              Score
+            </div>
+            <div class="value">
+              {{(result.score * 10).toFixed(2)}}
+            </div>
+          </div>
+          <div class="info p-3 info-end">
+            <div class="title">
+              Questions
+            </div>
+            <div class="value">
+              {{rightAnswers}}/{{test.questions.length}}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div *ngIf="!result && !isFetched">
-      <app-loader></app-loader>
-    </div>
-    <div *ngIf="result" class="infos">
-      <div class="info p-3">
-        <div class="title">
-          Name
-        </div>
-        <div class="value">
-          {{result.name[0]}}
-        </div>
-      </div>
-      <div class="info p-3">
-        <div class="title">
-          Score
-        </div>
-        <div class="value">
-          {{(result.score * 10).toFixed(2)}}
-        </div>
-      </div>
-      <div class="info p-3 info-end">
-        <div class="title">
-          Questions
-        </div>
-        <div class="value">
-          {{rightAnswers}}/{{test.questions.length}}
-        </div>
-      </div>
-    </div>
-    <div *ngIf="test && result" class="results-container mt-5">
-      <div *ngFor="let question of test.questions; let i = index" class="question p-2 rounded">
+
+
+    <div *ngIf="test && result" class="results-container mt-3">
+      <div *ngFor="let question of test.questions; let i = index" class="question py-2 px-3 rounded">
         <div class="question-bar">
           <div class="question-title"><span class="question-order">Question {{i+1}}</span>: {{question.title}}</div>
           <div *ngIf="result" class="question-state">
-            <span style="color: #28a745; font-weight: 600" *ngIf="result.userAnswers[i].isTrue">&nbsp;<i class="fas fa-check"></i></span>
-            <span style="color: #dc3545; font-weight: 600" *ngIf="!result.userAnswers[i].isTrue">&nbsp;<i class="fas fa-times"></i></span>
+            <span style="color: #28a745; font-weight: 600" *ngIf="result.userAnswers[i].isTrue">&nbsp;<i
+                class="fas fa-check"></i></span>
+            <span style="color: #dc3545; font-weight: 600" *ngIf="!result.userAnswers[i].isTrue">&nbsp;<i
+                class="fas fa-times"></i></span>
           </div>
         </div>
 
-        <ul class="answers">
+        <div class="answers">
           <div *ngFor="let answer of question.answers; let j = index">
             <div *ngIf="!question.isManyAnswers">
               <span *ngIf="answer.isTrue">
@@ -99,7 +108,7 @@
               </span>
             </div>
           </div>
-        </ul>
+        </div>
       </div>
     </div>
   </div>

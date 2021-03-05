@@ -105,6 +105,7 @@ div {
   justify-content: center;
   align-items: center;
   float: right; 
+  position: relative;
 }
 
 .test-card-copy button {
@@ -124,8 +125,20 @@ div {
 .test-card-copy button:hover {
   color: #0F993E;
 }
+.test-card-copy:hover .detail-copy-content {
+  display: inline-block;
+  background-color: white;
+  box-shadow: 0 0 0.1875rem 0 rgb(0 0 0 / 50%);
+
+}
 .endTestCard {
   border: 0;
+}
+.detail-copy-content {
+  display: none;
+  position: absolute;
+  right: -6vw;
+  font-size: 12px;
 }
 @media screen and (max-width: 601px) {
 

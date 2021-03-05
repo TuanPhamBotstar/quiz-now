@@ -3,7 +3,6 @@
   margin: 0 auto;
   padding: 16px;
   background: #fff;
-  box-shadow: 0px 10px 70px -30px #C4C4C4;
-  border-radius: 24px;
-  margin-bottom: 20px;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  border-radius: 8px;
 }

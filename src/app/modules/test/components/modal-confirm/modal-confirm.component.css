@@ -44,16 +44,28 @@ button {
 
 .button-yes {
   width: 68px;
-  color: rgba(0, 0, 0, .5);
+  color: black;
   background: #fff;
-  border: 3px solid red;
-  border-radius: 8px;
+  border-radius: 4px;
+  border: 1px solid lightgray;
+}
+
+.button-yes:hover {
+  transition: background-color .5s ease;
+  background: #fafafa;
 }
 
 .button-no {
   width: 68px;
-  color: black;
+  color: rgba(0, 0, 0, .5);
   background: #fff;
-  border: 3px solid green;
-  border-radius: 8px;
+  border-radius: 4px;
+  border: 1px solid lightgray;
+}
+
+.button-no:hover {
+  transition: background-color .5s ease;
+  color: black;
+  background: #5F45EA;
+  color: white;
 }

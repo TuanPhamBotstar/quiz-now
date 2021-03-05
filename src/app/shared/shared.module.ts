@@ -10,10 +10,11 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { ModalDeleteComponent } from './components/modal-delete/modal-delete.component';
 import { BarComponent } from './components/bar/bar.component';
 import { ConfigBankComponent } from './components/config-bank/config-bank.component';
+import { QuestionsComponent } from './components/questions/questions.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
-  declarations: [CountPipe, TimerPipe, PaginationComponent, LoaderComponent, ModalDeleteComponent, BarComponent, ConfigBankComponent],
+  declarations: [CountPipe, TimerPipe, PaginationComponent, LoaderComponent, ModalDeleteComponent, BarComponent, ConfigBankComponent, QuestionsComponent],
   exports: [CountPipe, TimerPipe, PaginationComponent, LoaderComponent, ModalDeleteComponent, BarComponent, ConfigBankComponent],
 })
 export class SharedModule {}

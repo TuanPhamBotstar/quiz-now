@@ -1,9 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
 import { ResultService } from '../../services/result.service';
 import { TestService } from 'src/app/modules/test/services/test.service';
-import { Result } from 'src/app/modules/bank/models/result';
 
 @Component({
   selector: 'app-view-result',
@@ -13,9 +11,7 @@ import { Result } from 'src/app/modules/bank/models/result';
 export class ViewResultComponent implements OnInit {
   constructor(
     private resultService: ResultService,
-    private route: ActivatedRoute,
     private router: Router,
-    private testService: TestService
   ) {}
 
   @HostListener('window:scroll', [])
@@ -40,11 +36,11 @@ export class ViewResultComponent implements OnInit {
 
   numberOfResults: number = 0;
 
-  fetchedTest: boolean = false;
+  isInfoFetched: boolean = false;
+  isResultsFetched: boolean = false;
 
   pages: any = 0;
 
-  isFetched: boolean = false;
   flag = false;
 
   ngOnInit(): void {
@@ -54,31 +50,26 @@ export class ViewResultComponent implements OnInit {
       this.minScore = res.data.minScore * 10;
 
       this.listScores = res.data.scores;
+      if (this.listScores === 0) this.listScores = [];
       console.log(this.listScores);
+
+      this.isInfoFetched= true;
     });
 
     this.getPage();
 
     this.element = document.getElementById('scrollId');
-    // console.log(this.element);
-
-    // this.currentPage = this.route.snapshot.queryParamMap.get('page') || '1';
-
-    // if (this.currentPage === '1') {
-    //   this.router.navigate(['/result'], { queryParams: { page: '1' } });
-    // }
 
     this.resultService.getResultsDataStore().subscribe((res) => {
-      // this.element.scrollIntoView({ behavior: 'smooth' });
 
-      if (res.length == 0) {
+      if (res.length == 0 && !this.isResultsFetched) {
         this.getResultsByIdUser(this.currentPage);
-        this.isFetched = true;
+        this.isResultsFetched = true;
       }
       if (res.length > 0) {
         this.listResults = res;
         let sum = 0;
-        this.isFetched = true;
+        this.isResultsFetched = true;
 
         for (var result of this.listResults) {
           sum += result.score;
@@ -99,7 +90,7 @@ export class ViewResultComponent implements OnInit {
   }
   getResultsByIdUser(page: any) {
     this.currentPage = page;
-    this.fetchedTest = false;
+    this.isResultsFetched = false;
     this.listTests = [];
 
     this.resultService.getResultsByIdUserStore(page);

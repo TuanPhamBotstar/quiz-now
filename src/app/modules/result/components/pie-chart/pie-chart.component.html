@@ -1,5 +1,8 @@
 <div class="chart rounded p-2 h-100 w-100" style="display: block;">
-  <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" width="500" height="200"
-    [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend" [colors]="chartColors">
-  </canvas>
+  <div *ngIf="pieChartData.length !== 0">
+    <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" width="500"
+      [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend" [colors]="chartColors">
+    </canvas>
+  </div>
+
 </div>

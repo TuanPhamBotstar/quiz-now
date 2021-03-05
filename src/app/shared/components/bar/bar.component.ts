@@ -39,6 +39,9 @@ export class BarComponent implements OnInit {
 
   }
 
+  goHome() {
+    this.router.navigate([''])
+  }
   logOut() {
     localStorage.clear();
     window.location.replace('/');

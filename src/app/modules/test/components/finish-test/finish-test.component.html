@@ -6,10 +6,10 @@
     <div class="noti-title">You have finished</div>
     <div class="score" *ngIf="test.knowTheResult">Your score is: {{(score*10).toFixed(2)}} </div>
     <div class="score" *ngIf="!test.knowTheResult">You can not see score. Thanks </div>
-    <div routerLink="/bank/view" style="cursor: pointer"><i class="fas fa-directions"></i>&nbsp; Go to Home page
-    </div>
     <div class="img">
       <img src="assets/imgs/finish.svg">
+    </div>
+    <div routerLink="/bank/view" style="cursor: pointer;" class="button-go-home px-3 py-2"><i class="fas fa-home"></i>&nbsp;Home
     </div>
   </div>
 </div>

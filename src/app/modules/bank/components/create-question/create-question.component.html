@@ -9,9 +9,11 @@
               <input type="checkbox" formControlName="isTrue" *ngIf="!hideButton">
             </div>
             <div style="width:100%">
-              <input type="text"  formControlName="title">
+              <input type="text" formControlName="title">
             </div>
-            <div style="text-align: right" *ngIf="!hideButton">
+            <div style="text-align: right; display: flex;
+            justify-content: center;
+            align-items: center;" *ngIf="!hideButton">
               <span (click)="removeAnswer(i, $event)">
                 <i style="cursor: pointer" class="far fa-trash-alt"></i>
               </span>
@@ -20,9 +22,10 @@
         </div>
       </div>
     </div>
-    <button (click)="addAnswer()" class="button__add-answer" *ngIf="!hideButton">+ Add answer</button>
+    <button (click)="addAnswer()" class="button__add-answer" style="padding:0" *ngIf="!hideButton">+ Add answer</button>
     <br>
-    <button *ngIf="!finishAddQuestion && !hideButton" class="button__not-done">Add</button>
-    <button type="submit" *ngIf="finishAddQuestion && !hideButton" (click)="onSubmit()" class="button__done">Add</button>
+    <button *ngIf="answers.length < 2 && !hideButton" class="button__not-done mt-3">Add</button>
+    <button type="submit" *ngIf="answers.length >=2 && !hideButton" (click)="onSubmit()"
+      class="button__done mt-3">Add</button>
   </form>
 </div>

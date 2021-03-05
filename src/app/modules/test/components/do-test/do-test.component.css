@@ -1,3 +1,8 @@
+.blur-test {
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+
 .do-test__title {
 
   font-family: PoppinsBlack;
@@ -15,6 +20,7 @@
 
 .container {
   padding-top: 50px;
+
 }
 
 .do-test__header {
@@ -56,7 +62,6 @@
 
 .do-test__question__title span {
   font-weight: 600;
-  text-decoration: underline;
 }
 
 
@@ -77,6 +82,7 @@ input[type=radio] {
   border: 0px;
   height: 16px;
   width: 16px;
+  outline: #5F45EA
   /* line-height: 36px; */
 }
 
@@ -87,15 +93,23 @@ input[type=checkbox] {
 
 .questions-container {
   text-align: center;
-  width: 250px;
-  height: 280px;
+  height: 50vh;
+  
   overflow-y: scroll;
-  border: 1px solid lightgray;
 }
+
+.line {
+  width: 80%;
+  background: lightgray;
+  height: .1vw;
+  margin: 0 auto
+}
+
 .questions-container .container {
   padding-top: 0;
   margin-top: 20px;
 }
+
 .question__number {
   display: flex;
   align-items: center;
@@ -115,10 +129,11 @@ input[type=checkbox] {
 }
 
 .selected {
-  background-color: blue;
+  background-color: #5F45EA80;
   color: white;
   border: 0;
 }
+
 .button-submit-test {
   border: 0;
   width: 80px;
@@ -128,19 +143,18 @@ input[type=checkbox] {
   float: right;
   color: white;
   outline: none;
-  /* position: fixed;
-  right: 3vw;
-  top: 50vh; */
 }
+
 .info-container {
   background-color: white;
   position: fixed;
-  /* width: 100%; */
-  height: 50%;
+  height: 70%;
+  width: 20%;
   right: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 0 0.1875rem 0 rgb(0 0 0 / 50%);
+  border-radius: 8px;
 
 }

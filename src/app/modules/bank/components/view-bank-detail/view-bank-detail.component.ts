@@ -18,7 +18,7 @@ export class ViewBankDetailComponent implements OnInit {
   listTest: Test[] | any = [];
   pages: number = 0;
   currentPage: string = '1';
-  
+
   showModalDelete: boolean = false;
   isFetched: boolean = false;
   reFetch: boolean = false;
@@ -51,7 +51,6 @@ export class ViewBankDetailComponent implements OnInit {
       delay: 5000,
     });
     e.stopPropagation();
-
   }
   goToTestDetail(id: any) {
     this.router.navigate([`/bank/view/${this.bankId}/tests/${id}`]);
@@ -70,17 +69,28 @@ export class ViewBankDetailComponent implements OnInit {
           this.bank = bank;
           console.log(this.bank);
           if (this.bank.idTests.length > 0) this.getAllTest(bank._id);
+          else {
+            console.log('man ngu');
+            this.isFetched = true;
+          }
           break;
         }
       }
       if (!this.bank)
-        this.bankService.getBankInfoStore(this.bankId).subscribe((res) => {
-          this.bank = res;
-          console.log(this.bank);
-          if (this.bank) {
-            if (this.bank.idTests.length > 0) this.getAllTest(this.bank._id);
-          }
-        });
+        this.bankService
+          .getBankInfoStore(this.bankId)
+          .pipe(filter((res) => res != null))
+          .subscribe((res) => {
+            this.bank = res;
+            console.log(this.bank);
+            if (this.bank) {
+              if (this.bank.idTests.length > 0) this.getAllTest(this.bank._id);
+              else {
+                console.log('man ga');
+                this.isFetched = true;
+              }
+            }
+          });
     });
   }
   getTestByBank(page: any) {
@@ -96,11 +106,14 @@ export class ViewBankDetailComponent implements OnInit {
         filter((result) => {
           // console.log(result)
           // if (result.length > 0) return result[0].source == id;
-          return result != null;
+          return result != [];
         })
       )
       .subscribe((res) => {
-        this.listTest = res;
+        if (res.length > 0) {
+          this.listTest = res;
+          this.isFetched = true;
+        }
       });
   }
   goToCreateTest() {

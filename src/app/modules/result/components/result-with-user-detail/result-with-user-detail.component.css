@@ -2,6 +2,11 @@
   display: flex;
 }
 
+.results-container {
+  overflow-y: scroll;
+  height: 60vh;
+}
+
 input[type="radio"] {
   width: 24px;
   height: 24px;

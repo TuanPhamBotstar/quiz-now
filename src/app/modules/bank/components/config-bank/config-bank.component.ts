@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BankService } from '../../services/bank.service';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { ToastManagementService } from 'src/app/shared/components/toast-management/toast-management.service';
 
 @Component({
@@ -35,33 +35,37 @@ export class ConfigBankComponent implements OnInit {
       if (res) {
         this.bankName = res.title;
         this.bankForm = this.fb.group({
-          title: this.bankName
-        })
+          title: this.bankName,
+        });
       }
     });
   }
   onKey(e: any) {
-    if (this.bankName === e.target.value) this.shouldDeleteBank = true;
+    this.bankName === e.target.value
+      ? (this.shouldDeleteBank = true)
+      : (this.shouldDeleteBank = false);
   }
   onSubmit() {
     console.log(this.bankForm.value);
 
-    this.bankService.updateBankStore({id: this.bankId, title: this.bankForm.value.title});
+    this.bankService.updateBankStore({
+      id: this.bankId,
+      title: this.bankForm.value.title,
+    });
 
     this.toastManagementService.show('Edit successfully', {
       classname: 'bg-success text-light',
       delay: 3000,
-    })
+    });
     this.bankName = this.bankForm.value.title;
   }
   deleteBank(id: any) {
     this.bankService.deleteBankStore(id);
-    
+
     this.toastManagementService.show('Delete successfully', {
       classname: 'bg-success text-light',
       delay: 3000,
-    
-    })
-    this.router.navigate(['bank/view'])
-  } 
+    });
+    this.router.navigate(['bank/view']);
+  }
 }

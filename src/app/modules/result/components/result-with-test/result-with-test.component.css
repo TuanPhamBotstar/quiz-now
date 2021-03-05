@@ -16,10 +16,12 @@ button {
   border-right: 1px solid lightgrey;
   width: 2vw;
 }
-
+.last-button-change-view {
+  border: 0;
+}
 table {
   padding: 15px;
-  /* margin-left: 40px; */
+  width: 100%;
 }
 
 .infos-card {
@@ -59,10 +61,9 @@ thead {
 
   width: 180px;
 }
-
 .rank {
   background-color: #fff;
-  width: 100%;
+  width: 50%;
 }
 
 th[scope="col"] {

@@ -1,7 +1,10 @@
 .score {
-  font-size: 24px;
+  font-size: 16px;
 }
-
+button {
+  border: 0;
+  outline: none;
+}
 div {
   outline: none;
 }
@@ -20,4 +23,9 @@ div {
 .img img{
     width: 400px;
     height: 400px;
+}
+.button-go-home {
+  border-radius: 8px;
+  background: #5f45ea;
+  color: white;
 }

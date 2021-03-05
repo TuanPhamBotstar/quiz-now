@@ -27,15 +27,7 @@
             <div class="detail-icon p-1">Questions</div>
           </div>
         </div>
-        <div [class.levelSelected]="levelName === 'config'" class="spi-feature mb-5">
-          <!-- <div *ngIf="!showConfigDropdown" (click)="changeConfigDropdown()">Config &nbsp;<i
-              class="fas fa-caret-right"></i></div>
-          <div *ngIf="showConfigDropdown" (click)="changeConfigDropdown()">Config &nbsp;<i
-              class="fas fa-caret-down"></i></div>
-
-          <div *ngIf="showConfigDropdown">
-            <div class="feature" (click)="openModal()">Delete</div>
-          </div> -->
+      <div [class.levelSelected]="levelName === 'config'" class="spi-feature mb-5">
           <div class="img-icon img-icon-2 p-2" (click)="goToConfig()">
             <i class="fas fa-cogs"></i>
             <div class="detail-icon p-1">Setting</div>

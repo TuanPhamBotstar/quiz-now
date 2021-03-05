@@ -1,17 +1,20 @@
 <div class="history-container" style="display: flex">
   <app-nav-bar [changeNavBar]="'results'" [levelName]="'history'"></app-nav-bar>
   <div class="history component-container">
+    <div style="text-align: center; font-weight: bold; font-size: 16px" class="mb-3">History</div>
+    <div *ngIf="listResults.length === 0 && fetchedTest" style="text-align: center; color: rgba(0,0,0,.6)">You haven't accessed any test</div>
+    <app-loader *ngIf="listResults.length === 0 && !fetchedTest"></app-loader>
     <div class="list-result" *ngIf="listResults.length > 0">
-      <div style="text-align: center; font-weight: bold;" class="mb-3">History</div>
-      <table class="table table-striped rounded mb-3">
-        <thead>
+      <table class="table table-bordered rounded mb-3 table-hover">
+        <thead class="thead-light">
           <th scope="col" class="col order-col"></th>
           <th scope="col" class="col name-col">Name</th>
           <th scope="col" class="col score-col">Score</th>
           <th scope="col" class="col time-col">Time</th>
         </thead>
         <tbody>
-          <tr *ngFor="let result of listResults; let i = index" routerLink="/result/{{result._id}}" style="cursor: pointer">
+          <tr *ngFor="let result of listResults; let i = index" routerLink="/result/{{result._id}}"
+            style="cursor: pointer">
             <th class="order-col">{{10*(1*currentPage - 1) + i + 1}}</th>
             <td class="name-col">{{result.test[0]}}</td>
             <td class="score-col">{{result.score}}</td>

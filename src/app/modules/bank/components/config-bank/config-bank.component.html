@@ -1,24 +1,25 @@
 <div class="config-bank-container" style="display: flex">
   <app-nav-bar [changeNavBar]="'true'" [levelName]="'config'" [bankId]="bankId"></app-nav-bar>
-  <div class="config-bank component-container">
+  <div class="config-bank component-container" *ngIf="bankName">
     <div class="title">Edit bank's name</div>
-    <div class="edit-container p-5 mb-3 rounded" *ngIf="bankName">
+    <div class="edit-container p-5 mb-3 rounded">
 
-      <form [formGroup]="bankForm" (ngSubmit)="onSubmit()">
-        <input formControlName="title" type="text" class="my-3 py-2 px-1 rounded">
+      <form [formGroup]="bankForm">
+        <input formControlName="title" type="text" class="my-3 p-2 rounded">
         <br>
-        <button type="submit" class="button-edit py-2 px-1 rounded">Edit title</button>
       </form>
+      <button (click)="onSubmit()" class="button-edit btn rounded">Edit</button>
     </div>
-    <div class="title">Danger zone</div>
-    <div class="delete-container p-5 rounded" *ngIf="bankName">
-      <span>Type <span style="font-weight: 600">{{bankName}}</span> to delete</span>
+    <div class="title mt-5">Danger zone</div>
+    <div class="delete-container p-5 rounded">
+      <input type="text" class="my-1 py-2 px-1 rounded danger-input" (keyup)="onKey($event)">
       <br>
-      <input type="text" class="my-3 py-2 px-1 rounded" placeholder="`Type bank's name to delete`" (keyup)="onKey($event)" >
-      <br>
-
-      <button *ngIf="!shouldDeleteBank" class="button-edit button-edit-not-done py-2 px-1 rounded">Delete</button>
-      <button *ngIf="shouldDeleteBank" (click)="deleteBank(bankId)" class="button-edit py-2 px-1 rounded">Delete</button>
+      <div style="color: rgba(0,0,0,.5); text-align: left; width: 40%; margin: 0 auto">Type <span
+          style="font-weight: 600">{{bankName}}</span> to delete</div>
+      <button *ngIf="!shouldDeleteBank"
+        class="button-delete button-edit-not-done btn btn-danger py-2 px-2 rounded">Delete</button>
+      <button *ngIf="shouldDeleteBank" (click)="deleteBank(bankId)"
+        class="button-delete p-2 btn btn-danger rounded">Delete</button>
     </div>
   </div>
 </div>

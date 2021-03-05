@@ -3,7 +3,7 @@
 <div *ngIf="!isFinished && test">
   <div class="info-container mt-5 px-2 py-3">
     <div class="questions-container ">
-      <div class="container">
+      <div class="container" [class.blur-test]="!showModal">
         <div class="row">
           <div *ngFor="let question of test.questions; let i = index" class="col-3">
             <div style="cursor: pointer" class="question__number" (click)="scroll('question' + i)"
@@ -13,6 +13,9 @@
         </div>
       </div>
     </div>
+    <div class="line-container">
+      <div class="line"></div>
+    </div>
     <app-timer *ngIf="showModal" [time]="test.time*60" (finishedEvent)="submitAnswers()"></app-timer>
     <div style="display: flex; justify-content: center">
       <button class="button-submit-test" id="target" (click)="onSubmit()">Finish</button>
@@ -21,7 +24,7 @@
 
 
 
-  <div class="container mb-5">
+  <div class="container mb-5" [class.blur-test]="!showModal">
     <div *ngIf="test" class="do-test-container">
       <div class="do-test__header mt-5">
         <div class="do-test__title">

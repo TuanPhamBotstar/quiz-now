@@ -44,5 +44,8 @@ import { HistoryComponent } from './components/history/history.component';
     ClipboardModule,
     ResultRoutingModule,
   ],
+  exports: [
+    ResultWithUserDetailComponent
+  ]
 })
 export class ResultModule {}

@@ -1,6 +1,13 @@
 <div style="display: block; position: relative" class="chart rounded p-3 w-100">
   <div style="font-weight: 800; font-size: 16px;">Score statistics</div>
-  <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" height="80"
-    [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColor">
-</canvas>
+  <div *ngIf="maxLength >= 2">
+    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" height="80"
+      [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColor">
+    </canvas>
+  </div>
+  <!-- <div *ngIf="maxLength < 2" class="blur-container">
+    <div class="blur"></div>
+    <div class="text-in-blur">There is no results</div>
+  </div> -->
+
 </div>

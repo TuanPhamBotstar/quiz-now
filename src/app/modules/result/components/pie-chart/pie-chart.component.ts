@@ -52,7 +52,7 @@ export class PieChartComponent implements OnInit {
     },
   };
   pieChartLabels: Label[] = ['Weak', 'Average', 'Good', 'Excellent'];
-  pieChartData: SingleDataSet = [1, 1, 1, 1];
+  pieChartData: SingleDataSet = [];
   pieChartType: ChartType = 'pie';
   pieChartLegend = true;
   pieChartPlugins = [];

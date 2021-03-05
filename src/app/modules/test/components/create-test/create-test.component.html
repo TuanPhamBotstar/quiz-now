@@ -3,9 +3,9 @@
   <div *ngIf="bank" class="create-test component-container mt-5">
 
     <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
-      <div class="create-test-form">
+      <div class="create-test-form p-3">
         <div class="create-test-form-title">
-          Create new test
+          Create test
         </div>
         <div class="input-total-questions">
           <label>Input total questions:&nbsp;(Max is
@@ -32,17 +32,17 @@
             [step]="1" [showStepIndicator]="true">
           </npn-slider>
         </div>
-        <div class="create-test-form-setting">
-          <div class="create-test-form-setting__title">
+        <div class="create-test-form-setting py-3">
+          <div class="create-test-form-setting__title mb-3 ">
             SETTING
           </div>
-          <div class="input-question input-setting">
+          <div class="input-question input-setting mb-3 px-2">
             <div class="input-question-title">Code:&nbsp;</div>
             <div class="input-setting-text">
               <input type="text" placeholder="Enter test's code" formControlName="code">
             </div>
           </div>
-          <div class="input-question input-setting">
+          <div class="input-question input-setting mb-3 px-2">
             <div class="input-question-title">Name:&nbsp;</div>
             <div class="input-setting-text">
               <input type="text" placeholder="Enter test's name" formControlName="title" required minlength="6">
@@ -53,7 +53,7 @@
               </span>
             </div>
           </div>
-          <div class="input-question input-setting">
+          <div class="input-question input-setting mb-3 px-2">
             <div class="input-question-title">
               Time:
             </div>
@@ -63,10 +63,20 @@
               minutes
             </div>
           </div>
-          <div formArrayName="requireInfo" class="require-info">
+
+          <div class="input-question input-setting mb-3 px-2">
+            <input type="checkbox" id="inputKnowTheResult" class="input-checkbox" formControlName="knowTheResult">
+            &nbsp;
+            <span>
+              <label for="inputKnowTheResult" class="input-question-title">Candidate can see the result after
+                submit</label>
+            </span>
+
+          </div>
+          <div formArrayName="requireInfo" class="require-info input-setting mb-3 px-2">
             <div class="button-add-info" (click)="addInfo()">+ Add info</div>
             <div *ngFor="let infoFormGroup of infosFormGroup">
-              <div [formGroup]="infoFormGroup" class="info-form">
+              <div [formGroup]="infoFormGroup" class="info-form px-3">
                 <input type="text" formControlName="info" class="info-field">
                 &nbsp;
                 <label for="type">Type: &nbsp;</label>
@@ -76,20 +86,11 @@
                   <option value="option">Option</option>
                 </select>
                 <div *ngIf="infoFormGroup.controls.type.value === 'option'">
-                  <input type="text" formControlName="option" class="option-field"
+                  <input type="text" formControlName="option" class="option-field p-2"
                     placeholder="Dividing options into comma ',' ">
                 </div>
               </div>
             </div>
-          </div>
-          <div class="input-question input-setting">
-            <input type="checkbox" id="inputKnowTheResult" class="input-checkbox" formControlName="knowTheResult">
-            &nbsp;
-            <span>
-              <label for="inputKnowTheResult" class="input-question-title">Candidate can see the result after
-                submit</label>
-            </span>
-
           </div>
         </div>
       </div>

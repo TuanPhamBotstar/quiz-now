@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs/internal/operators/filter';
 import { ResultService } from '../../services/result.service';
 
 @Component({
@@ -8,7 +9,10 @@ import { ResultService } from '../../services/result.service';
   styleUrls: ['./history.component.css'],
 })
 export class HistoryComponent implements OnInit {
-  constructor(private resultService: ResultService, private route: ActivatedRoute) {}
+  constructor(
+    private resultService: ResultService,
+    private route: ActivatedRoute
+  ) {}
 
   currentPage: any;
   listResults: any = [];
@@ -23,11 +27,14 @@ export class HistoryComponent implements OnInit {
 
     this.resultService.getResultsDataStore().subscribe((res) => {
       console.log(res);
-      if (res.length == 0) {
+      if (res.length == 0 && !this.fetchedTest) {
+        this.fetchedTest = true;
+
         this.getResultsByIdUser(this.currentPage);
       }
       if (res.length > 0) {
         this.listResults = res;
+        this.fetchedTest = true;
       }
     });
   }
@@ -39,8 +46,7 @@ export class HistoryComponent implements OnInit {
   }
   getResultsByIdUser(page: any): void {
     this.currentPage = page;
-    this.fetchedTest = false;
-    this.listTests = [];
+    // this.listTests = [];
 
     this.resultService.getResultsByIdUserStore(page);
   }

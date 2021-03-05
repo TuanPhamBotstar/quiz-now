@@ -27,7 +27,8 @@
                   type="{{test.requireInfo[i].type}}" placeholder="Input your {{test.requireInfo[i].info}}">
                 <div *ngIf="test.requireInfo[i].type === 'option' ">
                   <div *ngFor="let option of test.requireInfo[i].option; let j = index">
-                    <input style="width: 16px;height: 16px" type="radio" id="option-{{j}}" name="option" value={{option}} formControlName="value">&nbsp;
+                    <input style="width: 16px;height: 16px" type="radio" id="option-{{j}}" name="option"
+                      value={{option}} formControlName="value">&nbsp;
                     <label for="option-{{j}}">{{option}}</label>
                   </div>
                 </div>
@@ -37,7 +38,9 @@
         </div>
 
       </div>
-      <button type="submit" class="btn btn-success">Submit</button>
+      <div style="text-align: center">
+        <button type="submit" class="btn" style="background:  #5F45EA; color: white;">Submit</button>
+      </div>
     </form>
 
 
