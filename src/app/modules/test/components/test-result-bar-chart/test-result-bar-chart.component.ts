@@ -14,6 +14,8 @@ export class TestResultBarChartComponent implements OnInit {
 
   results: any = [];
 
+  shouldRender: boolean = false;
+
   constructor() {}
   questions = [];
 
@@ -93,12 +95,14 @@ export class TestResultBarChartComponent implements OnInit {
       },
       plugins: {
         datalabels: {
-          algin: 'end',
-          color: 'white',
+          display: false,
+        },
+        labels: {
+          render: 'value',
         },
       },
     };
 
-    console.log(this.barChartData[0].data);
+    if (this.barChartData[0].data.length > 0) this.shouldRender = true;
   }
 }

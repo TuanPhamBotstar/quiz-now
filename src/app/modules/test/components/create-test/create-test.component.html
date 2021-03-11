@@ -8,9 +8,11 @@
           Create test
         </div>
         <div class="input-total-questions">
-          <label>Input total questions:&nbsp;(Max is
-            {{bank.numberOfEasyQuestions + bank.numberOfNormalQuestions + bank.numberOfHardQuestions}})</label>
-          &nbsp;
+          <div>
+            <div class="create-test-form-setting__title mb-2" style="display: inline-block">QUESTIONS:&nbsp;</div><span style="font-style: italic; color: #bababa">(Max
+              is
+              {{bank.numberOfEasyQuestions + bank.numberOfNormalQuestions + bank.numberOfHardQuestions}})</span>
+          </div>
           <npn-slider [multiRange]="false" [step]="1" [min]="0"
             [max]="bank.numberOfEasyQuestions + bank.numberOfNormalQuestions + bank.numberOfHardQuestions"
             (onChange)="onChangeInput($event)"></npn-slider>
@@ -32,17 +34,17 @@
             [step]="1" [showStepIndicator]="true">
           </npn-slider>
         </div>
-        <div class="create-test-form-setting py-3">
-          <div class="create-test-form-setting__title mb-3 ">
+        <div class="create-test-form-setting py-3 mt-3">
+          <div class="create-test-form-setting__title mb-2 ">
             SETTING
           </div>
-          <div class="input-question input-setting mb-3 px-2">
+          <div class="input-question input-setting mb-2 px-2">
             <div class="input-question-title">Code:&nbsp;</div>
             <div class="input-setting-text">
               <input type="text" placeholder="Enter test's code" formControlName="code">
             </div>
           </div>
-          <div class="input-question input-setting mb-3 px-2">
+          <div class="input-question input-setting mb-2 px-2">
             <div class="input-question-title">Name:&nbsp;</div>
             <div class="input-setting-text">
               <input type="text" placeholder="Enter test's name" formControlName="title" required minlength="6">
@@ -53,7 +55,7 @@
               </span>
             </div>
           </div>
-          <div class="input-question input-setting mb-3 px-2">
+          <div class="input-question input-setting mb-2 px-2">
             <div class="input-question-title">
               Time:
             </div>
@@ -64,7 +66,7 @@
             </div>
           </div>
 
-          <div class="input-question input-setting mb-3 px-2">
+          <div class="input-question input-setting mb-2 px-2">
             <input type="checkbox" id="inputKnowTheResult" class="input-checkbox" formControlName="knowTheResult">
             &nbsp;
             <span>
@@ -73,7 +75,7 @@
             </span>
 
           </div>
-          <div formArrayName="requireInfo" class="require-info input-setting mb-3 px-2">
+          <div formArrayName="requireInfo" class="require-info input-setting mb-2 px-2">
             <div class="button-add-info" (click)="addInfo()">+ Add info</div>
             <div *ngFor="let infoFormGroup of infosFormGroup">
               <div [formGroup]="infoFormGroup" class="info-form px-3">

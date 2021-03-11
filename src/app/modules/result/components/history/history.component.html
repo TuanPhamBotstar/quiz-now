@@ -1,7 +1,7 @@
 <div class="history-container" style="display: flex">
   <app-nav-bar [changeNavBar]="'results'" [levelName]="'history'"></app-nav-bar>
   <div class="history component-container">
-    <div style="text-align: center; font-weight: bold; font-size: 16px" class="mb-3">History</div>
+    <!-- <div style="text-align: center; font-weight: bold; font-size: 16px" class="mb-3">History</div> -->
     <div *ngIf="listResults.length === 0 && fetchedTest" style="text-align: center; color: rgba(0,0,0,.6)">You haven't accessed any test</div>
     <app-loader *ngIf="listResults.length === 0 && !fetchedTest"></app-loader>
     <div class="list-result" *ngIf="listResults.length > 0">

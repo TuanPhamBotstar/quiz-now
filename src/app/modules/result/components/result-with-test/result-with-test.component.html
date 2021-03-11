@@ -103,19 +103,17 @@
           </div>
         </div>
       </div>
-      <div class="mt-3"></div>
-      <div *ngIf="listResults.length > 0">
-        <app-line-chart [idTest]="idTest" [time]="time" [maxLength]="totalResults"></app-line-chart>
-      </div>
-      <div class="listResults.length == 0">
-        <div class="blur-container p-3 layout-score">
-          <div class="blur"></div>
-          <div class="text-in-blur">There is no results</div>
+      <div class="mt-3">
+        <div *ngIf="listResults.length > 0">
+          <app-line-chart [idTest]="idTest" [time]="time" [maxLength]="totalResults"></app-line-chart>
+        </div>
+        <div *ngIf="listResults.length == 0">
+          <div class="blur-container p-3 layout-score">
+            <div class="blur"></div>
+            <div class="text-in-blur">There is no results</div>
+          </div>
         </div>
       </div>
-      <!-- <div class="blur-div">
-        <span>No results</span>
-      </div> -->
     </div>
   </div>
 

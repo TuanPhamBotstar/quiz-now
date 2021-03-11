@@ -1,10 +1,10 @@
 <div *ngIf="showModalDelete" class="modal-confirm">
-    <div class="modal-content">
-      <div class="modal-title">Delete this bank ?</div>
-      <div class="modal-detail">Delete this bank will delete all tests which generated from this bank</div>
-      <div class="button-choice">
-        <button class="button-yes p-1" (click)="deleteBank(bankId)">Delete</button>
-        <button class="button-no p-1" (click)="deleteBank(null)">Discard</button>
-      </div>
+  <div class="modal-content">
+    <div class="modal-title">Delete this bank ?</div>
+    <div class="modal-detail">Delete this bank will delete all tests which generated from this bank</div>
+    <div class="button-choice mt-3">
+      <button class="button-no p-1" (click)="deleteBank(null)">Discard</button>
+      <button class="button-yes p-1" (click)="deleteBank(bankId)">Delete</button>
     </div>
   </div>
+</div>

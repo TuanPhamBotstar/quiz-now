@@ -8,7 +8,7 @@
         <input formControlName="title" type="text" class="my-3 p-2 rounded">
         <br>
       </form>
-      <button (click)="onSubmit()" class="button-edit btn rounded">Edit</button>
+      <button (click)="onSubmit()" class="button-edit btn rounded">Save</button>
     </div>
     <div class="title mt-5">Danger zone</div>
     <div class="delete-container p-5 rounded">
@@ -17,7 +17,7 @@
       <div style="color: rgba(0,0,0,.5); text-align: left; width: 40%; margin: 0 auto">Type <span
           style="font-weight: 600">{{bankName}}</span> to delete</div>
       <button *ngIf="!shouldDeleteBank"
-        class="button-delete button-edit-not-done btn btn-danger py-2 px-2 rounded">Delete</button>
+      class="button-delete button-edit-not-done btn btn-danger py-2 px-2 rounded">Delete</button>
       <button *ngIf="shouldDeleteBank" (click)="deleteBank(bankId)"
         class="button-delete p-2 btn btn-danger rounded">Delete</button>
     </div>

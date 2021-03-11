@@ -63,9 +63,11 @@ export class BarChartComponent implements OnInit {
       responsive: true,
       plugins: {
         datalabels: {
-          algin: 'end',
-          color: 'white',
+          display: false
         },
+        labels: {
+          render: 'value'
+        }
       },
       scales: {
         yAxes: [

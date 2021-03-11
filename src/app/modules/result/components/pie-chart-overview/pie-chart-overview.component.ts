@@ -7,6 +7,7 @@ import {
   monkeyPatchChartJsTooltip,
 } from 'ng2-charts';
 import { ResultService } from '../../services/result.service';
+import 'chartjs-plugin-labels';
 
 @Component({
   selector: 'app-pie-chart-overview',
@@ -27,14 +28,17 @@ export class PieChartOverviewComponent implements OnInit {
     plugins: {
       labels: {
         render: 'percentage',
-        // fontColor: 'white',
+        fontColor: 'white',
         precision: 2,
+        fontSize: 14
+        // arc: true
       },
       datalabels: {
         color: 'white',
         font: {
           size: 20
-        }
+        },
+        display: false
       }
     },
     title: {
@@ -72,11 +76,17 @@ export class PieChartOverviewComponent implements OnInit {
     const sum =
       this.weakScore + this.averageScore + this.goodScore + this.excellentScore;
 
+    // this.pieChartData = [
+    //   (+(this.weakScore / sum * 100).toFixed(2)),
+    //   +(this.averageScore / sum * 100).toFixed(2),
+    //   +(this.goodScore / sum * 100).toFixed(2),
+    //   +(this.excellentScore / sum * 100).toFixed(2),
+    // ];
     this.pieChartData = [
-      (+(this.weakScore / sum * 100).toFixed(2)),
-      +(this.averageScore / sum * 100).toFixed(2),
-      +(this.goodScore / sum * 100).toFixed(2),
-      +(this.excellentScore / sum * 100).toFixed(2),
+      (+(this.weakScore)),
+      +(this.averageScore),
+      +(this.goodScore),
+      +(this.excellentScore),
     ];
     
     console.log(this.excellentScore);

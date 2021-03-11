@@ -37,11 +37,12 @@ export class PieChartComponent implements OnInit {
     plugins: {
       labels: {
         render: 'percentage',
-        fontColor: ['green', 'white', 'red'],
-        precision: 0,
+        precision: 2,
+        fontColor: 'white',
       },
       datalabels: {
         color: 'white',
+        display: false
       },
     },
     title: {
@@ -88,7 +89,7 @@ export class PieChartComponent implements OnInit {
           }, 0);
 
           for (let data of res.data) {
-            this.tmpData[data._id] = +((data.count / sum) * 100).toFixed(2);
+            this.tmpData[data._id] = +((data.count));
           }
 
           for (let i = 0; i < 4; i++) {

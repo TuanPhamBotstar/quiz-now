@@ -76,9 +76,11 @@ export class BarChartBankComponent implements OnInit {
       },
       plugins: {
         datalabels: {
-          algin: 'end',
-          color: 'black',
+          display: false
         },
+        labels: {
+          render: 'value'
+        }
       },
       title: {
         text: `${this.bankName}'s statistics`,

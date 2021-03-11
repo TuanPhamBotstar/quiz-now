@@ -120,14 +120,12 @@ input {
   outline: none;
   border: 0;
   position: absolute;
-  top: 80px;
   right: 30px;
   background-color: #759AF1;
-  width: 152px;
-  height: 54px;
-
-  font-size: 20px;
+  padding: .5rem;
+  font-size: 16px;
   color: white;
+  border-radius: 8px;
 }
 
 .require-info {
@@ -161,4 +159,14 @@ input {
 }
 .over {
   color: red;
+}
+.left-side-style {
+  display: inline-block;
+  height: 100%!important;
+  position: absolute;
+  top: 0;
+  background: red!important;
+}
+::ng-deep .slider {
+  padding: 0!important;
 }
