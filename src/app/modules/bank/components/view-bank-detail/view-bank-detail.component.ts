@@ -70,7 +70,6 @@ export class ViewBankDetailComponent implements OnInit {
           console.log(this.bank);
           if (this.bank.idTests.length > 0) this.getAllTest(bank._id);
           else {
-            console.log('man ngu');
             this.isFetched = true;
           }
           break;
@@ -86,7 +85,6 @@ export class ViewBankDetailComponent implements OnInit {
             if (this.bank) {
               if (this.bank.idTests.length > 0) this.getAllTest(this.bank._id);
               else {
-                console.log('man ga');
                 this.isFetched = true;
               }
             }

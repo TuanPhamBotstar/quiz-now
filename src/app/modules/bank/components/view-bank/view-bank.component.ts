@@ -48,6 +48,8 @@ export class ViewBankComponent implements OnInit {
     if (this.currentPage === '1') {
       this.router.navigate(['/bank/view'], { queryParams: { page: '1' } });
     }
+
+    // kiểm tra xem trong store có data ko, nếu có thì lấy nếu không thì fetch
     this.bankService.getBanksDataStore().subscribe((res) => {
       this.currentPage = this.route.snapshot.queryParamMap.get('page') || '1';
 
@@ -79,10 +81,11 @@ export class ViewBankComponent implements OnInit {
         this.hidePagination = true;
       } else {
         this.hidePagination = false;
-        this.bankService.getBanksDataStore().subscribe((res) => {
+        const newSub = this.bankService.getBanksDataStore().subscribe((res) => {
           console.log(res);
           this.banks = res;
         });
+        newSub.unsubscribe();
       }
     }
   }
